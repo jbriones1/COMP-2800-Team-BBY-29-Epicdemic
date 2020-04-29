@@ -2,7 +2,7 @@
 Team 29, COMP 2800, Winter Term B 2020
 
 ## Table of Contents
-* [PackagesToInstall]
+* [Packages To Install](#packages-to-install)
 
-## Node packages to install
+## Node packages to install <a name="packages-to-install"></a>
 * Phaser 3.23.0
