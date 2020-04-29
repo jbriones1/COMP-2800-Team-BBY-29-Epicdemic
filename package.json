@@ -1,0 +1,27 @@
+{
+  "name": "epicdemic",
+  "version": "1.0.0",
+  "description": "COMP 2800 Project by Team 29",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jbriones1/Epicdemic.git"
+  },
+  "keywords": [
+    "JavaScript",
+    "Node",
+    "Phaser"
+  ],
+  "author": "Jon Briones, Brian Li, Andi Hung, Mandy Jin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jbriones1/Epicdemic/issues"
+  },
+  "homepage": "https://github.com/jbriones1/Epicdemic#readme",
+  "dependencies": {
+    "phaser": "^3.23.0"
+  }
+}
