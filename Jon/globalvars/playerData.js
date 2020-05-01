@@ -5,5 +5,6 @@ export let playerData = {
 	happiness: 100,
 	location: null,
 	job: false,
-	score: 0
-}
+	score: 0,
+	day: 1
+};
