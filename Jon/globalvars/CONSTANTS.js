@@ -1,0 +1,21 @@
+export const CONSTANTS = {
+	SCENES: {
+		OVERWORLD:  "OVERWORLD",
+		CHATBOX:    "CHATBOX",
+		INTRO:      "INTRO",
+		HOME:       "HOME",
+		AIRPORT:    "AIRPORT",
+		STORE:      "STORE",
+		SCHOOL:     "SCHOOL",
+		HOSPITAL:   "HOSPITAL",
+		PARK:       "PARK",
+		LOBBY:      "LOBBY",
+		THEATRE:    "THEATRE",
+		MALL:       "MALL",
+		FOODCOURT:  "FOODCOURT",
+		MUSICSTORE: "MUSICSTORE"
+	},
+	UI: {
+		CHATBOX: "CHATBOX"
+	}
+};
