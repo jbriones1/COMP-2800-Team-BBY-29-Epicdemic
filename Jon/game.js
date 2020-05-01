@@ -39,5 +39,3 @@ let config = {
 };
 
 let game = new Phaser.Game(config);
-
-window.location.reload(true);
