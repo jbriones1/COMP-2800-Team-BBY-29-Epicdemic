@@ -1,7 +1,10 @@
-import {CONSTANTS} from '../globalvars/CONSTANTS.js';
+import {CONSTANTS}  from '../globalvars/CONSTANTS.js';
 import {playerData} from '../globalvars/playerData.js';
+import textbox      from '../functions/textbox.js' 
 
 let KEY = CONSTANTS.SCENES.OVERWORLD;
+let testText ='Select a location.';
+const GetValue = Phaser.Utils.Objects.GetValue;
 
 export class OverworldScene extends Phaser.Scene {
 	constructor() {
@@ -15,18 +18,24 @@ export class OverworldScene extends Phaser.Scene {
 		console.log("Loaded " + KEY);
 		playerData.location = KEY;
 
-
 		console.log(playerData);
 	}
 
 	// Load assets
 	preload() {
-		
+		this.load.scenePlugin('rexuiplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexuiplugin.min.js', 'rexUI', 'rexUI');
+		this.load.image('nextPage', '../images/arrow-down-left.png');
 	}
 
 	create () {
 
 		this.createButtons();
+		this.tb = textbox.createTextBox(this, 
+			100, 
+			CONSTANTS.UI.SCREEN_HEIGHT - 400, {
+			wrapWidth: 500,
+	})
+	.start(testText, CONSTANTS.TEXT.TEXT_SPEED);
 
 	}
 
@@ -36,7 +45,7 @@ export class OverworldScene extends Phaser.Scene {
 
 	createButtons () {
 		
-		this.homeButton = this.add.text(100, 100, 'Home')
+		this.homeButton = this.add.text(100, 100, 'Home', )
 		.setInteractive()
 		.on('pointerdown', () => this.scene.start(CONSTANTS.SCENES.HOME));
 
@@ -68,5 +77,4 @@ export class OverworldScene extends Phaser.Scene {
 		.setInteractive()
 		.on('pointerdown', () => this.scene.start(CONSTANTS.SCENES.MALL));
 	}
-
 }

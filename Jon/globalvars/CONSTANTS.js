@@ -16,6 +16,14 @@ export const CONSTANTS = {
 		MUSICSTORE: "MUSICSTORE"
 	},
 	UI: {
-		CHATBOX: "CHATBOX"
+		SCREEN_WIDTH: 950,
+		SCREEN_HEIGHT: 1280,
+		COLOR_PRIMARY: 0x0000ff,
+		COLOR_LIGHT: 0xffffff,
+		COLOR_DARK: 0xffffff
+	},
+	TEXT: {
+		FONT_SIZE: 48,
+		TEXT_SPEED: 10
 	}
 };

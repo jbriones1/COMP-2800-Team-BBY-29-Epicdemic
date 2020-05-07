@@ -27,10 +27,13 @@ export class SchoolScene extends Phaser.Scene {
 	// Load game objects
 	create () {
 
-		// REMOVE LATER
-		this.input.on('pointerdown', function () {
-		this.scene.start(CONSTANTS.SCENES.OVERWORLD);
-		}, this);
+		// Return to Overworld
+		this.theatreButton = this.add.text(
+			CONSTANTS.UI.SCREEN_WIDTH - 300, 100, ' Return to Overworld')
+			.setInteractive()
+			.once('pointerdown', () => {
+				this.scene.start(CONSTANTS.SCENES.OVERWORLD);
+		});
 
 		this.add.text(500, 360, KEY, {fill: '#0f0'})
 	}

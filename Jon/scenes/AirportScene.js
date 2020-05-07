@@ -1,5 +1,6 @@
 import {CONSTANTS}  from '../globalvars/CONSTANTS.js';
 import {playerData} from '../globalvars/playerData.js';
+import textbox      from '../functions/textbox.js'
 
 let KEY = CONSTANTS.SCENES.AIRPORT;
 var messageText;
@@ -21,23 +22,28 @@ export class AirportScene extends Phaser.Scene {
 
 	// Load assets
 	preload() {
+		this.load.scenePlugin('rexuiplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexuiplugin.min.js', 'rexUI', 'rexUI');
 	}
 
 	// Load game objects
 	create () {
 		this.cameras.main.backgroundColor.setTo(0,0,0);
+		textbox.createTextBox(this, 
+			100, 
+			CONSTANTS.UI.SCREEN_HEIGHT - 200, {
+			wrapWidth: CONSTANTS.UI.SCREEN_WIDTH,
+	})
+	.start("Moved to the airport", 10);
 
-		// REMOVE LATER
-		this.input.on('pointerdown', function () {
+		// Return to Overworld
+		this.theatreButton = this.add.text(
+			CONSTANTS.UI.SCREEN_WIDTH - 300, 100, ' Return to Overworld')
+		.setInteractive()
+		.once('pointerdown', () => {
 			this.scene.start(CONSTANTS.SCENES.OVERWORLD);
+		});
 
-		}, this);
-
-		this.add.text(500, 360, KEY, {fill: '#0f0'});
-		this.add.text(10, 620, messageText, {fill: '#0f0'});
-
-
-
+		this.add.text(500, 360, KEY, {fill: '#0f0', fontSize: CONSTANTS.TEXT.FONT_SIZE});
 	}
 
 }
