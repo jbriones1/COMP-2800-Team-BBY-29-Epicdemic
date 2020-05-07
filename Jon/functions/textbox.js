@@ -7,12 +7,12 @@ export function getBBcodeText (scene, wrapWidth, fixedWidth, fixedHeight) {
 		fixedWidth: fixedWidth,
 		fixedHeight: fixedHeight,
 
-		fontSize: '20px',
+		fontSize: '30px',
 		wrap: {
 				mode: 'word',
 				width: wrapWidth
 		},
-		maxLines: 2
+		maxLines: 8
 	})
 }
 
@@ -80,7 +80,7 @@ export function createTextBox (scene, x, y, config) {
 	return textBox;
 }
 
-function getBuiltInText (scene, wrapWidth, fixedWidth, fixedHeight) {
+export function getBuiltInText (scene, wrapWidth, fixedWidth, fixedHeight) {
 	return scene.add.text(0, 0, '', {
 		fontSize: '20px',
 		wordWrap: {
@@ -90,5 +90,3 @@ function getBuiltInText (scene, wrapWidth, fixedWidth, fixedHeight) {
 })
 .setFixedSize(fixedWidth, fixedHeight);
 }
-
-export default {getBBcodeText, createTextBox, getBuiltInText}

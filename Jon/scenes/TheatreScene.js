@@ -20,7 +20,8 @@ export class TheatreScene extends Phaser.Scene {
 
 	// Load assets
 	preload() {
-		
+		this.load.scenePlugin('rexuiplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexuiplugin.min.js', 'rexUI', 'rexUI');
+		this.load.image('nextPage', '../assets/images/arrow-down-left.png');
 	}
 
 	// Load game objects
