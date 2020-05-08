@@ -1,0 +1,34 @@
+export const CONSTANTS = {
+	SCENES: {
+		OVERWORLD:  "OVERWORLD",
+		CHATBOX:    "CHATBOX",
+		INTRO:      "INTRO",
+		HOME:       "HOME",
+		AIRPORT:    "AIRPORT",
+		STORE:      "STORE",
+		SCHOOL:     "SCHOOL",
+		HOSPITAL:   "HOSPITAL",
+		PARK:       "PARK",
+		LOBBY:      "LOBBY",
+		THEATRE:    "THEATRE",
+		MALL:       "MALL",
+		FOODCOURT:  "FOODCOURT",
+		MUSICSTORE: "MUSICSTORE"
+	},
+	UI: {
+		SCREEN_WIDTH: 950,
+		SCREEN_HEIGHT: 1280,
+		SUBMENU_Y: 800,
+		COLOR_PRIMARY: 0x0000ff,
+		COLOR_LIGHT: 0xffffff,
+		COLOR_DARK: 0xffffff,
+		COLOR_WIP: 0xff0000
+	},
+	TEXT: {
+		FONT_SIZE: 30,
+		TEXT_SPEED: 10
+	},
+	PRICE: {
+		
+	}
+};
