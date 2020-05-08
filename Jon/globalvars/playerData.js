@@ -2,18 +2,18 @@ export let playerData = {
 	stats: {
 		hunger: 100,
 		health: 100,
-		money: 1000,
+		money: 10,
 		happiness: 100,
 		score: 0,
 		day: 1,
-		hour: 12,
-		minute: 0,
-		minuteStr: '00',
+		hour: 23,
+		minute: 34,
+		minuteStr: '34',
 	},
 	fridge: {
 		apples: 0,
-		fries: 0,
-		cakes: 0
+		instant_ramen: 0,
+		bread: 0
 	},
 	storage: {
 		masks: 0,
@@ -34,18 +34,22 @@ export let playerData = {
 	],
 	location: null,
 	job: true,
-	stationery: [{
+	stationery: {
 		pencil: false,
 		markers: false,
 		paper: false
-	}],
-	book: [{
+	},
+	book: {
 		hasBook1: false,
 		hasBook2: false,
 		hasBook3: false,
 		hasOneBook: false
-	}]
+	}
 };
+
+export function setTime(hour, minute) {
+
+}
 
 export function changeTime(amount) {
 	playerData.stats.minute += amount;
@@ -93,8 +97,4 @@ export function clearSubmenu (submenu) {
 			submenu[i].destroy();
 		}
 	}
-}
-
-export function drawStats(scene) {
-	
 }

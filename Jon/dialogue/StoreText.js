@@ -1,29 +1,31 @@
+let freezer = {
+		interact: 'There are frozen fries here. Take some?',
+		confirm: 'You take a bag',
+		decline: 'You decide to get something healthier'
+}
+
 let checkout = {
-	good: {
-		interact: 'Welcome! What would you like?'
-	},
-	bad: {
-		interact: 'Please stay away, I\'m only here because I have to. You can use the self-checkout to the left of me'
-	},
-	purchase: {
-		clerk: 'Thank you for your purchase!',
-		selfCheckout: '*beep boop* Thank you for your money.',
-		noMoney: 'You can\'t afford this',
-		toFridge: '\nAdded to your fridge',
-		toStorage: '\nAdded to your storage',
-		noStock: 'No stock of this left'
-	}
+	pay: 'Pay for your items?', // requires a cost after
+	noItems: 'You can pay for items you get here'
 }
 
 let shelf = {
-	interact: 'There is a large empty section. \nProbably the toilet paper and hand sanitizer section.'
+	good: 'Masks, soap and toilet paper are sold here.',                  // 70 or higher health
+	neutral: 'Masks and soap sold here. No toilet paper to be found',     // 50 - 69 health
+	bad: 'Soap is sold here. Seems the masks and toilet paper are gone.', // 30 - 49 health
+	takeMask: 'You take a mask.', 
+	takeSoap: 'You grab some soap',
+	takeTp: 'You grab a roll of tp'
 }
 
 let produce = {
-	interact: 'Looks like some healthy food. That\'ll probably be good for me'
+	interact: 'There are apples here. Take some?',
+	confirm: 'You take an apple',
+	decline: 'You decide on something different'
 }
 
 export let sceneText = {
+	freezer: freezer,
 	checkout: checkout,
 	shelf: shelf,
 	produce: produce

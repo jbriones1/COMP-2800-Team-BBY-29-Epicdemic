@@ -5,3 +5,8 @@ let seats = {
 
     badSeat: "You realize that you picked a poor place to sit... However the movie is starting and its too awkward to switch now."
 }
+
+export let sceneText = {
+	enter: enter,
+	seats: seats
+}

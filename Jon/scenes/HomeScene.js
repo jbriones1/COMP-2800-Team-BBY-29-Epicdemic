@@ -2,6 +2,7 @@ import { CONSTANTS } from '../globalvars/CONSTANTS.js';
 import { playerData } from '../globalvars/playerData.js';
 import * as playerFnc from '../globalvars/playerData.js';
 import * as textbox from '../functions/textbox.js'
+import * as sceneFnc from '../functions/sceneFunctions.js'
 import { sceneText } from '../dialogue/HomeText.js';
 
 let KEY = CONSTANTS.SCENES.HOME;
@@ -10,6 +11,7 @@ let submenu;
 
 let boy;
 let computerOn = false;
+let mainButtons;
 
 export class HomeScene extends Phaser.Scene {
 	constructor() {
@@ -46,24 +48,25 @@ export class HomeScene extends Phaser.Scene {
 	// Load game objects
 	create() {
 
+		// Scene image
 		this.add.image(16, 100, 'house_bg')
 			.setOrigin(0, 0)
 			.setDisplaySize(918, 650);
 
-		boy = this.add.sprite(500, 500, 'boy')
-			.setDisplaySize(96, 144)
-			.setInteractive()
-			.on('pointerdown', () => {
-				tb.start('You hit the boy', 50);
-			});
+		// boy = this.add.sprite(500, 500, 'boy')
+		// 	.setDisplaySize(96, 144)
+		// 	.setInteractive()
+		// 	.on('pointerdown', () => {
+		// 		tb.start('You hit the boy', 50);
+		// 	});
 
-		this.anims.create({
-			key: 'neutral',
-			frames: this.anims.generateFrameNumbers('boy', { start: 0, end: 2 }),
-			frameRate: 3,
-			repeat: -1,
-			yoyo: true
-		});
+		// this.anims.create({
+		// 	key: 'neutral',
+		// 	frames: this.anims.generateFrameNumbers('boy', { start: 0, end: 2 }),
+		// 	frameRate: 3,
+		// 	repeat: -1,
+		// 	yoyo: true
+		// });
 
 		// Textbox at the bottom of the screen
 		tb = textbox.createTextBox(this,
@@ -80,9 +83,9 @@ export class HomeScene extends Phaser.Scene {
 
 		// Return to Overworld
 		this.theatreButton = this.add.text(
-			CONSTANTS.UI.SCREEN_WIDTH - 400, 10, ' Return to Overworld', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
+			CONSTANTS.UI.SCREEN_WIDTH - 100, 10, 'Map', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
 			.setInteractive()
-			.once('pointerdown', () => {
+			.on('pointerdown', () => {
 				this.scene.start(CONSTANTS.SCENES.OVERWORLD);
 			});
 
@@ -97,10 +100,10 @@ export class HomeScene extends Phaser.Scene {
 		this.bed = this.add.image(639, 353, 'house_bed')
 			.setInteractive()
 			.on('pointerdown', () => {
-				playerFnc.clearSubmenu(submenu);
+					playerFnc.clearSubmenu(submenu);
 
 				this.listBedChoices();
-				tb.start(sceneText.bed.interact, CONSTANTS.TEXT.TEXT_SPEED);
+				tb.start(sceneText.bed.interact, CONSTANTS.TEXT.TEXT_SPEED);	
 			});
 
 		// Computer
@@ -109,13 +112,15 @@ export class HomeScene extends Phaser.Scene {
 			.on('pointerdown', () => {
 				playerFnc.clearSubmenu(submenu);
 
+				let str = '';
 				if (!computerOn) {
-					console.log(playerFnc.changeTime(1));
+					console.log(playerFnc.changeTime(5));
 					computerOn = true;
+					str += sceneText.comp.interact + '\n';
+					tb.start(str + 'You have ' + playerData.messages.length 
+					+ ' message(s)', CONSTANTS.TEXT.TEXT_SPEED);
 				}
 				this.listCompChoices();
-				tb.start(sceneText.comp.interact
-					+ '\nYou have ' + playerData.messages.length + ' message(s)', CONSTANTS.TEXT.TEXT_SPEED);
 			});
 
 		// Sink
@@ -124,11 +129,7 @@ export class HomeScene extends Phaser.Scene {
 			.on('pointerdown', () => {
 				playerFnc.clearSubmenu(submenu);
 
-				if (this.washHands()) {
-					playerData.storage.soap--;
-					playerData.stats.health += 3;
-					console.log(playerData.storage.soap);
-				}
+				this.washHands();
 			});
 
 		// Fridge
@@ -146,13 +147,18 @@ export class HomeScene extends Phaser.Scene {
 			.on('pointerdown', () => {
 				playerFnc.clearSubmenu(submenu);
 
-				tb.start('You have:\n' + playerFnc.storageContents(), CONSTANTS.TEXT.TEXT_SPEED);
+				let tpCheck = (playerData.storage.toilet_paper < 1) ? 
+					sceneText.storage.noToiletPaper : '';
+
+				tb.start('You have:\n' + playerFnc.storageContents() + '\n' + tpCheck, 
+					CONSTANTS.TEXT.TEXT_SPEED);
 			});
 
+			mainButtons = [this.bed, this.computer, this.sink, this.fridge, this.storage];
 	} // end of create objects function
 
 	update() {
-		boy.anims.play('neutral', true);
+		// boy.anims.play('neutral', true);
 	}
 
 	// Choices when Computer is clicked
@@ -160,7 +166,7 @@ export class HomeScene extends Phaser.Scene {
 		this.compNews = this.add.text(50, CONSTANTS.UI.SUBMENU_Y, 'News', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
 			.setInteractive()
 			.on('pointerdown', () => {
-				if (playerData.stats.hour >= 22) { tb.start(sceneText.comp.news.day1); }
+				if (playerData.stats.day == 1) { tb.start(sceneText.comp.news.day1); }
 				else if (playerData.stats.health >= 70) { tb.start(sceneText.comp.news.good, CONSTANTS.TEXT.TEXT_SPEED); }
 				else if (playerData.stats.health >= 50) { tb.start(sceneText.comp.news.neutral, CONSTANTS.TEXT.TEXT_SPEED); }
 				else if (playerData.stats.health >= 30) { tb.start(sceneText.comp.news.bad, CONSTANTS.TEXT.TEXT_SPEED); }
@@ -188,7 +194,7 @@ export class HomeScene extends Phaser.Scene {
 		this.compOrder = this.add.text(400, CONSTANTS.UI.SUBMENU_Y, 'Order online', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
 			.setInteractive()
 			.on('pointerdown', () => {
-
+				tb.start(sceneText.comp.order.interact);
 			});
 
 		this.compShutDown = this.add.text(700, CONSTANTS.UI.SUBMENU_Y, 'Shutdown', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
@@ -207,12 +213,27 @@ export class HomeScene extends Phaser.Scene {
 		this.bedYes = this.add.text(200, CONSTANTS.UI.SUBMENU_Y, 'Yes', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
 			.setInteractive()
 			.on('pointerdown', () => {
-				if (playerData.stats.day == 1) { tb.start(sceneText.comp.news.day1); }
-				else if (playerData.stats.health >= 70) { tb.start(sceneText.comp.news.good, CONSTANTS.TEXT.TEXT_SPEED); }
-				else if (playerData.stats.health >= 50) { tb.start(sceneText.comp.news.neutral, CONSTANTS.TEXT.TEXT_SPEED); }
-				else if (playerData.stats.health >= 30) { tb.start(sceneText.comp.news.bad, CONSTANTS.TEXT.TEXT_SPEED); }
-				else if (playerData.stats.health >= 10) { tb.start(sceneText.comp.news.terrible, CONSTANTS.TEXT.TEXT_SPEED); }
-				else { tb.start(sceneText.bed.sleepGood, CONSTANTS.TEXT.TEXT_SPEED); }
+				if (playerData.stats.hour >= 21 || playerData.stats.hour < 8) {
+					playerFnc.clearSubmenu(submenu);
+
+					tb.start(sceneText.bed.sleepGood, CONSTANTS.TEXT.TEXT_SPEED);
+
+					// Disables the buttons in the room temporarily
+					sceneFnc.disableButtons(mainButtons);
+					this.time.addEvent({
+						delay: 1500,
+						callback: () => {
+							tb.start(sceneText.bed.wakeGood, CONSTANTS.TEXT.TEXT_SPEED);
+							sceneFnc.enableButtons(mainButtons);
+							this.sleep();
+						},
+						callbackScope: this
+					});
+
+					// Changes the day and time
+				} else {
+					tb.start(sceneText.bed.tooEarly, CONSTANTS.TEXT.TEXT_SPEED);
+				}
 			});
 
 		this.bedNo = this.add.text(500, CONSTANTS.UI.SUBMENU_Y, 'No', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
@@ -222,12 +243,13 @@ export class HomeScene extends Phaser.Scene {
 					tb.start(sceneText.comp.messages.None, CONSTANTS.TEXT.TEXT_SPEED);
 				} else {
 					let str = '';
-					str += 'From: ' + playerData.messages[0].sender;
-					str += '\n' + playerData.messages[0].message;
-					for (let i = 1; i < playerData.messages.length; i++) {
-						str += '\n\nFrom: ' + playerData.messages[i].sender;
-						str += '\n' + playerData.messages[i].message;
+
+					if (playerData.stats.hour >= 21 || playerData.stats.hour < 8) {
+						str += sceneText.bed.sleepSoon;
+					} else {
+						str += sceneText.bed.tooEarly;
 					}
+					
 					tb.start(str, CONSTANTS.TEXT.TEXT_SPEED);
 				}
 			});
@@ -238,12 +260,36 @@ export class HomeScene extends Phaser.Scene {
 	washHands() {
 		let soapCheck = (playerData.storage.soap > 0);
 		let withSoap = (soapCheck) ? 'with' : 'without';
-		let noSoap = (soapCheck) ? '. +3 health' : '. There is no effect'
+		let noSoap = (soapCheck) ? '. You feel healthier.' : '. There is no effect'
 
-		tb.start(sceneText.sink.interact + ' ' + withSoap + ' soap' + noSoap, CONSTANTS.TEXT.TEXT_SPEED);
+		if (soapCheck) {
+			playerData.storage.soap--;
+			playerData.stats.health +=3;
+		}
+
+		tb.start(sceneText.sink.interact + ' ' 
+			+ withSoap + ' soap' + noSoap
+			+ '\n\n\nYou have ' + playerData.storage.soap + ' soap left.', CONSTANTS.TEXT.TEXT_SPEED);
 
 		console.log(playerFnc.changeTime(1));
 
-		return soapCheck > 0;
+	}
+
+	sleep() {
+		let hoursOfSleep = 0;
+		let startMinute = playerData.stats.minute;
+		let minutesofSleep = ((60 - startMinute) != 60) ? 60 - startMinute : 0;
+		
+		if (startMinute != 0) {
+			playerFnc.changeTime(minutesofSleep);
+		}
+
+		while(playerData.stats.hour != 7) {
+			playerFnc.changeTime(60);
+			hoursOfSleep++;
+		}
+
+		console.log('Day ' + playerData.stats.day + '\nTime: ' + playerData.stats.hour + ':' + playerData.stats.minuteStr);
+		return 'You slept for ' + hoursOfSleep + ' hours and ' + minutesofSleep + ' minutes.';
 	}
 }
