@@ -68,7 +68,7 @@ export class HomeScene extends Phaser.Scene {
 		// Textbox at the bottom of the screen
 		tb = textbox.createTextBox(this,
 			100,
-			CONSTANTS.UI.SCREEN_HEIGHT - 200, {
+			CONSTANTS.UI.SCREEN_HEIGHT - 300, {
 			wrapWidth: 650,
 		});
 
@@ -99,6 +99,7 @@ export class HomeScene extends Phaser.Scene {
 			.on('pointerdown', () => {
 				playerFnc.clearSubmenu(submenu);
 
+				this.listBedChoices();
 				tb.start(sceneText.bed.interact, CONSTANTS.TEXT.TEXT_SPEED);
 			});
 
@@ -156,10 +157,10 @@ export class HomeScene extends Phaser.Scene {
 
 	// Choices when Computer is clicked
 	listCompChoices() {
-		this.compNews = this.add.text(400, 100, 'News', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
+		this.compNews = this.add.text(50, CONSTANTS.UI.SUBMENU_Y, 'News', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
 			.setInteractive()
 			.on('pointerdown', () => {
-				if (playerData.stats.day == 1) { tb.start(sceneText.comp.news.day1); }
+				if (playerData.stats.hour >= 22) { tb.start(sceneText.comp.news.day1); }
 				else if (playerData.stats.health >= 70) { tb.start(sceneText.comp.news.good, CONSTANTS.TEXT.TEXT_SPEED); }
 				else if (playerData.stats.health >= 50) { tb.start(sceneText.comp.news.neutral, CONSTANTS.TEXT.TEXT_SPEED); }
 				else if (playerData.stats.health >= 30) { tb.start(sceneText.comp.news.bad, CONSTANTS.TEXT.TEXT_SPEED); }
@@ -167,7 +168,7 @@ export class HomeScene extends Phaser.Scene {
 				else { tb.start(sceneText.comp.news.critical, CONSTANTS.TEXT.TEXT_SPEED); }
 			});
 
-		this.compMessages = this.add.text(400, 200, 'Messages', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
+		this.compMessages = this.add.text(200, CONSTANTS.UI.SUBMENU_Y, 'Messages', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
 			.setInteractive()
 			.on('pointerdown', () => {
 				if (playerData.messages == undefined || playerData.messages.length == 0) {
@@ -184,13 +185,13 @@ export class HomeScene extends Phaser.Scene {
 				}
 			});
 
-		this.compOrder = this.add.text(400, 300, 'Order online', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
+		this.compOrder = this.add.text(400, CONSTANTS.UI.SUBMENU_Y, 'Order online', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
 			.setInteractive()
 			.on('pointerdown', () => {
 
 			});
 
-		this.compShutDown = this.add.text(400, 400, 'Shutdown', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
+		this.compShutDown = this.add.text(700, CONSTANTS.UI.SUBMENU_Y, 'Shutdown', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
 			.setInteractive()
 			.on('pointerdown', () => {
 				computerOn = false;
@@ -203,7 +204,7 @@ export class HomeScene extends Phaser.Scene {
 	}
 
 	listBedChoices() {
-		this.compNews = this.add.text(400, 100, 'News', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
+		this.bedYes = this.add.text(200, CONSTANTS.UI.SUBMENU_Y, 'Yes', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
 			.setInteractive()
 			.on('pointerdown', () => {
 				if (playerData.stats.day == 1) { tb.start(sceneText.comp.news.day1); }
@@ -211,10 +212,10 @@ export class HomeScene extends Phaser.Scene {
 				else if (playerData.stats.health >= 50) { tb.start(sceneText.comp.news.neutral, CONSTANTS.TEXT.TEXT_SPEED); }
 				else if (playerData.stats.health >= 30) { tb.start(sceneText.comp.news.bad, CONSTANTS.TEXT.TEXT_SPEED); }
 				else if (playerData.stats.health >= 10) { tb.start(sceneText.comp.news.terrible, CONSTANTS.TEXT.TEXT_SPEED); }
-				else { tb.start(sceneText.comp.news.critical, CONSTANTS.TEXT.TEXT_SPEED); }
+				else { tb.start(sceneText.bed.sleepGood, CONSTANTS.TEXT.TEXT_SPEED); }
 			});
 
-		this.compMessages = this.add.text(400, 200, 'Messages', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
+		this.bedNo = this.add.text(500, CONSTANTS.UI.SUBMENU_Y, 'No', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
 			.setInteractive()
 			.on('pointerdown', () => {
 				if (playerData.messages == undefined || playerData.messages.length == 0) {
@@ -230,6 +231,8 @@ export class HomeScene extends Phaser.Scene {
 					tb.start(str, CONSTANTS.TEXT.TEXT_SPEED);
 				}
 			});
+
+			submenu = [this.bedYes, this.bedNo];
 	}
 
 	washHands() {

@@ -12,7 +12,7 @@ export function getBBcodeText (scene, wrapWidth, fixedWidth, fixedHeight) {
 				mode: 'word',
 				width: wrapWidth
 		},
-		maxLines: 8
+		maxLines: 6
 	})
 }
 

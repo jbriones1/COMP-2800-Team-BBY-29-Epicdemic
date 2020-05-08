@@ -53,11 +53,16 @@ export class OverworldScene extends Phaser.Scene {
 
 	createButtons () {
 		
-		this.homeButton = this.add.text(180, 210, 'Home', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
-		.setStroke('#000000', 10)
+		// Home Button
+		this.homeButton = this.add.rectangle(165, 100, 100, 150, '#000000', 0.1)
+		.setOrigin(0,0)
 		.setInteractive()
 		.on('pointerdown', () => this.scene.switch(CONSTANTS.SCENES.HOME));
 
+		this.add.text(180, 210, 'Home', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
+		.setStroke('#000000', 10)
+
+		// Airport Button
 		this.airportButton = this.add.text(700, 260, 'Airport', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
 		.setInteractive()
 		.setStroke('#000000', 10)
