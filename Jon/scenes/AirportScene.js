@@ -47,9 +47,9 @@ export class AirportScene extends Phaser.Scene {
 
 		// Return to Overworld
 		this.theatreButton = this.add.text(
-			CONSTANTS.UI.SCREEN_WIDTH - 400, 10, ' Return to Overworld', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
+			CONSTANTS.UI.SCREEN_WIDTH - 100, 10, 'Map', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
 			.setInteractive()
-			.once('pointerdown', () => {
+			.on('pointerdown', () => {
 				this.scene.start(CONSTANTS.SCENES.OVERWORLD);
 			});
 
