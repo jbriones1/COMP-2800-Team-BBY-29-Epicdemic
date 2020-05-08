@@ -1,25 +1,3 @@
-body {
-    padding: 0;
-    margin: 0;
-    background-color: black;
-}
-
-.navbar {
-    background: darkslategray;
-}
-
-.nav-link, .navbar-brand {
-    color: white;
-}
-
-.nav-link:hover {
-    color: rgb(16, 12, 44);
-}
-
-.navbar-collapse {
-    justify-content: flex-end;
-}
-
 .header {
     background-image: url("../images/covid-19.jpg");
     background-size: cover;
