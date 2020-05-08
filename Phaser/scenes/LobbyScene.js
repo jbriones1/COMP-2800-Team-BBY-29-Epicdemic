@@ -31,7 +31,7 @@ export class LobbyScene extends Phaser.Scene {
 		this.theatreButton = this.add.text(
 			CONSTANTS.UI.SCREEN_WIDTH - 300, 100, ' Return to Overworld')
 		.setInteractive()
-		.once('pointerdown', 		() => {
+		.on('pointerdown', 		() => {
 			this.scene.start(CONSTANTS.SCENES.OVERWORLD);
 		});
 
@@ -39,7 +39,7 @@ export class LobbyScene extends Phaser.Scene {
 
 		this.theatreButton = this.add.text(100, 100, 'Theatre')
 		.setInteractive()
-		.once('pointerdown', 		() => {
+		.on('pointerdown', 		() => {
 			this.scene.start(CONSTANTS.SCENES.THEATRE);
 		});
 

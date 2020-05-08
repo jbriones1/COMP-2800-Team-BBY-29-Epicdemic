@@ -22,9 +22,9 @@ export class IntroScene extends Phaser.Scene {
 		
 	}
 
-	// Load game obj
+	// Load game object
 	create () {
-		this.scene.switch(CONSTANTS.SCENES.OVERWORLD);
+		
 	}
 
 }
