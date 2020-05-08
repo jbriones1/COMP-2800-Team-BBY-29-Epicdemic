@@ -118,5 +118,7 @@ export class StoreScene extends Phaser.Scene {
 	} // end of create objects function
 
 	// listFreezerChoices
+	
+
 	// listShelfChoices
 }

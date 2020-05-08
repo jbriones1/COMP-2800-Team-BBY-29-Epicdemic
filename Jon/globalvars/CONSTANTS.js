@@ -26,5 +26,8 @@ export const CONSTANTS = {
 	TEXT: {
 		FONT_SIZE: 30,
 		TEXT_SPEED: 10
+	},
+	PRICE: {
+		
 	}
 };
