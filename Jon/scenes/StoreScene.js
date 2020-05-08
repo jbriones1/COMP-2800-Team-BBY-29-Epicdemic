@@ -65,6 +65,7 @@ export class StoreScene extends Phaser.Scene {
 		// Location name
 		this.add.text(10, 10, KEY, { fill: '#0f0', fontSize: CONSTANTS.TEXT.FONT_SIZE });
 
+		// UI
 		sceneFnc.drawUI(this, 50);
 	}
 

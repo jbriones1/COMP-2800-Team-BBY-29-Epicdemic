@@ -1,6 +1,7 @@
 import {CONSTANTS}  from '../globalvars/CONSTANTS.js';
 import {playerData} from '../globalvars/playerData.js';
-import * as textbox from '../functions/textbox.js' 
+import * as textbox from '../functions/textbox.js'; 
+import * as sceneFnc from '../functions/sceneFunctions.js';
 
 let KEY = CONSTANTS.SCENES.OVERWORLD;
 let testText ='Select a location.';
@@ -81,7 +82,7 @@ export class OverworldScene extends Phaser.Scene {
 		this.storeButton = this.add.rectangle(700, 400, 200, 185, '#000000', 0)
 		.setOrigin(0,0)
 		.setInteractive()
-		.on('pointerdown', () => this.scene.start(CONSTANTS.SCENES.STORE));
+		.on('pointerdown', () => this.scene.start(CONSTANTS.SCENES.STORE) );
 		
 		this.add.text(750, 550, 'Store', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
 		.setStroke('#000000', 10);
@@ -90,50 +91,51 @@ export class OverworldScene extends Phaser.Scene {
 		this.schoolButton = this.add.rectangle(700, 590, 200, 185, '#000000', 0)
 		.setOrigin(0,0)
 		.setInteractive()
-		.on('pointerdown', () => this.scene.start(CONSTANTS.SCENES.SCHOOL));
+		.on('pointerdown', () => tb.start('Work in progress', CONSTANTS.TEXT.TEXT_SPEED));
 		
-		this.add.text(750, 720, 'School', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
-		.setStroke('#000000', 10)
+		this.add.text(750, 720, 'School', { fill: '#f00', fontSize: CONSTANTS.TEXT.FONT_SIZE })
+		.setStroke('#000000', 10);
 
 		// Hospital button
 		this.hospitalButton = this.add.rectangle(550, 775, 200, 185, '#000000', 0)
 		.setOrigin(0,0)
 		.setInteractive()
-		.on('pointerdown', () => this.scene.start(CONSTANTS.SCENES.HOSPITAL));
+		.on('pointerdown', () => tb.start('Work in progress', CONSTANTS.TEXT.TEXT_SPEED));
 		
-		this.add.text(577, 980, 'Hospital', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
-		.setStroke('#000000', 10)
+		this.add.text(577, 980, 'Hospital', { fill: '#f00', fontSize: CONSTANTS.TEXT.FONT_SIZE })
+		.setStroke('#000000', 10);
 
 		// Park button
 		this.parkButton = this.add.rectangle(320, 750, 130, 200, '#000000', 0)
 		.setOrigin(0,0)
 		.setInteractive()
-		.on('pointerdown', () => this.scene.start(CONSTANTS.SCENES.PARK));
+		.on('pointerdown', () => tb.start('Work in progress', CONSTANTS.TEXT.TEXT_SPEED));
 		
-		this.add.text(350, 800, 'Park', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
-		.setStroke('#000000', 10)
+		this.add.text(350, 800, 'Park', { fill: '#f00', fontSize: CONSTANTS.TEXT.FONT_SIZE })
+		.setStroke('#000000', 10);
 
 		// Lobby button
 		this.lobbyButton = this.add.rectangle(0, 700, 275, 175, '#0000ff', 0)
 		.setOrigin(0,0)
 		.setInteractive()
-		.on('pointerdown', () => this.scene.start(CONSTANTS.SCENES.LOBBY));
+		.on('pointerdown', () => tb.start('Work in progress', CONSTANTS.TEXT.TEXT_SPEED));
 		
-		this.add.text(10, 825, 'Movie Theatre', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
-		.setStroke('#000000', 10)
+		this.add.text(10, 825, 'Movie Theatre', { fill: '#f00', fontSize: CONSTANTS.TEXT.FONT_SIZE })
+		.setStroke('#000000', 10);
 
 		// Mall button
 		this.mallButton = this.add.rectangle(100, 300, 200, 300, '#0000ff', 0)
 		.setOrigin(0,0)
 		.setInteractive()
-		.on('pointerdown', () => this.scene.start(CONSTANTS.SCENES.MALL));
+		.on('pointerdown', () => tb.start('Work in progress', CONSTANTS.TEXT.TEXT_SPEED));
 		
-		this.add.text(155, 525, 'Mall', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
-		.setInteractive()
-		.setStroke('#000000', 10)
-		.on('pointerdown', () => this.scene.start(CONSTANTS.SCENES.MALL));
+		this.add.text(155, 525, 'Mall', { fill: '#f00', fontSize: CONSTANTS.TEXT.FONT_SIZE })
+		.setStroke('#000000', 10);
 
 		// Location name
-		this.add.text(10, 10, KEY, { fill: '#0f0', fontSize: CONSTANTS.TEXT.FONT_SIZE })
+		this.add.text(10, 10, KEY, { fill: '#0f0', fontSize: CONSTANTS.TEXT.FONT_SIZE });
+
+		// UI
+		sceneFnc.drawUI(this, 1085);
 	}
 }

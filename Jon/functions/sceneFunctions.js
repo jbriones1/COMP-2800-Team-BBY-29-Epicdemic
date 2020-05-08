@@ -16,8 +16,13 @@ export function enableButtons (buttonList) {
 }
 
 export function drawUI (scene, yPos) {
+	console.log(scene.key);
 
 	// Money
-	scene.add.text(10, yPos, '$' + playerData.stats.money, 
+	scene.add.text(300, yPos, '$' + playerData.stats.money, 
 		{ fill: '#ffff00', fontSize: CONSTANTS.TEXT.FONT_SIZE }); // styling
+
+	// Time
+	scene.add.text(10, yPos, 'Day ' + playerData.stats.day + ' - ' + playerData.stats.hour + ':' + playerData.stats.minuteStr, 
+		{ fontSize: CONSTANTS.TEXT.FONT_SIZE }); // styling
 }
