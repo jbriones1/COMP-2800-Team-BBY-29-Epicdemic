@@ -33,7 +33,18 @@ export let playerData = {
 			message: 'Goodbye'}
 	],
 	location: null,
-	job: true
+	job: true,
+	stationery: [{
+		pencil: false,
+		markers: false,
+		paper: false
+	}],
+	book: [{
+		hasBook1: false,
+		hasBook2: false,
+		hasBook3: false,
+		hasOneBook: false
+	}]
 };
 
 export function changeTime(amount) {
