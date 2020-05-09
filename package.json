@@ -22,7 +22,10 @@
   },
   "homepage": "https://github.com/jbriones1/Epicdemic#readme",
   "dependencies": {
+    "http": "0.0.1-security",
+    "http-server": "^0.12.3",
     "parcel": "^1.12.4",
-    "phaser": "^3.23.0"
+    "phaser": "^3.23.0",
+    "server": "^1.0.27"
   }
 }

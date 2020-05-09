@@ -1,5 +1,7 @@
 /** @type {import("../typings/phaser")} */
 
+import {CONSTANTS}       from './globalvars/CONSTANTS.js';
+
 import {IntroScene}      from './scenes/IntroScene.js';
 import {OverworldScene}  from './scenes/OverworldScene.js';
 import {HomeScene}       from './scenes/HomeScene.js';
@@ -14,16 +16,13 @@ import {MallScene}       from './scenes/MallScene.js';
 import {FoodCourtScene}  from './scenes/FoodCourtScene.js';
 import {MusicStoreScene} from './scenes/MusicStoreScene.js';
 
-import {Chatbox}        from './UI/Chatbox.js';
-
 let config = {
 	type: Phaser.AUTO,
-	width: 720,
-	height: 1280,
+	width: CONSTANTS.UI.SCREEN_WIDTH,
+	height: CONSTANTS.UI.SCREEN_HEIGHT,
 	scene: [
 		IntroScene, 
 		OverworldScene, 
-		Chatbox, 
 		HomeScene,
 		AirportScene,
 		StoreScene,
@@ -34,7 +33,7 @@ let config = {
 		TheatreScene,
 		MallScene,
 		FoodCourtScene,
-		MusicStoreScene
+		MusicStoreScene,
 	]
 };
 
