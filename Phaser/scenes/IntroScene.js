@@ -24,7 +24,9 @@ export class IntroScene extends Phaser.Scene {
 
 	// Load game object
 	create () {
-		
+		this.input.on('pointerup', () => {
+			this.scene.start(CONSTANTS.SCENES.HOME);
+		});
 	}
 
 }

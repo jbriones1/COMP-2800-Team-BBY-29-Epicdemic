@@ -49,6 +49,9 @@ export class OverworldScene extends Phaser.Scene {
 	
 	tb.start(testText, CONSTANTS.TEXT.TEXT_SPEED);
 
+		// UI
+		this.add.text(sceneFnc.drawUI(this, 1085));
+
 	}
 
 	update () {
@@ -135,7 +138,5 @@ export class OverworldScene extends Phaser.Scene {
 		// Location name
 		this.add.text(10, 10, KEY, { fill: '#0f0', fontSize: CONSTANTS.TEXT.FONT_SIZE });
 
-		// UI
-		sceneFnc.drawUI(this, 1085);
 	}
 }

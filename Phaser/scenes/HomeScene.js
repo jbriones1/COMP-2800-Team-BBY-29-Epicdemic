@@ -9,7 +9,6 @@ let KEY = CONSTANTS.SCENES.HOME;
 let tb;
 let submenu;
 
-let boy;
 let computerOn = false;
 let mainButtons;
 
@@ -92,8 +91,6 @@ export class HomeScene extends Phaser.Scene {
 		// Location name
 		this.add.text(10, 10, KEY, { fill: '#0f0', fontSize: CONSTANTS.TEXT.FONT_SIZE })
 
-		// UI
-		sceneFnc.drawUI(this, 50);
 	}
 
 	/* All the interactable objects in the scene are made here */
@@ -275,7 +272,6 @@ export class HomeScene extends Phaser.Scene {
 			+ '\n\n\nYou have ' + playerData.storage.soap + ' soap left.', CONSTANTS.TEXT.TEXT_SPEED);
 
 		console.log(playerFnc.changeTime(1));
-
 	}
 
 	sleep() {

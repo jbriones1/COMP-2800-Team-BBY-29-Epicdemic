@@ -15,14 +15,15 @@ export function enableButtons (buttonList) {
 	}
 }
 
-export function drawUI (scene, yPos) {
-	console.log(scene.key);
+export function drawUI () {
 
+	let str = '';
 	// Money
-	scene.add.text(300, yPos, '$' + playerData.stats.money, 
-		{ fill: '#ffff00', fontSize: CONSTANTS.TEXT.FONT_SIZE }); // styling
+	str += '$' + playerData.stats.money
 
+	str += '                                   ';
 	// Time
-	scene.add.text(10, yPos, 'Day ' + playerData.stats.day + ' - ' + playerData.stats.hour + ':' + playerData.stats.minuteStr, 
-		{ fontSize: CONSTANTS.TEXT.FONT_SIZE }); // styling
+	str += 'Day ' + playerData.stats.day + ' - ' + playerData.stats.hour + ':' + playerData.stats.minuteStr;
+
+	return str;
 }

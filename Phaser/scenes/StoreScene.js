@@ -9,6 +9,8 @@ let KEY = CONSTANTS.SCENES.STORE;
 let tb;
 let submenu;
 
+let uitext;
+
 export class StoreScene extends Phaser.Scene {
 	constructor() {
 		super({
@@ -55,7 +57,7 @@ export class StoreScene extends Phaser.Scene {
 		this.createObjects();
 
 		// Return to Overworld
-		this.theatreButton = this.add.text(
+		this.overworldButton = this.add.text(
 			CONSTANTS.UI.SCREEN_WIDTH - 100, 10, 'Map', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
 			.setInteractive()
 			.on('pointerdown', () => {
@@ -66,7 +68,12 @@ export class StoreScene extends Phaser.Scene {
 		this.add.text(10, 10, KEY, { fill: '#0f0', fontSize: CONSTANTS.TEXT.FONT_SIZE });
 
 		// UI
-		sceneFnc.drawUI(this, 50);
+		uitext = this.add.text(sceneFnc.drawUI());
+
+	}
+
+	update () {
+		sceneFnc.drawUI(this, CONSTANTS.UI.PLAYER_UI);
 	}
 
 	/* All the interactable objects in the scene are made here */
@@ -209,9 +216,11 @@ export class StoreScene extends Phaser.Scene {
 
 		if (playerData.stats.money >= price) {
 			playerData.stats.money -= price;
+			
 			return true;
 		}
 
+		uitext.text.set((sceneFnc.drawUI(this, CONSTANTS.UI.PLAYER_UI)));
 		return false;
 	}
 }
