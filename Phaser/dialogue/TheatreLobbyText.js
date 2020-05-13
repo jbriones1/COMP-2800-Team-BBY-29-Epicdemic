@@ -9,25 +9,25 @@ let kiosk = {
     }
 }
 
-let concession = {
-    interact: "Welcome the concession stand! What can I get for you?",
+// let concession = {
+//     interact: "Welcome the concession stand! What can I get for you?",
 
-    buy: {
-        success: "Here you are! Enjoy the show and stay safe!",
-        fail: "Sorry, you don't have enough money for that!"
-    },
+//     buy: {
+//         success: "Here you are! Enjoy the show and stay safe!",
+//         fail: "Sorry, you don't have enough money for that!"
+//     },
 
-    question: {
-        /* Why aren't you guys using the popcorn machine? */
-        answer1: "We aren't using the popcorn machine because we are currently only selling pre-packaged items. This is an attempt to prevent the additional spread of COVID-19. We still have popcorn, chocolate and candy!",
+//     question: {
+//         /* Why aren't you guys using the popcorn machine? */
+//         answer1: "We aren't using the popcorn machine because we are currently only selling pre-packaged items. This is an attempt to prevent the additional spread of COVID-19. We still have popcorn, chocolate and candy!",
         
-        /* Why can't I have a soda from the fountain? */
-        answer2: "The soda fountain is currently not available to be used. We are only selling canned drinks at the moment in an effort to prevent the additional spread of COVID-19.",
+//         /* Why can't I have a soda from the fountain? */
+//         answer2: "The soda fountain is currently not available to be used. We are only selling canned drinks at the moment in an effort to prevent the additional spread of COVID-19.",
 
-        /* Why are you wearing gloves and a mask? */
-        answer3: "Wearing gloves and masks are an extra precaution that could help against the spread. It's not a certain thing, but because there is even a chance of it helping, I'm all for it!"
-    }
-}
+//         /* Why are you wearing gloves and a mask? */
+//         answer3: "Wearing gloves and masks are an extra precaution that could help against the spread. It's not a certain thing, but because there is even a chance of it helping, I'm all for it!"
+//     }
+// }
 
 let ticketWindow = {
     interact: 'Hello! How can I help you?',
@@ -58,9 +58,25 @@ let theatreEntrance = {
     failure: "You don't have a ticket! Go buy one before you enter the theatre"
 }
 
+//======================================
+// new added -> seat choice 
+//======================================
+let largeSofa = {
+    interact: "A lady is sitting on the sofa"
+}
+
+//======================================
+// new added -> seat choice 
+//======================================
+let smallSofa = {
+    interact: "There is an empty seat"
+}
+
 export let sceneText = {
     theatreEntrance: theatreEntrance,
     ticketWindow: ticketWindow,
-    concession: concession,
-    kiosk: kiosk
+    //concession: concession,
+    kiosk: kiosk,
+    largeSofa: largeSofa,
+    smallSofa: smallSofa
 }
