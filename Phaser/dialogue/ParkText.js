@@ -1,6 +1,6 @@
 let person1 = {
     /* First line of dialogue when selecting this person. */
-    interact: "Hey! I'm Bob!",
+    interact: "Hey! I'm Sally!",
 
     /* OPTION: Ask a question */
     question: {
