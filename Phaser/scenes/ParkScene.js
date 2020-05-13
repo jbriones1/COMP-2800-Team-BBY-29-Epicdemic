@@ -54,7 +54,7 @@ export class ParkScene extends Phaser.Scene {
 				this.scene.start(CONSTANTS.SCENES.OVERWORLD);
 		});
 		//location name
-		this.add.text(20, 50, KEY, {fill: '#0f0', fontSize: CONSTANTS.TEXT.FONT_SIZE})
+		// this.add.text(20, 50, KEY, {fill: '#0f0', fontSize: CONSTANTS.TEXT.FONT_SIZE})
 
 		//create object buttons
 		this.createObjects();
@@ -67,7 +67,7 @@ export class ParkScene extends Phaser.Scene {
 			yoyo: true
 		});	
 		//add person girl 1
-		let park_girl = this.add.sprite(230, 340, 'park_girl', 7)
+		let park_girl = this.add.sprite(435, 355, 'park_girl', 4)
 		.setDisplaySize(45, 75)
 		.setInteractive()
 		.on('pointerdown', () => {
@@ -86,35 +86,35 @@ export class ParkScene extends Phaser.Scene {
 			tb.start(sceneText.fountain.interact, CONSTANTS.TEXT.TEXT_SPEED)
 		})
 		//trail 1
-		this.add.rectangle(405, 410, 55, 270,'#000000', 0.5)
+		this.add.rectangle(405, 410, 55, 270,'#000000', 0)
 		.setOrigin(0,0)
 		.setInteractive()
 		.on('pointerdown', () => {
 			tb.start(sceneText.trails.interact, CONSTANTS.TEXT.TEXT_SPEED)
 		})
 		//trail 2
-		this.add.rectangle(450, 410, 270, 55,'#000000', 0.5)
+		this.add.rectangle(450, 410, 270, 55,'#000000', 0)
 		.setOrigin(0,0)
 		.setInteractive()
 		.on('pointerdown', () => {
 			tb.start(sceneText.trails.interact, CONSTANTS.TEXT.TEXT_SPEED)
 		})
 		//trail 3
-		this.add.rectangle(718, 0, 55, 750,'#000000', 0.5)
+		this.add.rectangle(718, 0, 55, 750,'#000000', 0)
 		.setOrigin(0,0)
 		.setInteractive()
 		.on('pointerdown', () => {
 			tb.start(sceneText.trails.interact, CONSTANTS.TEXT.TEXT_SPEED)
 		})
 		//trail 4
-		this.add.rectangle(0, 670, 320, 55,'#000000', 0.5)
+		this.add.rectangle(0, 670, 320, 55,'#000000', 0)
 		.setOrigin(0,0)
 		.setInteractive()
 		.on('pointerdown', () => {
 			tb.start(sceneText.trails.interact, CONSTANTS.TEXT.TEXT_SPEED)
 		})
 		//trail 5
-		this.add.rectangle(265, 625, 150, 55,'#000000', 0.5)
+		this.add.rectangle(265, 625, 150, 55,'#000000', 0)
 		.setOrigin(0,0)
 		.setInteractive()
 		.on('pointerdown', () => {
