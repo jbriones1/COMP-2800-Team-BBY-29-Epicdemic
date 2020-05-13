@@ -63,9 +63,6 @@ export class LobbyScene extends Phaser.Scene {
 		});
 
 		// button of large sofa
-		//======================================
-		// add a lady on the sofa
-		//======================================
 		this.add.rectangle(240, 370, 130, 70, '#000000', 0.8)
 		.setOrigin(0, 0)
 		.setInteractive()
