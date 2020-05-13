@@ -36,7 +36,7 @@ export class TheatreScene extends Phaser.Scene {
 		.setOrigin(0, 0)
 		.setDisplaySize(950, 680);
 
-		this.add.text(80, 10, KEY, {fill: '#0f0', fontSize: CONSTANTS.TEXT.FONT_SIZE });
+		//this.add.text(80, 10, KEY, {fill: '#0f0', fontSize: CONSTANTS.TEXT.FONT_SIZE });
 
 		tb = textbox.createTextBox(this, 100, CONSTANTS.UI.SCREEN_HEIGHT - 300, {wrapWidth: 650});
 		tb.start("At Theatre", CONSTANTS.TEXT.TEXT_SPEED);
@@ -120,7 +120,7 @@ export class TheatreScene extends Phaser.Scene {
 		.on('pointerdown', () => {
 			tb.start(sceneText.concession.interact, CONSTANTS.TEXT.TEXT_SPEED);
 		})
-			
+
 
 	}
 

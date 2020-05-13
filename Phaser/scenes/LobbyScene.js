@@ -41,7 +41,7 @@ export class LobbyScene extends Phaser.Scene {
 		.setOrigin(0, 0)
 		.setDisplaySize(70, 130);
 
-		this.add.text(80, 10, KEY, {fill: '#0f0', fontSize: CONSTANTS.TEXT.FONT_SIZE });
+		//this.add.text(80, 10, KEY, {fill: '#0f0', fontSize: CONSTANTS.TEXT.FONT_SIZE });
 
 		tb = textbox.createTextBox(this, 100, CONSTANTS.UI.SCREEN_HEIGHT - 300, {wrapWidth: 650});
 		tb.start("At Theatre Lobby", CONSTANTS.TEXT.TEXT_SPEED);
@@ -56,7 +56,7 @@ export class LobbyScene extends Phaser.Scene {
 
 		// Return to Overworld
 		this.overworldButton = this.add.text(
-			CONSTANTS.UI.SCREEN_WIDTH - 400, 10, ' Return to Overworld', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
+			CONSTANTS.UI.SCREEN_WIDTH - 150, 10, 'Map', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
 		.setInteractive()
 		.on('pointerdown', () => {
 			this.scene.start(CONSTANTS.SCENES.OVERWORLD);
@@ -82,7 +82,7 @@ export class LobbyScene extends Phaser.Scene {
 		// how to deal with this button? 
 		//======================================
 		// go to theatre
-		this.theatreButton = this.add.text(400, 10, 'Theatre')
+		this.theatreButton = this.add.text(400, 10, 'Theatre', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
 		.setInteractive()
 		.on('pointerdown', () => {
 			this.scene.start(CONSTANTS.SCENES.THEATRE);
