@@ -27,6 +27,7 @@ export class MusicStoreScene extends Phaser.Scene {
 		this.load.scenePlugin('rexuiplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexuiplugin.min.js', 'rexUI', 'rexUI');
 		this.load.image('nextPage', '../assets/images/arrow-down-left.png');
 		this.load.image('musicStore_bg', '../assets/backgrounds/musicStore/toystore.png');
+		this.load.image('musicStore_manager', '../assets/backgrounds/musicStore/manager.png');
 	}
 
 	// Load game objects
@@ -84,13 +85,13 @@ export class MusicStoreScene extends Phaser.Scene {
 
 		// button of manager
 		//======================================
-		// submenu ?   need to add manager in bg img
+		// submenu ?  
 		//======================================
-		this.add.rectangle(430, 650, 100, 100, '#000000', 0.8)
+		this.add.image(445, 650, 'musicStore_manager')
 		.setOrigin(0, 0)
 		.setInteractive()
 		.on('pointerdown', () => {
-			tb.start(sceneText.ticketWindow.interact, CONSTANTS.TEXT.TEXT_SPEED);
+			tb.start(sceneText.manager.interact, CONSTANTS.TEXT.TEXT_SPEED);
 		})
 
 

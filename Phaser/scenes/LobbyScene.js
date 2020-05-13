@@ -27,6 +27,7 @@ export class LobbyScene extends Phaser.Scene {
 		this.load.scenePlugin('rexuiplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexuiplugin.min.js', 'rexUI', 'rexUI');
 		this.load.image('nextPage', '../assets/images/arrow-down-left.png');
 		this.load.image('theatreLobby_bg', '../assets/backgrounds/theatreLobby/theatre_lobby.png');
+		this.load.image('theatreLobby_customer', '../assets/backgrounds/theatreLobby/customer.png');
 	}
 
 	// Load game objects
@@ -35,6 +36,10 @@ export class LobbyScene extends Phaser.Scene {
 		this.add.image(7, 100, 'theatreLobby_bg')
 		.setOrigin(0, 0)
 		.setDisplaySize(950, 680);
+
+		this.add.image(230, 350, 'theatreLobby_customer')
+		.setOrigin(0, 0)
+		.setDisplaySize(70, 130);
 
 		this.add.text(80, 10, KEY, {fill: '#0f0', fontSize: CONSTANTS.TEXT.FONT_SIZE });
 
