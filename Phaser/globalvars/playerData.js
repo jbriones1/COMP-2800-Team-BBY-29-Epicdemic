@@ -1,17 +1,17 @@
 export let playerData = {
 	stats: {
-		hunger: 100,
-		health: 100,
+		hunger: 10, 
+		health: 10, // 7-10 good, 5-6 neutral, 3-4 is bad, 0-2 is dead
 		money: 10,
-		happiness: 100,
+		happiness: 10,
 		score: 0,
 		day: 1,
-		hour: 23,
-		minute: 34,
-		minuteStr: '34',
+		hour: 8,
+		minute: 0,
+		minuteStr: '00',
 	},
 	fridge: {
-		apples: 0,
+		apple: 0,
 		instant_ramen: 0,
 		bread: 0
 	},
@@ -33,18 +33,7 @@ export let playerData = {
 			message: 'Goodbye'}
 	],
 	location: null,
-	job: true,
-	stationery: {
-		pencil: false,
-		markers: false,
-		paper: false
-	},
-	book: {
-		hasBook1: false,
-		hasBook2: false,
-		hasBook3: false,
-		hasOneBook: false
-	}
+	job: true
 };
 
 export function setTime(hour, minute) {
@@ -54,18 +43,15 @@ export function setTime(hour, minute) {
 export function changeTime(amount) {
 	playerData.stats.minute += amount;
 	if (playerData.stats.minute >= 60) {
-		playerData.stats.minute = playerData.stats.minute - 60;
-		playerData.stats.hour++;
+		playerData.stats.hour += Math.floor(playerData.stats.minute / 60);
+		playerData.stats.minute = playerData.stats.minute % 60;
 	}
 	if (playerData.stats.hour >= 24) {
-		playerData.stats.hour = playerData.stats.hour - 24;
-		playerData.stats.day++;
+		playerData.stats.day += Math.floor(playerData.stats.hour / 24);
+		playerData.stats.hour = playerData.stats.hour % 24;
 	}
 	
 	zeroPad();
-
-	return 'Day ' + playerData.stats.day + 
-		     '\nTime: ' + playerData.stats.hour + ':' + playerData.stats.minuteStr;
 }
 
 export function fridgeContents() {
@@ -91,6 +77,7 @@ function zeroPad(num, size) {
 	playerData.stats.minuteStr = playerData.stats.minuteStr.padStart(2, '0');
 }
 
+// Clears the current menu
 export function clearSubmenu (submenu) {
 	if (submenu != undefined) {
 		for (let i = 0; i < submenu.length; i++) {

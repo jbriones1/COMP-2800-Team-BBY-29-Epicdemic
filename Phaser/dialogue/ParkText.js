@@ -31,7 +31,9 @@ let trails = {
         bad: 'This trail is packed! Everyone looks like they are having a great time',
     },
 
-    leave: 'You decide to leave the trail for now...' 
+		leave: 'You decide to leave the trail for now...',
+		
+		
 
 }
 

@@ -9,8 +9,6 @@ let KEY = CONSTANTS.SCENES.STORE;
 let tb;
 let submenu;
 
-let uitext;
-
 export class StoreScene extends Phaser.Scene {
 	constructor() {
 		super({
@@ -58,22 +56,15 @@ export class StoreScene extends Phaser.Scene {
 
 		// Return to Overworld
 		this.overworldButton = this.add.text(
-			CONSTANTS.UI.SCREEN_WIDTH - 100, 10, 'Map', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
+			CONSTANTS.UI.SCREEN_WIDTH - 100, 0, 'Map', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
 			.setInteractive()
 			.on('pointerdown', () => {
 				this.scene.start(CONSTANTS.SCENES.OVERWORLD);
 			});
-
-		// Location name
-		this.add.text(10, 10, KEY, { fill: '#0f0', fontSize: CONSTANTS.TEXT.FONT_SIZE });
-
-		// UI
-		uitext = this.add.text(sceneFnc.drawUI());
-
 	}
 
 	update () {
-		sceneFnc.drawUI(this, CONSTANTS.UI.PLAYER_UI);
+
 	}
 
 	/* All the interactable objects in the scene are made here */
@@ -86,7 +77,7 @@ export class StoreScene extends Phaser.Scene {
 			.on('pointerdown', () => {
 				playerFnc.clearSubmenu(submenu);
 				
-				tb.start(sceneText.shelf.interact.interact);
+				tb.start(sceneText.shelf.interact);
 			});
 
 		// Checkout
@@ -117,6 +108,7 @@ export class StoreScene extends Phaser.Scene {
 			.on('pointerdown', () => {
 				playerFnc.clearSubmenu(submenu);
 
+				this.listClerkItems();
 				tb.start("Self checkout", CONSTANTS.TEXT.TEXT_SPEED);
 			});
 
@@ -125,11 +117,12 @@ export class StoreScene extends Phaser.Scene {
 	// Items available to buy
 	listClerkItems () {
 		
+		// Ramen choice
 		this.checkoutRamen = this.add.text(50, CONSTANTS.UI.SUBMENU_Y, '$1 Ramen', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
 		.setInteractive()
 		.on('pointerdown', () => {
 
-			if (this.purchase(playerData.fridge.instant_ramen, 1)) {
+			if (this.purchase(1)) {
 				playerData.fridge.instant_ramen++;
 				tb.start(sceneText.checkout.purchase.clerk + sceneText.checkout.purchase.toFridge);
 			} else {
@@ -138,11 +131,12 @@ export class StoreScene extends Phaser.Scene {
 
 		});
 
+		// Apple choice
 		this.checkoutApple = this.add.text(250, CONSTANTS.UI.SUBMENU_Y, '$2 Apple', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
 		.setInteractive()
 		.on('pointerdown', () => {
 			
-			if (this.purchase(playerData.fridge.apples, 2)) {
+			if (this.purchase(2)) {
 				playerData.fridge.apples++;
 				tb.start(sceneText.checkout.purchase.clerk + sceneText.checkout.purchase.toFridge);
 			} else {
@@ -151,11 +145,12 @@ export class StoreScene extends Phaser.Scene {
 
 		});
 
+		// Bread choice
 		this.checkoutBread = this.add.text(450, CONSTANTS.UI.SUBMENU_Y, '$3 Bread', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
 		.setInteractive()
 		.on('pointerdown', () => {
 			
-			if (this.purchase(playerData.fridge.bread, 3)) {
+			if (this.purchase(3)) {
 				playerData.fridge.bread++;
 				tb.start(sceneText.checkout.purchase.clerk + sceneText.checkout.purchase.toFridge);
 			} else {
@@ -164,6 +159,7 @@ export class StoreScene extends Phaser.Scene {
 
 		});
 
+		// Mask choice
 		this.checkoutMask = this.add.text(250, CONSTANTS.UI.SUBMENU_Y + 100, '$5 Masks', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
 		.setInteractive()
 		.on('pointerdown', () => {
@@ -173,7 +169,7 @@ export class StoreScene extends Phaser.Scene {
 				return;
 			}
 
-			if (this.purchase(playerData.storage.masks, 3)) {
+			if (this.purchase(5)) {
 				playerData.storage.masks++;
 				tb.start(sceneText.checkout.purchase.clerk + sceneText.checkout.purchase.toStorage);
 			} else {
@@ -182,6 +178,7 @@ export class StoreScene extends Phaser.Scene {
 			
 		});
 
+		// Toilet paper choice
 		this.checkoutTp = this.add.text(450, CONSTANTS.UI.SUBMENU_Y + 100, '$5 Toilet Paper', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
 		.setInteractive()
 		.on('pointerdown', () => {
@@ -190,6 +187,7 @@ export class StoreScene extends Phaser.Scene {
 			
 		});
 
+		// Soap choice
 		this.checkoutSoap = this.add.text(50, CONSTANTS.UI.SUBMENU_Y + 100, '$1 Soap', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
 		.setInteractive()
 		.on('pointerdown', () => {
@@ -216,11 +214,9 @@ export class StoreScene extends Phaser.Scene {
 
 		if (playerData.stats.money >= price) {
 			playerData.stats.money -= price;
-			
 			return true;
 		}
 
-		uitext.text.set((sceneFnc.drawUI(this, CONSTANTS.UI.PLAYER_UI)));
 		return false;
 	}
 }
