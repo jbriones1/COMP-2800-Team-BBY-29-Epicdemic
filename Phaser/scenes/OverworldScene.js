@@ -18,7 +18,6 @@ export class OverworldScene extends Phaser.Scene {
 	// Load data and plugins from other 
 	init () {
 		console.log("Loaded " + KEY);
-		playerData.location = KEY;
 
 		console.log(playerData);
 	}
@@ -41,16 +40,14 @@ export class OverworldScene extends Phaser.Scene {
 
 		this.createButtons();
 
+		// Textbox
 		tb = textbox.createTextBox(this, 
 			100, 
-			CONSTANTS.UI.SCREEN_HEIGHT - 150, {
+			CONSTANTS.UI.SCREEN_HEIGHT - 100, {
 			wrapWidth: 500,
 	})
 	
 	tb.start(testText, CONSTANTS.TEXT.TEXT_SPEED);
-
-		// UI
-		this.add.text(sceneFnc.drawUI(this, 1085));
 
 	}
 
@@ -64,7 +61,7 @@ export class OverworldScene extends Phaser.Scene {
 		this.homeButton = this.add.rectangle(115, 100, 200, 175, '#000000', 0)
 		.setOrigin(0,0)
 		.setInteractive()
-		.on('pointerdown', () => this.scene.start(CONSTANTS.SCENES.HOME));
+		.on('pointerup', () => this.scene.start(CONSTANTS.SCENES.HOME));
 
 		this.add.text(175, 210, 'Home', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
 		.setStroke('#000000', 10);
@@ -73,7 +70,7 @@ export class OverworldScene extends Phaser.Scene {
 		this.airportButton = this.add.rectangle(680, 125, 200, 200, '#000000', 0)
 		.setOrigin(0,0)
 		.setInteractive()
-		.on('pointerdown', () => {
+		.on('pointerup', () => {
 			// this.scene.start(CONSTANTS.SCENES.AIRPORT);
 			tb.start('Closed due to the virus', CONSTANTS.TEXT.TEXT_SPEED);
 		});
@@ -85,7 +82,7 @@ export class OverworldScene extends Phaser.Scene {
 		this.storeButton = this.add.rectangle(700, 400, 200, 185, '#000000', 0)
 		.setOrigin(0,0)
 		.setInteractive()
-		.on('pointerdown', () => this.scene.start(CONSTANTS.SCENES.STORE) );
+		.on('pointerup', () => this.scene.start(CONSTANTS.SCENES.STORE) );
 		
 		this.add.text(750, 550, 'Store', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
 		.setStroke('#000000', 10);
@@ -94,7 +91,7 @@ export class OverworldScene extends Phaser.Scene {
 		this.schoolButton = this.add.rectangle(700, 590, 200, 185, '#000000', 0)
 		.setOrigin(0,0)
 		.setInteractive()
-		.on('pointerdown', () => tb.start('Work in progress', CONSTANTS.TEXT.TEXT_SPEED));
+		.on('pointerup', () => tb.start('Closed due to the virus', CONSTANTS.TEXT.TEXT_SPEED));
 		
 		this.add.text(750, 720, 'School', { fill: '#f00', fontSize: CONSTANTS.TEXT.FONT_SIZE })
 		.setStroke('#000000', 10);
@@ -103,16 +100,16 @@ export class OverworldScene extends Phaser.Scene {
 		this.hospitalButton = this.add.rectangle(550, 775, 200, 185, '#000000', 0)
 		.setOrigin(0,0)
 		.setInteractive()
-		.on('pointerdown', () => tb.start('Work in progress', CONSTANTS.TEXT.TEXT_SPEED));
+		.on('pointerup', () => this.scene.start(CONSTANTS.SCENES.HOSPITAL));
 		
-		this.add.text(577, 980, 'Hospital', { fill: '#f00', fontSize: CONSTANTS.TEXT.FONT_SIZE })
+		this.add.text(577, 980, 'Hospital', { fill: '#fff', fontSize: CONSTANTS.TEXT.FONT_SIZE })
 		.setStroke('#000000', 10);
 
 		// Park button
 		this.parkButton = this.add.rectangle(320, 750, 130, 200, '#000000', 0)
 		.setOrigin(0,0)
 		.setInteractive()
-		.on('pointerdown', () => tb.start('Work in progress', CONSTANTS.TEXT.TEXT_SPEED));
+		.on('pointerup', () => tb.start('Work in progress', CONSTANTS.TEXT.TEXT_SPEED));
 		
 		this.add.text(350, 800, 'Park', { fill: '#f00', fontSize: CONSTANTS.TEXT.FONT_SIZE })
 		.setStroke('#000000', 10);
@@ -121,7 +118,7 @@ export class OverworldScene extends Phaser.Scene {
 		this.lobbyButton = this.add.rectangle(0, 700, 275, 175, '#0000ff', 0)
 		.setOrigin(0,0)
 		.setInteractive()
-		.on('pointerdown', () => tb.start('Work in progress', CONSTANTS.TEXT.TEXT_SPEED));
+		.on('pointerup', () => tb.start('Work in progress', CONSTANTS.TEXT.TEXT_SPEED));
 		
 		this.add.text(10, 825, 'Movie Theatre', { fill: '#f00', fontSize: CONSTANTS.TEXT.FONT_SIZE })
 		.setStroke('#000000', 10);
@@ -130,13 +127,10 @@ export class OverworldScene extends Phaser.Scene {
 		this.mallButton = this.add.rectangle(100, 300, 200, 300, '#0000ff', 0)
 		.setOrigin(0,0)
 		.setInteractive()
-		.on('pointerdown', () => tb.start('Work in progress', CONSTANTS.TEXT.TEXT_SPEED));
+		.on('pointerup', () => tb.start('Work in progress', CONSTANTS.TEXT.TEXT_SPEED));
 		
 		this.add.text(155, 525, 'Mall', { fill: '#f00', fontSize: CONSTANTS.TEXT.FONT_SIZE })
 		.setStroke('#000000', 10);
-
-		// Location name
-		this.add.text(10, 10, KEY, { fill: '#0f0', fontSize: CONSTANTS.TEXT.FONT_SIZE });
 
 	}
 }

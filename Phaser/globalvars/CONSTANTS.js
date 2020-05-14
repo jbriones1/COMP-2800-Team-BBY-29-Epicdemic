@@ -2,6 +2,7 @@ export const CONSTANTS = {
 	SCENES: {
 		OVERWORLD:  "OVERWORLD",
 		CHATBOX:    "CHATBOX",
+		UI:         "UI",
 		INTRO:      "INTRO",
 		HOME:       "HOME",
 		AIRPORT:    "AIRPORT",
@@ -9,11 +10,11 @@ export const CONSTANTS = {
 		SCHOOL:     "SCHOOL",
 		HOSPITAL:   "HOSPITAL",
 		PARK:       "PARK",
-		LOBBY:      "LOBBY",
+		LOBBY:      "LOBBY", // Movie theatre lobby
 		THEATRE:    "THEATRE",
-		MALL:       "MALL",
+		MALL:       "MALL", 
 		FOODCOURT:  "FOODCOURT",
-		MUSICSTORE: "MUSICSTORE"
+		MUSICSTORE: "MUSICSTORE" // Toy store
 	},
 	UI: {
 		SCREEN_WIDTH: 950,
