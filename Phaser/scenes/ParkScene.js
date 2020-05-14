@@ -29,6 +29,7 @@ export class ParkScene extends Phaser.Scene {
 		this.load.image('park_bg', '../assets/backgrounds/park.png')
 		this.load.spritesheet('park_girl', '../characterspritesheet/girl1.png', { frameWidth: 31, frameHeight: 48 })
 		this.load.image('park_arrow', '../assets/images/red_arrow.png')
+		this.load.image('red_arrow', '../assets/images/red_arrow_up.png')
 	}
 	// Load game objects
 	create () {
@@ -48,14 +49,18 @@ export class ParkScene extends Phaser.Scene {
 		tb.start("At Park", CONSTANTS.TEXT.TEXT_SPEED);
 
 		// Return to Overworld
-		this.theatreButton = this.add.text(
-			CONSTANTS.UI.SCREEN_WIDTH - 100, 50, 'Map',{ fontSize: CONSTANTS.TEXT.FONT_SIZE })
+		//Exit from top 
+		this.theatreButton = this.add.image(
+			763, 135,'park_arrow').setRotation(3.14)
+			.setOrigin(0,0)
+			.setDisplaySize(30,30)
 			.setInteractive()
 			.once('pointerdown', () => {
 				this.scene.start(CONSTANTS.SCENES.OVERWORLD);
 		});
-		//location name
-		// this.add.text(20, 50, KEY, {fill: '#0f0', fontSize: CONSTANTS.TEXT.FONT_SIZE})
+
+		//Exit Text
+		this.add.text(715, 50, 'EXIT', {fill: '#0f0', fontSize: CONSTANTS.TEXT.FONT_SIZE})
 
 		//create object buttons
 		this.createObjects();
@@ -73,10 +78,21 @@ export class ParkScene extends Phaser.Scene {
 		.setOrigin(0,0)
 		.setDisplaySize(30,30)
 
-		//arrow on the trail
-		this.add.image(733, 400,'park_arrow')
-		.setOrigin(0,0)
-		.setDisplaySize(30,30)
+		// //arrow on the trail
+		// this.add.image(810, 420,'park_arrow').setRotation(3.14/2)
+		// .setOrigin(0,0)
+		// .setDisplaySize(30,30)
+
+		//bottom trail red arrow
+		this.add.image(733, 715,'park_arrow')
+			.setOrigin(0,0)
+			.setDisplaySize(30,30)
+
+		//side arrow
+		this.add.image(50, 680,'park_arrow').setRotation(3.14/2)
+			.setOrigin(0,0)
+			.setDisplaySize(30,30)
+			.setInteractive()
 
 		//add person girl 1
 		this.anims.create({
@@ -106,6 +122,7 @@ export class ParkScene extends Phaser.Scene {
 			tb.start(sceneText.fountain.interact, CONSTANTS.TEXT.TEXT_SPEED)
 			this.listFountainChoices();
 		})
+
 		//trail 1
 		this.add.rectangle(405, 410, 55, 270,'#000000', 0)
 		.setOrigin(0,0)
@@ -115,6 +132,7 @@ export class ParkScene extends Phaser.Scene {
 			tb.start(sceneText.trails.interact, CONSTANTS.TEXT.TEXT_SPEED)
 			this.listTrailsChoices();
 		})
+
 		//trail 2
 		this.add.rectangle(450, 410, 270, 55,'#000000', 0)
 		.setOrigin(0,0)
@@ -124,8 +142,9 @@ export class ParkScene extends Phaser.Scene {
 			tb.start(sceneText.trails.interact, CONSTANTS.TEXT.TEXT_SPEED)
 			this.listTrailsChoices();
 		})
-		//trail 3, arrow is above here
-		this.add.rectangle(718, 0, 55, 750,'#000000', 0)
+
+		//trail 3: top exit arrow and bottom clickable arrow are here
+		this.add.rectangle(718, 140, 55, 620,'#000000', 0)
 		.setOrigin(0,0)
 		.setInteractive()
 		.on('pointerdown', () => {
@@ -133,7 +152,8 @@ export class ParkScene extends Phaser.Scene {
 			tb.start(sceneText.trails.interact, CONSTANTS.TEXT.TEXT_SPEED)
 			this.listTrailsChoices();
 		})
-		//trail 4
+
+		//trail 4: side clickable arrow here
 		this.add.rectangle(0, 670, 320, 55,'#000000', 0)
 		.setOrigin(0,0)
 		.setInteractive()
@@ -142,6 +162,7 @@ export class ParkScene extends Phaser.Scene {
 			tb.start(sceneText.trails.interact, CONSTANTS.TEXT.TEXT_SPEED)
 			this.listTrailsChoices();
 		})
+		
 		//trail 5
 		this.add.rectangle(265, 625, 150, 55,'#000000', 0)
 		.setOrigin(0,0)
