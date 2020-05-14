@@ -6,13 +6,12 @@ let reception = {
         /* First line of dialogue after asking a question. */
         interact: 'Ask away!',
         /* "How can I help the hospital amid this crisis?" */
-        question1: {
-            answer1: 'Stay home as much as possible',
-            answer2: 'If you feel sick, use a self-triage tool, or call your provider rather than rushing immediately to the hospital',
-            answer3: 'Make a monetary donation to a non-profit hospital',
-            answer4: 'Donate masks, hand sanitizer, and cleaning supplies!',
-            answer5: 'Run essential errands for those of higher risk!'
-        },
+        question1: [
+					'Stay home as much as possible',
+					'If you feel sick, use a self-triage tool, or call your provider rather than rushing immediately to the hospital',
+					'Make a monetary donation to a non-profit hospital',
+					'Run essential errands for those of higher risk!'
+				],
         /* "Do you have any hand sanitizer I could use?" */
         question2: {
             answer: 'Yes there is some hand sanitizer right here! Thank you for asking!'
@@ -31,7 +30,8 @@ let reception = {
         /* First line of dialogue for this option. */
         interact: 'Thank you so much! Which item are you looking to donate?',
         /* Thank you */
-        thanks: 'Thank you for your donation. We appreciate it so much!'
+				thanks: 'Thank you for your donation. We appreciate it so much!',
+				notEnough: "Sorry, looks like you're too poor!"
     },
 
     /* OPTION: Check-in */
@@ -72,8 +72,13 @@ let hospitalRooms = {
     }
 }
 
+let grandma = {
+	interact: "Ohhhhhhhhhhhhhhhhhhhhhhhhhhhhhh hheeeeeelllloooo theeerrreeeeee. No one evvveeerrrrrr talks to me. I'm so happy someone your age still appreciates us old folks looonngg enoougghh to have a conversation. What are you here for? I'm just here for some routine checkups. Ooooooohhhhhhh....... (She talks to you for 3 hours)"
+}
+
 export let sceneText = {
     reception: reception,
     seats: seats,
-    hospitalRooms: hospitalRooms
+		hospitalRooms: hospitalRooms,
+		grandma: grandma
 }

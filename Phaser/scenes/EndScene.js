@@ -1,10 +1,11 @@
 import {CONSTANTS} from '../globalvars/CONSTANTS.js';
 import {playerData} from '../globalvars/playerData.js';
 
-let KEY = CONSTANTS.SCENES.UI;
+let KEY = CONSTANTS.SCENES.END;
 let uiText;
+let uiScene;
 
-export class UIScene extends Phaser.Scene {
+export class EndScene extends Phaser.Scene {
 	constructor() {
 		super({
 			key: KEY
@@ -12,7 +13,9 @@ export class UIScene extends Phaser.Scene {
 	}
 
 	init () {
+		uiScene = this.scene.get(CONSTANTS.SCENES.UI);
 		console.log("Loaded " + KEY);
+		this.scene.setVisible(false);
 	}
 
 	// Load assets
@@ -23,24 +26,20 @@ export class UIScene extends Phaser.Scene {
 
 	// Load game objects
 	create () {
-		uiText = this.add.text(0, 0, 'UI', {fontSize: '35px'});
+		uiText = this.add.text(CONSTANTS.UI.SCREEN_WIDTH/2, CONSTANTS.UI.SCREEN_HEIGHT/2, 'ENDSCENE', {fontSize: '35px'});
 	}
 
 	update() {
-		if (!this.scene.isActive(CONSTANTS.SCENES.OVERWORLD)) {
-			this.scene.setVisible(true);
-			uiText.setY(0);
-		} else {
-			this.scene.setVisible(true);
-			uiText.setY(1080);
-		}
-
-		uiText.setText('$' + playerData.stats.money + '     Hunger: ' + playerData.stats.hunger + '     Happiness: ' + playerData.stats.happiness
-			+ '\nDay ' + playerData.stats.day + ' - ' + playerData.stats.hour + ':' + playerData.stats.minuteStr);
 
 		if (playerData.stats.day >= 6) {
-			this.scene.pause(playerData.location);
+			this.endgame();
 		}
+	}
+
+	endgame() {
+		this.scene.pause(CONSTANTS.SCENES.UI);
+		this.scene.stop(playerData.location);
+		this.scene.setVisible(true, CONSTANTS.SCENES.END);
 	}
 
 }

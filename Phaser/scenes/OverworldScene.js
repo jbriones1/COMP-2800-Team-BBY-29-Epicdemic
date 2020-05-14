@@ -127,9 +127,9 @@ export class OverworldScene extends Phaser.Scene {
 		this.mallButton = this.add.rectangle(100, 300, 200, 300, '#0000ff', 0)
 		.setOrigin(0,0)
 		.setInteractive()
-		.on('pointerup', () => tb.start('Work in progress', CONSTANTS.TEXT.TEXT_SPEED));
+		.on('pointerup', () => this.scene.start(CONSTANTS.SCENES.MUSICSTORE));
 		
-		this.add.text(155, 525, 'Mall', { fill: '#f00', fontSize: CONSTANTS.TEXT.FONT_SIZE })
+		this.add.text(155, 525, 'MALL', { fill: '#f00', fontSize: CONSTANTS.TEXT.FONT_SIZE })
 		.setStroke('#000000', 10);
 
 	}

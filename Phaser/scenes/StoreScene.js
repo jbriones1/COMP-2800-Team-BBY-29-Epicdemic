@@ -87,7 +87,7 @@ export class StoreScene extends Phaser.Scene {
 			.on('pointerdown', () => {
 				playerFnc.clearSubmenu(submenu);
 
-				tb.start(sceneText.checkout.good);
+				
 				this.listClerkItems();
 			});
 
@@ -116,6 +116,7 @@ export class StoreScene extends Phaser.Scene {
 
 	// Items available to buy
 	listClerkItems () {
+		tb.start(sceneText.checkout.good);
 		
 		// Ramen choice
 		this.checkoutRamen = this.add.text(50, CONSTANTS.UI.SUBMENU_Y, '$1 Ramen', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
@@ -164,7 +165,7 @@ export class StoreScene extends Phaser.Scene {
 		.setInteractive()
 		.on('pointerdown', () => {
 			
-			if (playerData.stats.health < 30) {
+			if (playerData.stats.health < 3) {
 				tb.start(sceneText.checkout.purchase.noStock);
 				return;
 			}

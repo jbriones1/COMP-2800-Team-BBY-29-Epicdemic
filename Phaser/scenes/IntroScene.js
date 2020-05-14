@@ -26,6 +26,7 @@ export class IntroScene extends Phaser.Scene {
 	preload() {
 		this.load.scenePlugin('rexuiplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexuiplugin.min.js', 'rexUI', 'rexUI');
 		this.load.image('nextPage', '../assets/images/arrow-down-left.png');
+		this.load.image('redArrow', '../assets/images/red_arrow.png');
 	}
 
 	// Load game object
@@ -38,7 +39,7 @@ export class IntroScene extends Phaser.Scene {
 
 	update () {
 
-		this.scene.start(CONSTANTS.SCENES.HOSPITAL).launch(CONSTANTS.SCENES.UI);
+		// this.scene.start(CONSTANTS.SCENES.HOME).launch(CONSTANTS.SCENES.UI);
 
 		if (tb.isLastPage && !tb.isTyping && !startText) {
 
@@ -46,7 +47,9 @@ export class IntroScene extends Phaser.Scene {
 				{fontSize: CONSTANTS.TEXT.FONT_SIZE})
 			.setInteractive()
 			.on('pointerdown', () => {
-				this.scene.start(CONSTANTS.SCENES.HOME).launch(CONSTANTS.SCENES.UI)
+				// Boots all necessary scenes
+				this.scene.start(CONSTANTS.SCENES.HOME)
+				.launch(CONSTANTS.SCENES.UI);
 			});
 			
 			startText = true;
