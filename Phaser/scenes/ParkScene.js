@@ -60,7 +60,7 @@ export class ParkScene extends Phaser.Scene {
 		this.createObjects();
 		
 		this.anims.create({
-			key: 'neutral',
+			key: 'park_girl_neutral',
 			frames: this.anims.generateFrameNumbers('park_girl', {start: 0, end: 2}),
 			frameRate: 3,
 			repeat: -1,
@@ -75,7 +75,7 @@ export class ParkScene extends Phaser.Scene {
 			tb.start(sceneText.person1.interact, CONSTANTS.TEXT.TEXT_SPEED)
 			this.listPersonChoices();
 		})
-		park_girl.anims.play('neutral', true);
+		park_girl.anims.play('park_girl_neutral', true);
 	}
 
 	createObjects(){

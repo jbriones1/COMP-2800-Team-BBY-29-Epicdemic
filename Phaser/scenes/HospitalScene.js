@@ -96,13 +96,13 @@ export class HospitalScene extends Phaser.Scene {
 
 		// Nurse animation
 		this.anims.create({
-			key: 'neutral',
+			key: 'hospital_nurse_neutral',
 			frames: this.anims.generateFrameNumbers('hospital_nurse', {start: 0, end: 2}),
 			frameRate: 3,
 			repeat: -1,
 			yoyo: true
 		});
-		nurse.anims.play('neutral', true);
+		nurse.anims.play('hospital_nurse_neutral', true);
 
 		// this.add.rectangle(startX, startY, width, height, color, alpha/transparency)
 		this.add.rectangle(275, 300, 150, 200, '#000000', 0)

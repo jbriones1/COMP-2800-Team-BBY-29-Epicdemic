@@ -109,16 +109,16 @@ export class OverworldScene extends Phaser.Scene {
 		this.parkButton = this.add.rectangle(320, 750, 130, 200, '#000000', 0)
 		.setOrigin(0,0)
 		.setInteractive()
-		.on('pointerup', () => tb.start('Work in progress', CONSTANTS.TEXT.TEXT_SPEED));
+		.on('pointerup', () => this.scene.start(CONSTANTS.SCENES.PARK));
 		
-		this.add.text(350, 800, 'Park', { fill: '#f00', fontSize: CONSTANTS.TEXT.FONT_SIZE })
+		this.add.text(350, 800, 'Park', { fill: '#fff', fontSize: CONSTANTS.TEXT.FONT_SIZE })
 		.setStroke('#000000', 10);
 
 		// Lobby button
 		this.lobbyButton = this.add.rectangle(0, 700, 275, 175, '#0000ff', 0)
 		.setOrigin(0,0)
 		.setInteractive()
-		.on('pointerup', () => tb.start('Work in progress', CONSTANTS.TEXT.TEXT_SPEED));
+		.on('pointerup', () => this.scene.start(CONSTANTS.SCENES.LOBBY));
 		
 		this.add.text(10, 825, 'Movie Theatre', { fill: '#f00', fontSize: CONSTANTS.TEXT.FONT_SIZE })
 		.setStroke('#000000', 10);
