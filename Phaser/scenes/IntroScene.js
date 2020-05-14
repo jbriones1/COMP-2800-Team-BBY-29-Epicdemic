@@ -28,5 +28,4 @@ export class IntroScene extends Phaser.Scene {
 			this.scene.start(CONSTANTS.SCENES.PARK);
 		// });
 	}
-
 }
