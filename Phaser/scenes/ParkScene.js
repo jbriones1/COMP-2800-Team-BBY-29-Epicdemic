@@ -7,7 +7,7 @@ import { sceneText } from '../dialogue/ParkText.js';
 
 let KEY = CONSTANTS.SCENES.PARK;
 let tb;
-let submenu;
+let submenu = [];
 
 export class ParkScene extends Phaser.Scene {
 	constructor() {
@@ -60,20 +60,21 @@ export class ParkScene extends Phaser.Scene {
 		this.createObjects();
 		
 		this.anims.create({
-			ket: 'neutral',
+			key: 'neutral',
 			frames: this.anims.generateFrameNumbers('park_girl', {start: 0, end: 2}),
 			frameRate: 3,
 			repeat: -1,
 			yoyo: true
 		});	
 		//add person girl 1
-		let park_girl = this.add.sprite(435, 355, 'park_girl', 4)
+		let park_girl = this.add.sprite(435, 355, 'park_girl', 1)
 		.setDisplaySize(45, 75)
 		.setInteractive()
 		.on('pointerdown', () => {
+			playerFnc.clearSubmenu(submenu);
 			tb.start(sceneText.person1.interact, CONSTANTS.TEXT.TEXT_SPEED)
+			this.listPersonChoices();
 		})
-		//didn't work T.T
 		park_girl.anims.play('neutral', true);
 	}
 
@@ -83,43 +84,98 @@ export class ParkScene extends Phaser.Scene {
 		.setOrigin(0,0)
 		.setInteractive()
 		.on('pointerdown', () => {
+			playerFnc.clearSubmenu(submenu);
 			tb.start(sceneText.fountain.interact, CONSTANTS.TEXT.TEXT_SPEED)
+			this.listFountainChoices();
 		})
 		//trail 1
 		this.add.rectangle(405, 410, 55, 270,'#000000', 0)
 		.setOrigin(0,0)
 		.setInteractive()
 		.on('pointerdown', () => {
+			playerFnc.clearSubmenu(submenu);
 			tb.start(sceneText.trails.interact, CONSTANTS.TEXT.TEXT_SPEED)
+			this.listTrailsChoices();
 		})
 		//trail 2
 		this.add.rectangle(450, 410, 270, 55,'#000000', 0)
 		.setOrigin(0,0)
 		.setInteractive()
 		.on('pointerdown', () => {
+			playerFnc.clearSubmenu(submenu);
 			tb.start(sceneText.trails.interact, CONSTANTS.TEXT.TEXT_SPEED)
+			this.listTrailsChoices();
 		})
 		//trail 3
 		this.add.rectangle(718, 0, 55, 750,'#000000', 0)
 		.setOrigin(0,0)
 		.setInteractive()
 		.on('pointerdown', () => {
+			playerFnc.clearSubmenu(submenu);
 			tb.start(sceneText.trails.interact, CONSTANTS.TEXT.TEXT_SPEED)
+			this.listTrailsChoices();
 		})
 		//trail 4
 		this.add.rectangle(0, 670, 320, 55,'#000000', 0)
 		.setOrigin(0,0)
 		.setInteractive()
 		.on('pointerdown', () => {
+			playerFnc.clearSubmenu(submenu);
 			tb.start(sceneText.trails.interact, CONSTANTS.TEXT.TEXT_SPEED)
+			this.listTrailsChoices();
 		})
 		//trail 5
 		this.add.rectangle(265, 625, 150, 55,'#000000', 0)
 		.setOrigin(0,0)
 		.setInteractive()
 		.on('pointerdown', () => {
+			playerFnc.clearSubmenu(submenu);
 			tb.start(sceneText.trails.interact, CONSTANTS.TEXT.TEXT_SPEED)
+			this.listTrailsChoices();
 		})
+	}
+	/* PARK GIRL CODE */
+	listPersonChoices() {
+		//add submenu.push to do wrap it around
+		submenu.push(this.add.text(20, CONSTANTS.UI.SUBMENU_Y, "QUESTION", {fontSize: CONSTANTS.TEXT.FONT_SIZE})
+			.setInteractive()
+			.on('pointerdown', () => {
+				tb.start(sceneText.person1.question.answer1, CONSTANTS.TEXT.TEXT_SPEED);
+		 	})
+		);
+	}
+	//Founctain choices
+	listFountainChoices() {
+		submenu.push(this.add.text(20, CONSTANTS.UI.SUBMENU_Y, "DRINK", {fontSize: CONSTANTS.TEXT.FONT_SIZE})
+			.setInteractive()
+			.on('pointerdown', () => {
+				tb.start(sceneText.fountain.drink, CONSTANTS.TEXT.TEXT_SPEED);
+		 	})
+		);
+
+		submenu.push(this.add.text(300, CONSTANTS.UI.SUBMENU_Y, "LEAVE", {fontSize: CONSTANTS.TEXT.FONT_SIZE})
+			.setInteractive()
+			.on('pointerdown', () => {
+				tb.start(sceneText.fountain.leave, CONSTANTS.TEXT.TEXT_SPEED);
+		 	})
+		);
+	}
+	//Trail Choices
+	listTrailsChoices(){
+		submenu.push(this.add.text(20, CONSTANTS.UI.SUBMENU_Y, "EXAMINE", {fontSize: CONSTANTS.TEXT.FONT_SIZE})
+			.setInteractive()
+			.on('pointerdown', () => {
+				tb.start(sceneText.trails.examine.good, CONSTANTS.TEXT.TEXT_SPEED);
+		 	})
+		);
+
+		submenu.push(this.add.text(300, CONSTANTS.UI.SUBMENU_Y, "LEAVE", {fontSize: CONSTANTS.TEXT.FONT_SIZE})
+			.setInteractive()
+			.on('pointerdown', () => {
+				tb.start(sceneText.trails.leave, CONSTANTS.TEXT.TEXT_SPEED);
+		 	})
+		);
+
 	}
 
 }
