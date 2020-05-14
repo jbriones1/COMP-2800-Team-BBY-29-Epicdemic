@@ -162,17 +162,17 @@ export class ParkScene extends Phaser.Scene {
 	}
 	//Trail Choices
 	listTrailsChoices(){
-		submenu.push(this.add.text(20, CONSTANTS.UI.SUBMENU_Y, "EXAMINE", {fontSize: CONSTANTS.TEXT.FONT_SIZE})
+		submenu.push(this.add.text(20, CONSTANTS.UI.SUBMENU_Y, "WALK", {fontSize: CONSTANTS.TEXT.FONT_SIZE})
 			.setInteractive()
 			.on('pointerdown', () => {
-				tb.start(sceneText.trails.examine.good, CONSTANTS.TEXT.TEXT_SPEED);
+				tb.start(sceneText.trails.walk, CONSTANTS.TEXT.TEXT_SPEED);
 		 	})
 		);
 
-		submenu.push(this.add.text(300, CONSTANTS.UI.SUBMENU_Y, "LEAVE", {fontSize: CONSTANTS.TEXT.FONT_SIZE})
+		submenu.push(this.add.text(300, CONSTANTS.UI.SUBMENU_Y, "EXAMINE", {fontSize: CONSTANTS.TEXT.FONT_SIZE})
 			.setInteractive()
 			.on('pointerdown', () => {
-				tb.start(sceneText.trails.leave, CONSTANTS.TEXT.TEXT_SPEED);
+				tb.start(sceneText.trails.examine.good, CONSTANTS.TEXT.TEXT_SPEED);
 		 	})
 		);
 
