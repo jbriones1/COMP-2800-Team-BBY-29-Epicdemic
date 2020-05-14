@@ -59,7 +59,7 @@ let theatreEntrance = {
 }
 
 //======================================
-// new added -> seat choice 
+// new added -> seat choice in theatre lobby
 //======================================
 let largeSofa = {
     interact: "A lady is sitting on the sofa. Do you want to sit beside her?"

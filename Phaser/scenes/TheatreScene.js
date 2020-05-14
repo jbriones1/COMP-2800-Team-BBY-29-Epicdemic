@@ -29,7 +29,8 @@ export class TheatreScene extends Phaser.Scene {
 		this.load.scenePlugin('rexuiplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexuiplugin.min.js', 'rexUI', 'rexUI');
 		this.load.image('nextPage', '../assets/images/arrow-down-left.png');
 		this.load.image('theatre_bg', '../assets/backgrounds/theatre/theatre.png');
-		this.load.image('theatre_arrow', '../assets/images/red_arrow.png')
+		this.load.image('theatre_arrow', '../assets/images/red_arrow.png');
+		//this.load.image('theatre_return_arrow', '../assets/images/arrow-down-left.png')
 	}
 
 	// Load game objects
@@ -39,21 +40,21 @@ export class TheatreScene extends Phaser.Scene {
 		.setOrigin(0, 0)
 		.setDisplaySize(950, 680);
 
-		//this.add.text(80, 10, KEY, {fill: '#0f0', fontSize: CONSTANTS.TEXT.FONT_SIZE });
-
 		tb = textbox.createTextBox(this, 100, CONSTANTS.UI.SCREEN_HEIGHT - 300, {wrapWidth: 650});
 		tb.start("At Theatre", CONSTANTS.TEXT.TEXT_SPEED);
 
+		this.addArrows();
+
 		// Return to Lobby
-		this.toLobbyButton = this.add.text(
-			CONSTANTS.UI.SCREEN_WIDTH - 360, 10, ' Return to Lobby', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
+		this.toLobbyButton = this.add.image(478, 750, 'theatre_arrow')
+			.setDisplaySize(30, 30)
 			.setInteractive()
 			.once('pointerdown', () => {
 				this.scene.start(CONSTANTS.SCENES.LOBBY);
 		});
 
 		// button of concession
-		this.add.rectangle(400, 600, 150, 100, '#000000', 0)
+		this.add.rectangle(400, 600, 150, 80, '#000000', 0)
 		.setOrigin(0, 0)
 		.setInteractive()
 		.on('pointerdown', () => {
@@ -134,9 +135,52 @@ export class TheatreScene extends Phaser.Scene {
 		})
 	}
 
-	// this.add.image(230, 350, 'theatreLobby_arrow')
-		// .setOrigin(0, 0)
-		// .setDisplaySize(30, 30);
+	addArrows() {
+		// arrow for concession
+		this.add.image(455, 560, 'theatre_arrow')
+		.setOrigin(0, 0)
+		.setDisplaySize(30, 30);
 
+		// arrow for r1c2
+		this.add.image(170, 330, 'theatre_arrow')
+		.setOrigin(0, 0)
+		.setDisplaySize(30, 30);
+
+		// arrow for r1c2
+		this.add.image(300, 330, 'theatre_arrow')
+		.setOrigin(0, 0)
+		.setDisplaySize(30, 30);
+
+		// arrow for r1c3
+		this.add.image(630, 330, 'theatre_arrow')
+		.setOrigin(0, 0)
+		.setDisplaySize(30, 30);
+
+		// arrow for r1c4
+		this.add.image(760, 330, 'theatre_arrow')
+		.setOrigin(0, 0)
+		.setDisplaySize(30, 30);
+
+		// arrow for r2c2
+		this.add.image(170, 435, 'theatre_arrow')
+		.setOrigin(0, 0)
+		.setDisplaySize(30, 30);
+
+		// arrow for r2c2
+		this.add.image(300, 435, 'theatre_arrow')
+		.setOrigin(0, 0)
+		.setDisplaySize(30, 30);
+
+		// arrow for r2c3
+		this.add.image(630, 435, 'theatre_arrow')
+		.setOrigin(0, 0)
+		.setDisplaySize(30, 30);
+
+		// arrow for r2c4
+		this.add.image(760, 435, 'theatre_arrow')
+		.setOrigin(0, 0)
+		.setDisplaySize(30, 30);
+	
+	}
 	
 }

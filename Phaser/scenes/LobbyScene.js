@@ -45,26 +45,23 @@ export class LobbyScene extends Phaser.Scene {
 		.setDisplaySize(70, 130);
 
 		this.addArrows();
-
-		
-		//this.add.text(80, 10, KEY, {fill: '#0f0', fontSize: CONSTANTS.TEXT.FONT_SIZE });
-
+	
 		tb = textbox.createTextBox(this, 100, CONSTANTS.UI.SCREEN_HEIGHT - 300, {wrapWidth: 650});
 		tb.start("At Theatre Lobby", CONSTANTS.TEXT.TEXT_SPEED);
 
 		// Return to Overworld
-		this.overworldButton = this.add.text(
-			CONSTANTS.UI.SCREEN_WIDTH - 150, 10, 'Map', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
+		this.overworldButton = this.add.image(456, 730, 'theatreLobby_arrow')
+		.setOrigin(0, 0)
+		.setDisplaySize(30, 30)
 		.setInteractive()
 		.on('pointerdown', () => {
 			this.scene.start(CONSTANTS.SCENES.OVERWORLD);
 		});
 
-		//======================================
-		// how to deal with this button? 
-		//======================================
 		// go to theatre
-		this.theatreButton = this.add.text(700, 400, 'Theatre', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
+		this.theatreButton = this.add.image(780, 490, 'theatreLobby_arrow').setRotation(3.14 + 3.14/2)
+		.setOrigin(0, 0)
+		.setDisplaySize(30, 30)
 		.setInteractive()
 		.on('pointerdown', () => {
 			this.scene.start(CONSTANTS.SCENES.THEATRE);
@@ -135,17 +132,20 @@ export class LobbyScene extends Phaser.Scene {
 	}
 
 	addArrows() {
-		this.add.image(230, 350, 'theatreLobby_arrow')
+		// arrow for large sofa
+		this.add.image(300, 320, 'theatreLobby_arrow')//.setRotation(3.14/2)
 		.setOrigin(0, 0)
 		.setDisplaySize(30, 30);
 
-		this.add.image(230, 350, 'theatreLobby_arrow')
+		// arrow for small sofa
+		this.add.image(115, 425, 'theatreLobby_arrow')//.setRotation(3.14)
 		.setOrigin(0, 0)
 		.setDisplaySize(30, 30);
 
-		this.add.image(230, 350, 'theatreLobby_arrow')
+		// arrow for reception
+		this.add.image(655, 195, 'theatreLobby_arrow')
 		.setOrigin(0, 0)
-		.setDisplaySize(30, 30);
+		.setDisplaySize(30, 30);		
 	}
 
 
