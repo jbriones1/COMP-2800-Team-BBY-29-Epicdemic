@@ -9,6 +9,8 @@ let KEY = CONSTANTS.SCENES.THEATRE;
 
 let tb;
 
+let submenu = [];
+
 export class TheatreScene extends Phaser.Scene {
 	constructor() {
 		super({
@@ -27,6 +29,7 @@ export class TheatreScene extends Phaser.Scene {
 		this.load.scenePlugin('rexuiplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexuiplugin.min.js', 'rexUI', 'rexUI');
 		this.load.image('nextPage', '../assets/images/arrow-down-left.png');
 		this.load.image('theatre_bg', '../assets/backgrounds/theatre/theatre.png');
+		this.load.image('theatre_arrow', '../assets/images/red_arrow.png')
 	}
 
 	// Load game objects
@@ -50,78 +53,90 @@ export class TheatreScene extends Phaser.Scene {
 		});
 
 		// button of concession
-		this.add.rectangle(400, 600, 150, 100, '#000000', 0.8)
+		this.add.rectangle(400, 600, 150, 100, '#000000', 0)
 		.setOrigin(0, 0)
 		.setInteractive()
 		.on('pointerdown', () => {
+			playerFnc.clearSubmenu(submenu);
 			tb.start(sceneText.concession.interact, CONSTANTS.TEXT.TEXT_SPEED);
 		})
 
 		// button of seat r1c1
-		this.add.rectangle(120, 350, 100, 70, '#000000', 0.8)
+		this.add.rectangle(120, 350, 100, 70, '#000000', 0)
 		.setOrigin(0, 0)
 		.setInteractive()
 		.on('pointerdown', () => {
+			playerFnc.clearSubmenu(submenu);
 			tb.start(sceneText.concession.interact, CONSTANTS.TEXT.TEXT_SPEED);
 		})
 
 		// button of seat r1c2
-		this.add.rectangle(280, 350, 100, 70, '#000000', 0.8)
+		this.add.rectangle(280, 350, 100, 70, '#000000', 0)
 		.setOrigin(0, 0)
 		.setInteractive()
 		.on('pointerdown', () => {
+			playerFnc.clearSubmenu(submenu);
 			tb.start(sceneText.concession.interact, CONSTANTS.TEXT.TEXT_SPEED);
 		})
 
 		// button of seat r2c1
-		this.add.rectangle(120, 480, 100, 70, '#000000', 0.8)
+		this.add.rectangle(120, 480, 100, 70, '#000000', 0)
 		.setOrigin(0, 0)
 		.setInteractive()
 		.on('pointerdown', () => {
+			playerFnc.clearSubmenu(submenu);
 			tb.start(sceneText.concession.interact, CONSTANTS.TEXT.TEXT_SPEED);
 		})
 
 		// button of seat r2c2
-		this.add.rectangle(280, 480, 100, 70, '#000000', 0.8)
+		this.add.rectangle(280, 480, 100, 70, '#000000', 0)
 		.setOrigin(0, 0)
 		.setInteractive()
 		.on('pointerdown', () => {
+			playerFnc.clearSubmenu(submenu);
 			tb.start(sceneText.concession.interact, CONSTANTS.TEXT.TEXT_SPEED);
 		})
 
 		// button of seat r1c3
-		this.add.rectangle(570, 350, 100, 70, '#000000', 0.8)
+		this.add.rectangle(570, 350, 100, 70, '#000000', 0)
 		.setOrigin(0, 0)
 		.setInteractive()
 		.on('pointerdown', () => {
+			playerFnc.clearSubmenu(submenu);
 			tb.start(sceneText.concession.interact, CONSTANTS.TEXT.TEXT_SPEED);
 		})
 
 		// button of seat r1c4
-		this.add.rectangle(750, 350, 100, 70, '#000000', 0.8)
+		this.add.rectangle(750, 350, 100, 70, '#000000', 0)
 		.setOrigin(0, 0)
 		.setInteractive()
 		.on('pointerdown', () => {
+			playerFnc.clearSubmenu(submenu);
 			tb.start(sceneText.concession.interact, CONSTANTS.TEXT.TEXT_SPEED);
 		})
 
 		// button of seat r2c3
-		this.add.rectangle(570, 480, 100, 70, '#000000', 0.8)
+		this.add.rectangle(570, 480, 100, 70, '#000000', 0)
 		.setOrigin(0, 0)
 		.setInteractive()
 		.on('pointerdown', () => {
+			playerFnc.clearSubmenu(submenu);
 			tb.start(sceneText.concession.interact, CONSTANTS.TEXT.TEXT_SPEED);
 		})
 
 		// button of seat r2c4
-		this.add.rectangle(750, 480, 100, 70, '#000000', 0.8)
+		this.add.rectangle(750, 480, 100, 70, '#000000', 0)
 		.setOrigin(0, 0)
 		.setInteractive()
 		.on('pointerdown', () => {
+			playerFnc.clearSubmenu(submenu);
 			tb.start(sceneText.concession.interact, CONSTANTS.TEXT.TEXT_SPEED);
 		})
-
-
 	}
 
+	// this.add.image(230, 350, 'theatreLobby_arrow')
+		// .setOrigin(0, 0)
+		// .setDisplaySize(30, 30);
+
+	
 }
