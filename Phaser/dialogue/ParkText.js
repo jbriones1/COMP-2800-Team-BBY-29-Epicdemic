@@ -30,13 +30,11 @@ let trails = {
 
     examine: {
         good: 'This trail is usually very full, there is not a soul in sight today.',
+        neutral: 'This trail is not very packed today. Only a few people are walking dogs.',
         bad: 'This trail is packed! Everyone looks like they are having a great time',
+        dead: 'You are watching over this trail from the sky.'
     },
-
 		leave: 'You decide to leave the trail for now...',
-		
-		
-
 }
 
 export let sceneText = {

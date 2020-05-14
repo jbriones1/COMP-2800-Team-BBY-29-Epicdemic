@@ -28,6 +28,7 @@ export class ParkScene extends Phaser.Scene {
 		this.load.image('nextPage', '../assets/images/arrow-down-left.png');
 		this.load.image('park_bg', '../assets/backgrounds/park.png')
 		this.load.spritesheet('park_girl', '../characterspritesheet/girl1.png', { frameWidth: 31, frameHeight: 48 })
+		this.load.image('park_arrow', '../assets/images/red_arrow.png')
 	}
 	// Load game objects
 	create () {
@@ -58,7 +59,26 @@ export class ParkScene extends Phaser.Scene {
 
 		//create object buttons
 		this.createObjects();
-		
+	}
+
+	createObjects(){
+		/*red arrow indicating clickable objects*/
+		//arrow above fountain
+		this.add.image(275, 230,'park_arrow')
+		.setOrigin(0,0)
+		.setDisplaySize(30,30)
+
+		//arrow above person1
+		this.add.image(420, 290,'park_arrow')
+		.setOrigin(0,0)
+		.setDisplaySize(30,30)
+
+		//arrow on the trail
+		this.add.image(733, 400,'park_arrow')
+		.setOrigin(0,0)
+		.setDisplaySize(30,30)
+
+		//add person girl 1
 		this.anims.create({
 			key: 'park_girl_neutral',
 			frames: this.anims.generateFrameNumbers('park_girl', {start: 0, end: 2}),
@@ -66,7 +86,7 @@ export class ParkScene extends Phaser.Scene {
 			repeat: -1,
 			yoyo: true
 		});	
-		//add person girl 1
+	
 		let park_girl = this.add.sprite(435, 355, 'park_girl', 1)
 		.setDisplaySize(45, 75)
 		.setInteractive()
@@ -76,9 +96,7 @@ export class ParkScene extends Phaser.Scene {
 			this.listPersonChoices();
 		})
 		park_girl.anims.play('park_girl_neutral', true);
-	}
 
-	createObjects(){
 		//fountain button
 		this.add.rectangle(265, 335, 132, 108,'#000000', 0)
 		.setOrigin(0,0)
@@ -106,7 +124,7 @@ export class ParkScene extends Phaser.Scene {
 			tb.start(sceneText.trails.interact, CONSTANTS.TEXT.TEXT_SPEED)
 			this.listTrailsChoices();
 		})
-		//trail 3
+		//trail 3, arrow is above here
 		this.add.rectangle(718, 0, 55, 750,'#000000', 0)
 		.setOrigin(0,0)
 		.setInteractive()
@@ -169,10 +187,14 @@ export class ParkScene extends Phaser.Scene {
 		 	})
 		);
 
+		//"Examine" option will print different messages based on health status.
 		submenu.push(this.add.text(300, CONSTANTS.UI.SUBMENU_Y, "EXAMINE", {fontSize: CONSTANTS.TEXT.FONT_SIZE})
 			.setInteractive()
 			.on('pointerdown', () => {
-				tb.start(sceneText.trails.examine.good, CONSTANTS.TEXT.TEXT_SPEED);
+				if (playerData.stats.health >= 7) { tb.start(sceneText.trails.examine.good, CONSTANTS.TEXT.TEXT_SPEED); }
+				else if (playerData.stats.health >= 5) { tb.start(sceneText.trails.examine.neutral, CONSTANTS.TEXT.TEXT_SPEED); }
+				else if (playerData.stats.health >= 3) { tb.start(sceneText.trails.examine.bad, CONSTANTS.TEXT.TEXT_SPEED); }
+				else { tb.start(sceneText.trails.examine.dead, CONSTANTS.TEXT.TEXT_SPEED); }
 		 	})
 		);
 
