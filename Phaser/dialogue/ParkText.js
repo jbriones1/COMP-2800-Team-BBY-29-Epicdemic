@@ -1,6 +1,6 @@
 let person1 = {
     /* First line of dialogue when selecting this person. */
-    interact: "Hey! I'm Bob!",
+    interact: "Hey! I'm Sally!",
 
     /* OPTION: Ask a question */
     question: {
@@ -26,12 +26,16 @@ let fountain = {
 let trails = {
     interact: 'A short, popular trail that is covered by lots of shade on this hot, summer day.',
 
+    walk: 'I walked the trail',
+
     examine: {
         good: 'This trail is usually very full, there is not a soul in sight today.',
         bad: 'This trail is packed! Everyone looks like they are having a great time',
     },
 
-    leave: 'You decide to leave the trail for now...' 
+		leave: 'You decide to leave the trail for now...',
+		
+		
 
 }
 

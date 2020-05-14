@@ -15,6 +15,7 @@ import {TheatreScene}    from './scenes/TheatreScene.js';
 import {MallScene}       from './scenes/MallScene.js';
 import {FoodCourtScene}  from './scenes/FoodCourtScene.js';
 import {MusicStoreScene} from './scenes/MusicStoreScene.js';
+import {UIScene}         from './scenes/UIScene.js';
 
 let config = {
 	type: Phaser.AUTO,
@@ -22,7 +23,8 @@ let config = {
 	height: CONSTANTS.UI.SCREEN_HEIGHT,
 	scene: [
 		IntroScene, 
-		OverworldScene, 
+		OverworldScene,
+		UIScene, 
 		HomeScene,
 		AirportScene,
 		StoreScene,
