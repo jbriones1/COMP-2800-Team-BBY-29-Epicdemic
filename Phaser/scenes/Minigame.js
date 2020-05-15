@@ -1,5 +1,6 @@
 import {CONSTANTS} from '../globalvars/CONSTANTS.js';
 import {playerData} from '../globalvars/playerData.js';
+import * as playerFnc from '../globalvars/playerData.js';
 
 var goodChars = ['chicken', 'bunny', 'duck', 'rino', 'bird'];
 var badChars = ['ghost', 'skull1', 'skull2', 'turtle', 'pig'];
@@ -31,6 +32,7 @@ var restartText = [
 ];
 var finished = false;
 var gameWidth = 950;
+var scene;
 
 
 let KEY = CONSTANTS.SCENES.MINIGAME;
@@ -47,8 +49,7 @@ export class MiniGame extends Phaser.Scene {
 		lives = 3;
 		score = 0;
 
-		console.log(lives);
-		console.dir(this.scene);
+		
 		
 		// BG
 		this.add.image(475, 640, 'bg');
@@ -75,7 +76,7 @@ export class MiniGame extends Phaser.Scene {
 		
 		dude.setScale(3);
 		dude.setBounce(0, 0);
-		console.dir(dude);
+		
 		// Left, turn, right
 		this.anims.create({
 				key: 'left',
@@ -241,13 +242,13 @@ export class MiniGame extends Phaser.Scene {
 		})
 		.setInteractive()
 		.on('pointerdown', () => {
-				gameStart = true;
+				
 				start.destroy();
 				instructions.destroy();
 				tutorialSprites.destroy(true);
 				timer = this.time.addEvent({
 						delay: 4500,
-						callback: randomSpawn,
+						callback: this.randomSpawn,
 						loop: true
 				});
 				elapsed = timer.getElapsed();
@@ -260,16 +261,10 @@ export class MiniGame extends Phaser.Scene {
 		// Baddies
 		
 		baddies = this.physics.add.group();
-
-
-
-		// this.physics.add.overlap(dude, goodies, null, this);
-
-		// this.physics.add.overlap(dude, baddies, null, this);
-
-		console.log(this);
 		
 
+		
+		scene = this;
 
 	}
 
@@ -317,18 +312,18 @@ export class MiniGame extends Phaser.Scene {
 	} // update
 
 	hitBaddie(dude, baddie) {
-		collide(baddie, dude);
+		scene.__proto__.collide(baddie, dude);
 		lives--;
-		console.log(lives);
+		
 		livesText.setText('Lives: ' + lives)
-		console.dir("collide with baddie: " + baddie);
+		
 		if (lives <= 0) {
 				timer.paused = true;
-				 game.scene.scenes[0].physics.pause();
+				 scene.physics.pause();
 				 dude.setTint(0xff0000);
 				 dude.anims.play('turn');
 				 gameOver = true;
-				 restart = game.scene.scenes[0].add.text(80, 300, restartText, {
+				 restart = scene.add.text(80, 300, restartText, {
 						fontSize: '50px',
 						fill: '#000000',
 						fontWeight: 'bold',
@@ -336,25 +331,26 @@ export class MiniGame extends Phaser.Scene {
 						stroke: '#000000',
 						strokeThickness: 1
 				}).setInteractive().on('pointerdown', () => {
-						console.dir(game.scene.keys.default.scene.restart());
+						scene.scene.restart();
 				});
 		}
 	} // hit baddie
 
 	collectGoodie(dude, goodie) {
-		console.log(goodie);
-		collide(goodie, dude);
+		
+		
+		scene.__proto__.collide(goodie, dude);
 		score += 10;
 		scoreText.setText('Score: ' + score);
-		console.log("collide goodie");
+		
 
 		if (score >= 50) {
 				timer.paused = true;
-				game.scene.scenes[0].physics.pause();
+				scene.physics.pause();
 				dude.setTint(0xf5ff36);
 				dude.anims.play('turn');
 				gameOver = true;
-				win = game.scene.scenes[0].add.text(30, 300, winText, {
+				win = scene.add.text(30, 300, winText, {
 						fontSize: '50px',
 						fill: '#000000',
 						fontWeight: 'bold',
@@ -362,7 +358,9 @@ export class MiniGame extends Phaser.Scene {
 						stroke: '#000000',
 						strokeThickness: 1
 				}).setInteractive().on('pointerdown', () => {
-						game.scene.keys.default.scene.start('scene2', {finished: gameOver});
+						playerData.stats.money += Math.floor(score / 5);
+						playerFnc.changeTime(4);
+						scene.scene.start(CONSTANTS.SCENES.MUSICSTORE, {finished: gameOver});
 				});
 		}
 
@@ -377,35 +375,8 @@ export class MiniGame extends Phaser.Scene {
 		let goodie = goodies.create(x, 0, goodChars[num]);
 		goodie.setScale(2.3);
 		goodie.setBounce(0);
-		game.scene.scenes[0].physics.add.collider(platforms, goodie, collide, null, this);
-		game.scene.scenes[0].physics.add.collider(dude, goodie, collectGoodie, null, this);
-		goodie.setTint(0x32a842);
-		switch(num) {
-				case 0:
-						goodie.anims.play('idleChicken', true);
-						break;
-				case 1:
-						goodie.anims.play('idleBunny', true);
-						break;
-				case 2:
-						goodie.anims.play('idleDuck', true);
-						break;
-				case 3:
-						goodie.anims.play('idleRino', true);
-						break;
-				case 4:
-						goodie.anims.play('idleBird', true);
-						break;
-		}
-	}
-
-	spawnGood(num) {
-		var x = Phaser.Math.Between(0, gameWidth);
-		let goodie = goodies.create(x, 0, goodChars[num]);
-		goodie.setScale(2.3);
-		goodie.setBounce(0);
-		game.scene.scenes[0].physics.add.collider(platforms, goodie, collide, null, this);
-		game.scene.scenes[0].physics.add.collider(dude, goodie, collectGoodie, null, this);
+		scene.physics.add.collider(platforms, goodie, scene.__proto__.collide, null, this);
+		scene.physics.add.collider(dude, goodie, scene.__proto__.collectGoodie, null, this);
 		goodie.setTint(0x32a842);
 		switch(num) {
 				case 0:
@@ -427,12 +398,13 @@ export class MiniGame extends Phaser.Scene {
 	} // spawn good
 
 	spawnBad(num) {
+		
 		var x = Phaser.Math.Between(0, gameWidth);
 		let baddie = baddies.create(x, 0, badChars[num]);
 		baddie.setScale(2.3);
 		baddie.setBounce(0);
-		game.scene.scenes[0].physics.add.collider(platforms, baddie, collide, null, this);
-		game.scene.scenes[0].physics.add.collider(dude, baddie, hitBaddie, null, this);
+		scene.physics.add.collider(platforms, baddie, scene.__proto__.collide, null, this);
+		scene.physics.add.collider(dude, baddie, scene.__proto__.hitBaddie, null, this);
 		baddie.setTint(0xfc0303);
 		switch(num) {
 				case 0:
@@ -458,9 +430,9 @@ export class MiniGame extends Phaser.Scene {
 				for (let i = 0; i < 5; i++) {
 						setTimeout(function() {
 								let randomNum = Phaser.Math.Between(0, 4);
-								console.log(randomNum);
-								spawnBad(randomNum);
-								spawnGood(randomNum);
+								
+								scene.__proto__.spawnBad(randomNum);
+								scene.__proto__.spawnGood(randomNum);
 						}, Math.random() * 1000);
 				}
 		}

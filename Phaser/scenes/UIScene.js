@@ -29,7 +29,9 @@ export class UIScene extends Phaser.Scene {
 	}
 
 	update() {
-		if (!this.scene.isActive(CONSTANTS.SCENES.OVERWORLD)) {
+		if (this.scene.isActive(CONSTANTS.SCENES.MINIGAME)) {
+			this.scene.setVisible(false);
+		} else if (!this.scene.isActive(CONSTANTS.SCENES.OVERWORLD)) {
 			this.scene.setVisible(true);
 			uiText.setY(0);
 		} else {
@@ -62,6 +64,7 @@ export class UIScene extends Phaser.Scene {
 		if (stats.happiness < 0) {
 			stats.happiness = 0;
 		}
+
 		if (stats.happiness > 10) {
 			stats.happiness = 10;
 		}

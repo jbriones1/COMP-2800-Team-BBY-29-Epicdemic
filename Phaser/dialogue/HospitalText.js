@@ -40,7 +40,7 @@ let reception = {
         fail: 'You have already checked in!'
 		},
 
-		grandma: "Unfortunately, she is very sick. Some people are just not being careful enough around the elderly."
+		grandma: "Unfortunately, got very sick because someone wasn't cautious around her. Some people are just not being careful enough around the elderly."
 }
 
 let seats = {

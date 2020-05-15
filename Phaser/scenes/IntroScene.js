@@ -53,10 +53,14 @@ export class IntroScene extends Phaser.Scene {
 		// School
 		this.load.image('school_bg', '../assets/backgrounds/school/school_toliet_paper.png');
 
-		// Theatre
+		// Theatre Lobby
 		this.load.image('theatreLobby_bg', '../assets/backgrounds/theatreLobby/theatre_lobby.png');
 		this.load.image('theatreLobby_customer', '../assets/backgrounds/theatreLobby/customer.png');
-		this.load.image('theatreLobby_arrow', '../assets/images/red_arrow.png')
+
+		// Theatre
+		this.load.image('theatre_bg', '../assets/backgrounds/theatre/theatre_people.png')
+
+		
 
 		// Mini-game ==============================================================
 		// bg
@@ -94,7 +98,7 @@ export class IntroScene extends Phaser.Scene {
 
 	// Load game object
 	create () {
-		tb = textbox.createTextBox(this,
+		tb = textbox.createEndTextBox(this,
 			100, 300, { wrapWidth: 650 });
 
 		tb.start(sceneText.introduction, CONSTANTS.TEXT.TEXT_SPEED);
@@ -102,8 +106,8 @@ export class IntroScene extends Phaser.Scene {
 
 	update () {
 
-		// this.scene.start(CONSTANTS.SCENES.SCHOOL).launch(CONSTANTS.SCENES.UI);
-		this.scene.start(CONSTANTS.SCENES.MINIGAME);
+		this.scene.start(CONSTANTS.SCENES.THEATRE).launch(CONSTANTS.SCENES.UI);
+		// this.scene.start(CONSTANTS.SCENES.MINIGAME);
 
 		if (tb.isLastPage && !tb.isTyping && !startText) {
 

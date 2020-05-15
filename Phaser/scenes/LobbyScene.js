@@ -50,21 +50,23 @@ export class LobbyScene extends Phaser.Scene {
 		tb.start("At Theatre Lobby", CONSTANTS.TEXT.TEXT_SPEED);
 
 		// Return to Overworld
-		this.overworldButton = this.add.image(456, 730, 'theatreLobby_arrow')
+		this.overworldButton = this.add.image(456, 750, 'red_arrow')
 		.setOrigin(0, 0)
 		.setDisplaySize(30, 30)
 		.setInteractive()
-		.on('pointerdown', () => {
+		.on('pointerup', () => {
 			this.scene.start(CONSTANTS.SCENES.OVERWORLD);
 		});
 
 		// go to theatre
-		this.theatreButton = this.add.image(780, 490, 'theatreLobby_arrow').setRotation(3.14 + 3.14/2)
+		this.theatreButton = this.add.image(780, 490, 'red_arrow').setRotation(3.14 + 3.14/2)
 		.setOrigin(0, 0)
 		.setDisplaySize(30, 30)
 		.setInteractive()
-		.on('pointerdown', () => {
-			this.scene.start(CONSTANTS.SCENES.THEATRE);
+		.on('pointerup', () => {
+			playerFnc.clearSubmenu(submenu);
+			this.listMovieEntranceChoices();
+			tb.start(sceneText.theatreEntrance.interact, CONSTANTS.TEXT.TEXT_SPEED);
 		});
 
 
@@ -72,8 +74,10 @@ export class LobbyScene extends Phaser.Scene {
 		this.add.rectangle(600, 250, 150, 100, '#000000', 0)
 		.setOrigin(0, 0)
 		.setInteractive()
-		.on('pointerdown', () => {
+		.on('pointerup', () => {
 			playerFnc.clearSubmenu(submenu);
+
+			this.listTicketWindowChoices();
 			tb.start(sceneText.ticketWindow.interact, CONSTANTS.TEXT.TEXT_SPEED);
 		})
 
@@ -81,7 +85,7 @@ export class LobbyScene extends Phaser.Scene {
 		this.add.rectangle(240, 370, 130, 70, '#000000', 0)
 		.setOrigin(0, 0)
 		.setInteractive()
-		.on('pointerdown', () => {
+		.on('pointerup', () => {
 			playerFnc.clearSubmenu(submenu);
 			tb.start(sceneText.largeSofa.interact, CONSTANTS.TEXT.TEXT_SPEED);
 			this.listSeatChoices();
@@ -91,7 +95,7 @@ export class LobbyScene extends Phaser.Scene {
 		this.add.rectangle(100, 500, 100, 70, '#000000', 0)
 		.setOrigin(0, 0)
 		.setInteractive()
-		.on('pointerdown', () => {
+		.on('pointerup', () => {
 			playerFnc.clearSubmenu(submenu);
 			tb.start(sceneText.smallSofa.interact, CONSTANTS.TEXT.TEXT_SPEED);
 			this.listSofaChoices();
@@ -99,18 +103,26 @@ export class LobbyScene extends Phaser.Scene {
 
 	}
 
+	// Seat next to the lady
 	listSeatChoices() {
 		submenu.push(this.add.text(250, CONSTANTS.UI.SUBMENU_Y, "YES", { fontSize: CONSTANTS.TEXT.FONT_SIZE })
 			.setInteractive()
-			.on('pointerdown', () => {
-				tb.start(sceneText.seats.badSeat);
+			.on('pointerup', () => {
+				playerFnc.clearSubmenu(submenu);
+
+				if (!playerData.inventory.mask) {
+					playerData.stats.health--;
+				}
+				playerData.stats.bad_decisions++;
+				playerFnc.changeTime(5);
 			})
 		);
 
 		submenu.push(this.add.text(450, CONSTANTS.UI.SUBMENU_Y, "NO", { fontSize: CONSTANTS.TEXT.FONT_SIZE })
 			.setInteractive()
-			.on('pointerdown', () => {
-				tb.start(sceneText.seats.goodSeat);
+			.on('pointerup', () => {
+				playerFnc.clearSubmenu(submenu);
+				tb.start(sceneText.seats.goodSeat, CONSTANTS.TEXT.TEXT_SPEED);
 			})
 		);
 	}
@@ -118,15 +130,76 @@ export class LobbyScene extends Phaser.Scene {
 	listSofaChoices() {
 		submenu.push(this.add.text(250, CONSTANTS.UI.SUBMENU_Y, "YES", { fontSize: CONSTANTS.TEXT.FONT_SIZE })
 			.setInteractive()
-			.on('pointerdown', () => {
-				tb.start(sceneText.sofa.sit);
+			.on('pointerup', () => {
+				playerFnc.clearSubmenu(submenu);
+				tb.start(sceneText.sofa.sit, CONSTANTS.TEXT.TEXT_SPEED);
+				this.sitAndWait();
 			})
 		);
 
 		submenu.push(this.add.text(450, CONSTANTS.UI.SUBMENU_Y, "NO", { fontSize: CONSTANTS.TEXT.FONT_SIZE })
 			.setInteractive()
-			.on('pointerdown', () => {
-				tb.start(sceneText.sofa.notSit);
+			.on('pointerup', () => {
+				playerFnc.clearSubmenu(submenu);
+				tb.start(sceneText.sofa.notSit, CONSTANTS.TEXT.TEXT_SPEED);
+			})
+		);
+	}
+
+	listTicketWindowChoices() {
+		submenu.push(this.add.text(100, CONSTANTS.UI.SUBMENU_Y, "BUY TICKET $8", { fontSize: CONSTANTS.TEXT.FONT_SIZE })
+			.setInteractive()
+			.on('pointerup', () => {
+				playerFnc.clearSubmenu(submenu);
+				
+				if (!playerData.inventory.ticket && playerData.stats.money >= 8) {
+					playerData.inventory.ticket++;
+					playerData.stats.money -= 8;
+					tb.start(sceneText.ticketWindow.buy.success, CONSTANTS.TEXT.TEXT_SPEED);
+					playerFnc.clearSubmenu(submenu);
+				} else if (playerData.inventory.ticket) {
+					tb.start(sceneText.ticketWindow.buy.alreadyHave, CONSTANTS.TEXT.TEXT_SPEED);
+					playerFnc.clearSubmenu(submenu);
+				} else {
+					tb.start(sceneText.ticketWindow.buy.noMoney, CONSTANTS.TEXT.TEXT_SPEED);
+					playerFnc.clearSubmenu(submenu);
+				}
+			})
+		);
+
+		submenu.push(this.add.text(450, CONSTANTS.UI.SUBMENU_Y, "LEAVE", { fontSize: CONSTANTS.TEXT.FONT_SIZE })
+			.setInteractive()
+			.on('pointerup', () => {
+				playerFnc.clearSubmenu(submenu);
+				tb.start(sceneText.sofa.notSit, CONSTANTS.TEXT.TEXT_SPEED);
+			})
+		);
+	}
+
+	listMovieEntranceChoices() {
+		submenu.push(this.add.text(250, CONSTANTS.UI.SUBMENU_Y, "YES", { fontSize: CONSTANTS.TEXT.FONT_SIZE })
+			.setInteractive()
+			.on('pointerup', () => {
+				playerFnc.clearSubmenu(submenu);
+
+				if (playerData.inventory.ticket && (playerData.stats.hour >= 18 && playerData.stats.hour < 20)) {
+					playerData.inventory.ticket = false;
+					this.scene.start(CONSTANTS.SCENES.THEATRE);
+				} else if (!playerData.inventory.ticket){
+					playerFnc.clearSubmenu(submenu);
+					tb.start(sceneText.theatreEntrance.failure, CONSTANTS.TEXT.TEXT_SPEED);
+				} else {
+					playerFnc.clearSubmenu(submenu);
+					tb.start(sceneText.theatreEntrance.noMovie, CONSTANTS.TEXT.TEXT_SPEED);
+				}
+
+			})
+		);
+
+		submenu.push(this.add.text(450, CONSTANTS.UI.SUBMENU_Y, "NO", { fontSize: CONSTANTS.TEXT.FONT_SIZE })
+			.setInteractive()
+			.on('pointerup', () => {
+				playerFnc.clearSubmenu(submenu);
 			})
 		);
 	}
@@ -148,5 +221,23 @@ export class LobbyScene extends Phaser.Scene {
 		.setDisplaySize(30, 30);		
 	}
 
+	sitAndWait() {
+		let startMinute = playerData.stats.minute;
+		let minutesofSleep = ((60 - startMinute) != 60) ? 60 - startMinute : 0;
+		
+		if (playerData.stats.hour < 18) {
+			if (startMinute != 0) {
+				playerFnc.changeTime(minutesofSleep);
+			}
+			while(playerData.stats.hour != 18) {
+				playerFnc.changeTime(60);
+			}
+		} else if (playerData.stats.hour >= 18 && playerData.stats.hour < 20) {
+			tb.start(sceneText.wait.movie_started, CONSTANTS.TEXT.TEXT_SPEED);
+		} else if (playerData.stats.hour < 24) {
+			tb.start(sceneText.wait.movie_ended, CONSTANTS.TEXT.TEXT_SPEED);
+		}
+		
+	} // end of sit and wait
 
 }

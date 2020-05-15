@@ -21,7 +21,7 @@ export function enableButtons(buttonList) {
 }
 
 export function checkDistance(startScene, finishScene) {
-	if (startScene != finishScene) {
-		changeTime(10);
+	if (startScene != finishScene && startScene != null) {
+		changeTime(30);
 	}
 }

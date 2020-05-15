@@ -225,6 +225,7 @@ export class HomeScene extends Phaser.Scene {
 
 					// Changes the day and time
 				} else {
+					playerFnc.clearSubmenu(submenu);
 					tb.start(sceneText.bed.tooEarly, CONSTANTS.TEXT.TEXT_SPEED);
 				}
 			});
@@ -283,7 +284,6 @@ export class HomeScene extends Phaser.Scene {
 			hoursOfSleep++;
 		}
 
-		console.log('Day ' + playerData.stats.day + '\nTime: ' + playerData.stats.hour + ':' + playerData.stats.minuteStr);
 		return 'You slept for ' + hoursOfSleep + ' hours and ' + minutesofSleep + ' minutes.';
 	} // end of sleep
 

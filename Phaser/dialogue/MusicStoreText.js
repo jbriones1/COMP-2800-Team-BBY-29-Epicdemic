@@ -1,5 +1,5 @@
 let manager = {
-    interact: "Hey, what's up?",
+    interact: "Hey, get to work! The government may not consider this place essential, but I sure do.",
 
     question: {
         /* Do I have to wear gloves and a mask while I work? */
@@ -9,18 +9,7 @@ let manager = {
         answer2: "We are only letting 5 people in the store at all times. This is to ensure we can abide by the social-distancing rules.",
 
         /* What tasks should I do today? */
-        jobs: {
-            stockRecords: "Stock the records shelf",
-            stockCDs: "Stock the CD shelf",
-            sortRecordsGenre: "Order the records shelf by genre",
-            sortRecordsAlpha: "Order the records shelf alphabetically",
-            sortCDsGenre: "Order the CDs shelf by genre",
-            sortCDsAlpha: "Order the CDs shelf alphabetically",
-            fixCashRegister: "Try to fix the cash register, I think somebody broke it.",
-            disinfectShelves: "Disinfect both selves",
-            disinfectRegister: "Disinfect the cash register",
-            fiveTransactions: "Take 5 transactions at the cash register"
-        },
+        jobs: "You should probably get to work",
 
         finishedJobs: {
             success: "Great job! Feel free to head home, your pay will be automatically deposited into your account!",
@@ -48,55 +37,24 @@ let cashRegister = {
     }
 }
 
-let recordShelf = {
-    interact: "A shelf that holds records",
-
-    stock: {
-        success: "You stock the shelves... Finally you are finished!",
-        fail: "You stock the shelves... You get tired and decide to take a break."
-    },
-
-    order: {
-        byGenre: {
-            success: "You try to order all the records by genre... You were successful!",
-            fail: "You try to order all the records by genre... You got distracted by a baby crying outside and lose track. Try again!"
-        },
-
-        alphabetically: {
-            success: "You try to order all the records alphabetically... You were successful!",
-            fail: "You try to order all the records alphabetically... You lose track of where you were because your favourite song started playing and you had to sing along. Try again!"
-        }
-    },
-
-    disinfect: "You disinfect the record shelf."
+let misc = {
+	kid: "You disinfect the kid",
+	leftToys: "Why is there a sword here? You disinfect it anyway",
+	rightToys: "What a strange assortment of toys"
 }
 
-let cdShelf = {
-    interact: "A shelf that holds CDs",
-
-    stock: {
-        success: "You stock the shelves... Finally you are finished!",
-        fail: "You stock the shelves... You get tired and decide to take a break."
-    },
-
-    order: {
-        byGenre: {
-            success: "You try to order all the CDs by genre... You were successful!",
-            fail: "You try to order all the CDs by genre... You got distracted by a baby crying outside and lose track. Try again!"
-        },
-
-        alphabetically: {
-            success: "You try to order all the CDs alphabetically... You were successful!",
-            fail: "You try to order all the CDs alphabetically... You lose track of where you were because your favourite song started playing and you had to sing along. Try again!"
-        }
-    },
-
-    disinfect: "You disinfect the CDs shelf."
+let customer = {
+	interact: "This whole quarantine thing they're talking about seems like a terrible idea. The government is totally overreacting! ",
+	mask: "I see you're wearing a mask. I don't need one because this whole virus is propaganda",
+	noMask: "I see you're not wearing a mask, you're one of the smart ones!",
+	agree: "Right!? I'm going to tell the other mothers that we should just bring our kids to the playground!.",
+	disagree: "Pssh. You're as brainwashed as them. The government needs to re-open the schools so that my kid over there can stop annoying me!",
+	blame: "I set up that playdate like you said I should and my kid got sick! This is all your fault! (You feel bad for the kid)"
 }
 
 export let sceneText = {
-    cdShelf: cdShelf,
-    recordShelf: recordShelf,
     cashRegister: cashRegister,
-    manager: manager
+		manager: manager,
+		customer: customer,
+		misc: misc
 }
