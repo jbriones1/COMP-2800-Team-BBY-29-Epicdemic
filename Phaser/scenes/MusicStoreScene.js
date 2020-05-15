@@ -9,6 +9,7 @@ let KEY = CONSTANTS.SCENES.MUSICSTORE;
 
 let tb;
 let objectDebug = 0;
+let submenu = [];
 
 export class MusicStoreScene extends Phaser.Scene {
 	constructor() {
@@ -19,6 +20,7 @@ export class MusicStoreScene extends Phaser.Scene {
 
 	init () {
 		console.log("Loaded " + KEY);
+		sceneFnc.checkDistance(playerData.location, KEY);
 		playerData.location = KEY;
 		console.log(playerData);
 	}
@@ -49,28 +51,51 @@ export class MusicStoreScene extends Phaser.Scene {
 			this.scene.start(CONSTANTS.SCENES.OVERWORLD);
 		});
 
-		// button of manager
-		this.add.image(350, 640, 'musicStore_manager')
+		// button of customer healthy
+		this.customerHealthy = this.add.image(350, 640, 'musicStore_manager')
 		.setOrigin(0, 0)
 		.setInteractive()
 		.on('pointerup', () => {
-			tb.start(sceneText.manager.interact, CONSTANTS.TEXT.TEXT_SPEED);
+			this.interactCustomer();
 		})
+
+		// Creates a customer with different responses
+		if (!playerData.toystore.healthy_customer) {
+			this.customerHealthy.destroy();
+			this.customerBad = this.add.image(350, 640, 'musicStore_manager')
+			.setOrigin(0, 0)
+			.setInteractive()
+			.on('pointerup', () => {
+				tb.start(sceneText.customer.blame, CONSTANTS.TEXT.TEXT_SPEED);
+				playerData.stats.happiness -= 2;
+			})
+		}
 
 		// button of cash register
 		this.add.rectangle(650, 650, 150, 80, '#000000', objectDebug)
 		.setOrigin(0, 0)
 		.setInteractive()
 		.on('pointerup', () => {
-			tb.start(sceneText.ticketWindow.interact, CONSTANTS.TEXT.TEXT_SPEED);
+			tb.start(sceneText.manager.interact, CONSTANTS.TEXT.TEXT_SPEED);
+			if (!playerData.inventory.mask) {
+				playerData.stats.health--;
+			}
 		})
 
 		// button of left toy table
-		this.add.rectangle(120, 440, 100, 120, '#000000', objectDebug)
+		this.add.rectangle(110, 430, 150, 170, '#000000', objectDebug)
 		.setOrigin(0, 0)
 		.setInteractive()
 		.on('pointerup', () => {
-			tb.start(sceneText.ticketWindow.interact, CONSTANTS.TEXT.TEXT_SPEED);
+			tb.start(sceneText.misc.leftToys, CONSTANTS.TEXT.TEXT_SPEED);
+		})
+
+		// button of kid
+		this.add.rectangle(100, 650, 150, 120, '#000000', objectDebug)
+		.setOrigin(0, 0)
+		.setInteractive()
+		.on('pointerup', () => {
+			tb.start(sceneText.misc.kid, CONSTANTS.TEXT.TEXT_SPEED);
 		})
 
 		// button of right toy table
@@ -78,7 +103,7 @@ export class MusicStoreScene extends Phaser.Scene {
 		.setOrigin(0, 0)
 		.setInteractive()
 		.on('pointerup', () => {
-			tb.start(sceneText.ticketWindow.interact, CONSTANTS.TEXT.TEXT_SPEED);
+			tb.start(sceneText.misc.rightToys, CONSTANTS.TEXT.TEXT_SPEED);
 		})
 
 		// button of toys in the middle
@@ -86,7 +111,8 @@ export class MusicStoreScene extends Phaser.Scene {
 		.setOrigin(0, 0)
 		.setInteractive()
 		.on('pointerup', () => {
-			tb.start(sceneText.ticketWindow.interact, CONSTANTS.TEXT.TEXT_SPEED);
+			tb.start(sceneText.manager.question.jobs, CONSTANTS.TEXT.TEXT_SPEED);
+			this.listWorkChoices();
 		})
 
 	}
@@ -107,6 +133,11 @@ export class MusicStoreScene extends Phaser.Scene {
 		.setOrigin(0, 0)
 		.setDisplaySize(30, 30);
 
+		// arrow for left toy table 
+		this.add.image(160, 620, 'red_arrow')
+		.setOrigin(0, 0)
+		.setDisplaySize(30, 30);
+
 		// arrow for right toy table 
 		this.add.image(760, 380, 'red_arrow')
 		.setOrigin(0, 0)
@@ -117,6 +148,61 @@ export class MusicStoreScene extends Phaser.Scene {
 		.setOrigin(0, 0)
 		.setDisplaySize(30, 30);
 
+	}
+
+	listWorkChoices() {
+		playerFnc.clearSubmenu(submenu);
+
+		submenu.push(
+			this.add.text(200, CONSTANTS.UI.SUBMENU_Y, 'YES', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
+			.setInteractive()
+			.on('pointerup', () => {
+				this.scene.start(CONSTANTS.SCENES.MINIGAME);
+			})
+		);
+
+		submenu.push(
+			this.add.text(500, CONSTANTS.UI.SUBMENU_Y, 'NO', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
+			.setInteractive()
+			.on('pointerup', () => {
+				playerFnc.clearSubmenu(submenu);
+			})
+		);
+
+	} // end of list work choices
+
+	interactCustomer() {
+		playerFnc.clearSubmenu(submenu);
+
+		let str = sceneText.customer.interact;
+		if (playerData.inventory.mask) {
+			str += " " + sceneText.customer.mask;
+		} else {
+			str += " " + sceneText.customer.noMask;
+			playerData.stats.health--;
+		}
+		
+		tb.start(str, CONSTANTS.TEXT.TEXT_SPEED);
+
+		submenu.push(
+			this.add.text(200, CONSTANTS.UI.SUBMENU_Y, 'AGREE', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
+			.setInteractive()
+			.on('pointerup', () => {
+				playerFnc.clearSubmenu(submenu);
+				tb.start(sceneText.customer.agree, CONSTANTS.TEXT.TEXT_SPEED);
+				playerData.stats.bad_decisions++;
+				playerData.toystore.healthy_customer = false;
+			})
+		);
+
+		submenu.push(
+			this.add.text(500, CONSTANTS.UI.SUBMENU_Y, 'DISAGREE', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
+			.setInteractive()
+			.on('pointerup', () => {
+				playerFnc.clearSubmenu(submenu);
+				tb.start(sceneText.customer.disagree, CONSTANTS.TEXT.TEXT_SPEED);
+			})
+		);
 	}
 
 }

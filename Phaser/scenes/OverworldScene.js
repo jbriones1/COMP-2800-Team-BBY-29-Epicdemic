@@ -2,6 +2,7 @@ import {CONSTANTS}  from '../globalvars/CONSTANTS.js';
 import {playerData} from '../globalvars/playerData.js';
 import * as textbox from '../functions/textbox.js'; 
 import * as sceneFnc from '../functions/sceneFunctions.js';
+import {overworldText} from '../dialogue/IntroSceneText.js'
 
 let KEY = CONSTANTS.SCENES.OVERWORLD;
 let testText ='Select a location.';
@@ -102,7 +103,7 @@ export class OverworldScene extends Phaser.Scene {
 			if (playerData.unlocked) {
 				this.scene.start(CONSTANTS.SCENES.SCHOOL)
 			} else {
-				tb.start('Closed due to the virus', CONSTANTS.TEXT.TEXT_SPEED);
+				tb.start(overworldText.locked, CONSTANTS.TEXT.TEXT_SPEED);
 			}
 		});
 		
@@ -122,9 +123,15 @@ export class OverworldScene extends Phaser.Scene {
 		this.parkButton = this.add.rectangle(320, 750, 130, 200, '#000000', 0)
 		.setOrigin(0,0)
 		.setInteractive()
-		.on('pointerup', () => this.scene.start(CONSTANTS.SCENES.PARK));
+		.on('pointerup', () => {
+			if (playerData.stats.health >= 4) {
+				this.scene.start(CONSTANTS.SCENES.PARK);
+			} else {
+				tb.start(overworldText.locked, CONSTANTS.TEXT.TEXT_SPEED);
+			}
+		});
 		
-		this.add.text(350, 800, 'Park', { fill: '#fff', fontSize: CONSTANTS.TEXT.FONT_SIZE })
+		this.parkText = this.add.text(350, 800, 'Park', { fill: '#fff', fontSize: CONSTANTS.TEXT.FONT_SIZE })
 		.setStroke('#000000', 10);
 
 		// Lobby button
@@ -133,17 +140,42 @@ export class OverworldScene extends Phaser.Scene {
 		.setInteractive()
 		.on('pointerup', () => this.scene.start(CONSTANTS.SCENES.LOBBY));
 		
-		this.add.text(10, 825, 'Movie Theatre', { fill: '#fff', fontSize: CONSTANTS.TEXT.FONT_SIZE })
+		this.lobbyText = this.add.text(10, 825, 'Movie Theatre', { fill: '#fff', fontSize: CONSTANTS.TEXT.FONT_SIZE })
 		.setStroke('#000000', 10);
 
 		// Mall button
 		this.mallButton = this.add.rectangle(100, 300, 200, 300, '#0000ff', 0)
 		.setOrigin(0,0)
 		.setInteractive()
-		.on('pointerup', () => this.scene.start(CONSTANTS.SCENES.MUSICSTORE));
+		.on('pointerup', () => {
+			if (playerData.stats.health >= 1) {
+				this.scene.start(CONSTANTS.SCENES.MUSICSTORE);
+			} else {
+				tb.start(overworldText.locked, CONSTANTS.TEXT.TEXT_SPEED);
+			}	
+		});
 		
-		this.add.text(155, 525, 'Mall', { fill: '#fff', fontSize: CONSTANTS.TEXT.FONT_SIZE })
+		this.mallText = this.add.text(155, 525, 'Mall', { fill: '#fff', fontSize: CONSTANTS.TEXT.FONT_SIZE })
 		.setStroke('#000000', 10);
 
+		this.setLocationStatuses()
+	}
+
+	// Locks certain locations if the health of the world is not good
+	setLocationStatuses() {
+		// Movies
+		if (playerData.stats.health < 8) {
+			this.lobbyText.setFill('#f00');
+		} 
+
+		// Mall
+		if (playerData.stats.health < 3) {
+			this.mallText.setFill('#f00');
+		} 
+
+		// Park
+		if (playerData.stats.health < 4) {
+			this.parkText.setFill('#f00');
+		} 
 	}
 }

@@ -36,7 +36,6 @@ export class HospitalScene extends Phaser.Scene {
 	preload() {
 		// Textbox
 		this.load.scenePlugin('rexuiplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexuiplugin.min.js', 'rexUI', 'rexUI');
-
 	}
 
 	// Load game objects
@@ -50,15 +49,17 @@ export class HospitalScene extends Phaser.Scene {
 		tb.start('Hospital. There are a few places to sit.', CONSTANTS.TEXT.TEXT_SPEED);
 
 		this.createObjects();
+		this.addArrows();
 		
 		// Return to Overworld
 		// text(x, y, String)
-		this.overworldButton = this.add.text(
-			CONSTANTS.UI.SCREEN_WIDTH - 100, 0, 'Map', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
-			.setInteractive()
-			.on('pointerup', () => {
-				this.scene.start(CONSTANTS.SCENES.OVERWORLD);
-			});
+		this.add.image(577, 730, 'red_arrow')
+		.setOrigin(0, 0)
+		.setDisplaySize(30, 30)
+		.setInteractive()
+		.on('pointerup', () => {
+			this.scene.start(CONSTANTS.SCENES.OVERWORLD);
+		});
 
 	}
 
@@ -94,7 +95,7 @@ export class HospitalScene extends Phaser.Scene {
 		});
 
 		// Bad seats
-		this.badSeats = this.add.rectangle(600, 400, 80, 250, '#000', 0.5)
+		this.badSeats = this.add.rectangle(600, 400, 80, 250, '#000', 0)
 		.setOrigin(0, 0)
 		.setInteractive()
 		.on('pointerup', () => {
@@ -109,7 +110,7 @@ export class HospitalScene extends Phaser.Scene {
 		});
 
 		// Good seats
-		this.goodSeats = this.add.rectangle(850, 400, 80, 250, '#000', 0.5)
+		this.goodSeats = this.add.rectangle(850, 400, 80, 250, '#000', 0)
 		.setOrigin(0, 0)
 		.setInteractive()
 		.on('pointerup', () => {
@@ -118,7 +119,7 @@ export class HospitalScene extends Phaser.Scene {
 		});
 
 		// Good seat
-		this.goodSeat = this.add.rectangle(20, 525, 80, 110, '#000', 0.5)
+		this.goodSeat = this.add.rectangle(20, 525, 80, 110, '#000', 0)
 		.setOrigin(0, 0)
 		.setInteractive()
 		.on('pointerup', () => {
@@ -210,7 +211,7 @@ export class HospitalScene extends Phaser.Scene {
 		);
 
 		if (!playerData.hospital.grandma)
-		submenu.push(this.add.text(50, CONSTANTS.UI.SUBMENU_Y + 100, "Where's the old lady?", { fontSize: CONSTANTS.TEXT.FONT_SIZE })
+		submenu.push(this.add.text(50, CONSTANTS.UI.SUBMENU_Y + 100, "> Where's the old lady?", { fontSize: CONSTANTS.TEXT.FONT_SIZE })
 									.setInteractive()
 									.on('pointerup', () => {
 										tb.start(sceneText.reception.grandma);
@@ -242,23 +243,23 @@ export class HospitalScene extends Phaser.Scene {
 	}
 
 	addArrows() {
-		// arrow for concession
-		this.add.image(455, 560, 'red_arrow')
+		// Right seats
+		this.add.image(870, 340, 'red_arrow')
 		.setOrigin(0, 0)
 		.setDisplaySize(30, 30);
 
-		// arrow for r1c2
-		this.add.image(170, 330, 'red_arrow')
+		// left chair
+		this.add.image(50, 500, 'red_arrow')
 		.setOrigin(0, 0)
 		.setDisplaySize(30, 30);
 
-		// arrow for r1c2
-		this.add.image(300, 330, 'red_arrow')
+		// nurse
+		this.add.image(333, 270, 'red_arrow')
 		.setOrigin(0, 0)
 		.setDisplaySize(30, 30);
 
-		// arrow for r1c3
-		this.add.image(630, 330, 'red_arrow')
+		// middle seats
+		this.add.image(630, 340, 'red_arrow')
 		.setOrigin(0, 0)
 		.setDisplaySize(30, 30);
 	
