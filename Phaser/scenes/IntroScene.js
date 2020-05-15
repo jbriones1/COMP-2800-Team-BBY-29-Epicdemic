@@ -57,6 +57,39 @@ export class IntroScene extends Phaser.Scene {
 		this.load.image('theatreLobby_bg', '../assets/backgrounds/theatreLobby/theatre_lobby.png');
 		this.load.image('theatreLobby_customer', '../assets/backgrounds/theatreLobby/customer.png');
 		this.load.image('theatreLobby_arrow', '../assets/images/red_arrow.png')
+
+		// Mini-game ==============================================================
+		// bg
+		this.load.image('sky', '../assets/sky.png');
+		this.load.image('ground', '../assets/platform.png');
+		this.load.image('bg', '../assets/bg.png');
+
+		// Character
+		this.load.spritesheet('dude', '../assets/dude.png', { frameWidth: 32, frameHeight: 48 });
+
+		// Good
+		this.load.spritesheet('chicken', '../assets/Enemies/Chicken/Idle.png',
+		{frameWidth: 32, frameHeight: 34});
+		this.load.spritesheet('bunny', '../assets/Enemies/Bunny/Idle.png',
+		{frameWidth: 34, frameHeight: 44});
+		this.load.spritesheet('duck', '../assets/Enemies/Duck/Idle.png',
+		{frameWidth: 36, frameHeight: 36});
+		this.load.spritesheet('rino', '../assets/Enemies/Rino/Idle.png',
+		{frameWidth: 52, frameHeight: 34});
+		this.load.spritesheet('bird', '../assets/Enemies/BlueBird/Flying.png',
+		{frameWidth: 32, frameHeight: 32});
+
+		// Bad
+		this.load.spritesheet('ghost', '../assets/Enemies/Ghost/Idle.png',
+		{frameWidth: 44, frameHeight: 30});
+		this.load.spritesheet('skull1', '../assets/Enemies/Skull/Idle1.png',
+		{frameWidth: 52, frameHeight: 54});
+		this.load.spritesheet('skull2', '../assets/Enemies/Skull/Idle2.png',
+		{frameWidth: 52, frameHeight: 54});
+		this.load.spritesheet('turtle', '../assets/Enemies/Turtle/spikeso.png',
+		{frameWidth: 44, frameHeight: 26});
+		this.load.spritesheet('pig', '../assets/Enemies/AngryPig/Run.png',
+		{frameWidth: 36, frameHeight: 30});
 	}
 
 	// Load game object
@@ -69,7 +102,8 @@ export class IntroScene extends Phaser.Scene {
 
 	update () {
 
-		this.scene.start(CONSTANTS.SCENES.SCHOOL).launch(CONSTANTS.SCENES.UI);
+		// this.scene.start(CONSTANTS.SCENES.SCHOOL).launch(CONSTANTS.SCENES.UI);
+		this.scene.start(CONSTANTS.SCENES.MINIGAME);
 
 		if (tb.isLastPage && !tb.isTyping && !startText) {
 

@@ -15,7 +15,8 @@ export const CONSTANTS = {
 		THEATRE:    "THEATRE",
 		MALL:       "MALL", 
 		FOODCOURT:  "FOODCOURT",
-		MUSICSTORE: "MUSICSTORE" // Toy store
+		MUSICSTORE: "MUSICSTORE", // Toy store
+		MINIGAME:   "MINIGAME"
 	},
 	UI: {
 		SCREEN_WIDTH: 950,
