@@ -38,7 +38,9 @@ let reception = {
     checkin: {
         confirm: 'Thank you for checking in! We will let you know when it is your turn. Feel free to take a seat in the mean time. Remember to employ social-distancing rules!',
         fail: 'You have already checked in!'
-    }
+		},
+
+		grandma: "Unfortunately, she is very sick. Some people are just not being careful enough around the elderly."
 }
 
 let seats = {
@@ -73,7 +75,9 @@ let hospitalRooms = {
 }
 
 let grandma = {
-	interact: "Ohhhhhhhhhhhhhhhhhhhhhhhhhhhhhh hheeeeeelllloooo theeerrreeeeee. No one evvveeerrrrrr talks to me. I'm so happy someone your age still appreciates us old folks looonngg enoougghh to have a conversation. What are you here for? I'm just here for some routine checkups. Ooooooohhhhhhh....... (She talks to you for 3 hours)"
+	interact: "Ohhhhhhhhhhhhhhhhhhhhhhhhhhhhhh hheeeeeelllloooo theeerrreeeeee. No one evvveeerrrrrr talks to me. I'm so happy someone your age still appreciates us old folks looonngg enoougghh to have a conversation. What are you here for? I'm just here for some routine checkups. Ooooooohhhhhhh....... (She talks to you for 3 hours)",
+	egg: "Oh thank you for talking to me. Here, have this old key. I used to work at the school and it seems like nobody is there anymore. (You've unlocked the school!)",
+	no_mask: "\nYou should've worn a mask when talking to her"
 }
 
 export let sceneText = {

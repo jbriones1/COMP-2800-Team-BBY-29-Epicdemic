@@ -8,6 +8,8 @@ let testText ='Select a location.';
 const GetValue = Phaser.Utils.Objects.GetValue;
 let tb;
 
+let schoolTextTint = '#f00'
+
 export class OverworldScene extends Phaser.Scene {
 	constructor() {
 		super({
@@ -56,6 +58,11 @@ export class OverworldScene extends Phaser.Scene {
 	}
 
 	createButtons () {
+
+		// Easter egg
+		if (playerData.unlocked) {
+			schoolTextTint = '#fff'
+		}
 		
 		// Home button
 		this.homeButton = this.add.rectangle(115, 100, 200, 175, '#000000', 0)
@@ -75,7 +82,7 @@ export class OverworldScene extends Phaser.Scene {
 			tb.start('Closed due to the virus', CONSTANTS.TEXT.TEXT_SPEED);
 		});
 		
-		this.add.text(700, 260, 'Airport', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
+		this.add.text(700, 260, 'Airport', { fill: '#f00', fontSize: CONSTANTS.TEXT.FONT_SIZE })
 		.setStroke('#000000', 10)
 
 		// Store button
@@ -91,9 +98,15 @@ export class OverworldScene extends Phaser.Scene {
 		this.schoolButton = this.add.rectangle(700, 590, 200, 185, '#000000', 0)
 		.setOrigin(0,0)
 		.setInteractive()
-		.on('pointerup', () => tb.start('Closed due to the virus', CONSTANTS.TEXT.TEXT_SPEED));
+		.on('pointerup', () => {
+			if (playerData.unlocked) {
+				this.scene.start(CONSTANTS.SCENES.SCHOOL)
+			} else {
+				tb.start('Closed due to the virus', CONSTANTS.TEXT.TEXT_SPEED);
+			}
+		});
 		
-		this.add.text(750, 720, 'School', { fill: '#fff', fontSize: CONSTANTS.TEXT.FONT_SIZE })
+		this.add.text(750, 720, 'School', { fill: schoolTextTint, fontSize: CONSTANTS.TEXT.FONT_SIZE })
 		.setStroke('#000000', 10);
 
 		// Hospital button

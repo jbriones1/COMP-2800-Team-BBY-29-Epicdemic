@@ -16,7 +16,8 @@ import {MallScene}       from './scenes/MallScene.js';
 import {FoodCourtScene}  from './scenes/FoodCourtScene.js';
 import {MusicStoreScene} from './scenes/MusicStoreScene.js';
 import {UIScene}         from './scenes/UIScene.js';
-import {EndScene}        from './scenes/EndScene.js';
+import {EndScene}        from './scenes/EndScene.js'; 
+import {MiniGame}        from './scenes/Minigame.js';
 
 let config = {
 	type: Phaser.AUTO,
@@ -37,8 +38,20 @@ let config = {
 		MallScene,
 		FoodCourtScene,
 		MusicStoreScene,
-		EndScene
-	]
+		EndScene,
+		MiniGame
+	],
+	physics: {
+		default: 'arcade',
+		arcade: {
+				gravity: {y: 300},
+				debug: false
+		}
+	},
+	scale: {
+		mode: Phaser.Scale.FIT,
+		autoCenter: Phaser.Scale.CENTER_BOTH
+		}
 };
 
 let game = new Phaser.Game(config);

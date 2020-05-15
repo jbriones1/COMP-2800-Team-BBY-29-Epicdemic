@@ -6,11 +6,12 @@ export let playerData = {
 		happiness: 10,
 		score: 0,
 		day: 1,
-		hour: 8,
+		hour: 9,
 		minute: 0,
 		minuteStr: '00',
 		donations: 0,
-		last_meal: 0
+		last_meal: 0,
+		bad_decisions: 0
 	},
 	fridge: {
 		apple: 0,
@@ -36,7 +37,12 @@ export let playerData = {
 	],
 	location: null,
 	job: true,
-	tutorial_done: false
+	tutorial_done: false,
+	unlocked: false,
+	secret: false,
+	hospital: {
+		grandma: true
+	}
 };
 
 export function setTime(hour, minute) {
@@ -68,7 +74,6 @@ export function fridgeContents() {
 	for (let x in playerData.fridge) {
 		str += playerData.fridge[x] + 'x ' + x.replace(/_/g, ' ') + '\n';
 	}
-	str += '\nin the fridge.'
 	return str;
 }
 
@@ -77,7 +82,6 @@ export function storageContents() {
 	for (let x in playerData.storage) {
 		str += playerData.storage[x] + 'x ' + x.replace(/_/g, ' ') + '\n';
 	}
-	str += '\nin storage.'
 	return str;
 }
 
@@ -107,4 +111,12 @@ function checkLastMeal() {
 	if (playerData.stats.last_meal >= 4) {
 		playerData.stats.hunger--;
 	}
+}
+
+export function maskCheck() {
+	if (!playerData.inventory.mask) {
+		playerData.stats.health--;
+	}
+
+	return playerData.inventory.mask;
 }

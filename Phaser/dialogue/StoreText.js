@@ -13,6 +13,9 @@ let checkout = {
 		toFridge: '\nAdded to your fridge',
 		toStorage: '\nAdded to your storage',
 		noStock: 'No stock of this left'
+	},
+	self: {
+		interact: "*Beep boop* Buy stuff."
 	}
 }
 

@@ -11,8 +11,9 @@ let tb;
 let submenu = [];
 let mainButtons = [];
 
-let grannyTalk = false;
 let nurseTalk;
+let grannyTalk = false;
+let eggTalk = 0;
 
 export class HospitalScene extends Phaser.Scene {
 	constructor() {
@@ -23,10 +24,12 @@ export class HospitalScene extends Phaser.Scene {
 
 	init () {
 		console.log("Loaded " + KEY);
+		sceneFnc.checkDistance(playerData.location, KEY);
 		playerData.location = KEY;
 
 		console.log(playerData);
 		nurseTalk = 0;
+		grannyTalk = 0;
 	}
 
 	// Load assets
@@ -95,7 +98,14 @@ export class HospitalScene extends Phaser.Scene {
 		.setOrigin(0, 0)
 		.setInteractive()
 		.on('pointerup', () => {
-			tb.start(sceneText.seats.takeASeat.badSeats, CONSTANTS.TEXT.TEXT_SPEED);
+			if (this.grandma != undefined) {
+				tb.start(sceneText.seats.takeASeat.badSeats, CONSTANTS.TEXT.TEXT_SPEED);
+				playerFnc.changeTime(5);
+			} else {
+				tb.start(sceneText.seats.takeASeat.goodSeat, CONSTANTS.TEXT.TEXT_SPEED);
+				playerFnc.changeTime(5);
+			}
+			
 		});
 
 		// Good seats
@@ -104,6 +114,7 @@ export class HospitalScene extends Phaser.Scene {
 		.setInteractive()
 		.on('pointerup', () => {
 			tb.start(sceneText.seats.takeASeat.goodSeat, CONSTANTS.TEXT.TEXT_SPEED);
+			playerFnc.changeTime(5);
 		});
 
 		// Good seat
@@ -115,19 +126,42 @@ export class HospitalScene extends Phaser.Scene {
 		});
 
 		// Grandma
+		this.grannyTalk = 0;
 		this.grandma = this.add.sprite(630, 480, 'hospital_grandma', 3)
 		.setInteractive()
 		.on('pointerup', () => {
 			playerFnc.clearSubmenu(submenu);
 
-			tb.start(sceneText.grandma.interact, sceneText.grandma.interact.length / 3);
+			let str = '';
+
+			if (eggTalk == 3 && !playerData.unlocked) {
+				str += sceneText.grandma.egg;
+				playerData.unlocked = true;
+			} else {
+				str += sceneText.grandma.interact;
+				eggTalk++;
+			}
+
+			// If you're not wearing a mask
+			if (!playerData.inventory.mask) {
+				playerData.stats.health--;
+				str += '. ' + sceneText.grandma.no_mask;
+			}
+
+			// You can't do anything else while talking to the old lady
 			grannyTalk = true;
 			sceneFnc.disableButtons(mainButtons);
+			tb.start(str, CONSTANTS.TEXT.TEXT_SPEED * 3);
 		});
+
+		// Remove grandma if the world isn't healthy
+		if (!playerData.hospital.grandma) {
+			this.grandma.destroy();
+		}
 
 		mainButtons = [this.nurse, this.badSeats, this.goodSeat, this.goodSeats, this.grandma]
 
-		// Nurse animation
+		// Nurse animation ------------------------------------------------------------------------------------------------
 		this.anims.create({
 			key: 'hospital_nurse_neutral',
 			frames: this.anims.generateFrameNumbers('hospital_nurse', {start: 0, end: 2}),
@@ -174,6 +208,14 @@ export class HospitalScene extends Phaser.Scene {
 										tb.start(sceneText.reception.checkin.confirm);
 									})
 		);
+
+		if (!playerData.hospital.grandma)
+		submenu.push(this.add.text(50, CONSTANTS.UI.SUBMENU_Y + 100, "Where's the old lady?", { fontSize: CONSTANTS.TEXT.FONT_SIZE })
+									.setInteractive()
+									.on('pointerup', () => {
+										tb.start(sceneText.reception.grandma);
+									})
+		);
 	}
 
 	listQuestions() {
@@ -197,6 +239,28 @@ export class HospitalScene extends Phaser.Scene {
 										tb.start(sceneText.reception.question.question3.answer);
 									})
 		);
+	}
 
+	addArrows() {
+		// arrow for concession
+		this.add.image(455, 560, 'red_arrow')
+		.setOrigin(0, 0)
+		.setDisplaySize(30, 30);
+
+		// arrow for r1c2
+		this.add.image(170, 330, 'red_arrow')
+		.setOrigin(0, 0)
+		.setDisplaySize(30, 30);
+
+		// arrow for r1c2
+		this.add.image(300, 330, 'red_arrow')
+		.setOrigin(0, 0)
+		.setDisplaySize(30, 30);
+
+		// arrow for r1c3
+		this.add.image(630, 330, 'red_arrow')
+		.setOrigin(0, 0)
+		.setDisplaySize(30, 30);
+	
 	}
 }
