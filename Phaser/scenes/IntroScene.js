@@ -56,7 +56,7 @@ export class IntroScene extends Phaser.Scene {
 
 	update () {
 
-		this.scene.start(CONSTANTS.SCENES.STORE).launch(CONSTANTS.SCENES.UI);
+		// this.scene.start(CONSTANTS.SCENES.STORE).launch(CONSTANTS.SCENES.UI);
 
 		if (tb.isLastPage && !tb.isTyping && !startText) {
 
