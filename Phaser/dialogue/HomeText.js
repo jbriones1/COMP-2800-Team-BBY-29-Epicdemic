@@ -11,14 +11,23 @@ let comp = {
 	messages: {
 		None:  'No messages',
 		Brian: 'Wanna go get to the movies?',
-		Jon:   'Wanna go to the pub?',
+		Jon:   'Wanna go to the pub? (You wonder why Jon keeps asking to go to the pub, this town doesn\'t have one.)',
 		Andi:  'Wanna go get some food at the mall?',
-		Mandy: 'Wanna go for a walk in the park?'
+		Mandy: 'Wanna go for a walk in the park?',
+		Boss:  "Don't be late for work! There's a shipment of toys I want you to come deal with."
 	},
 	order: {
 		interact: 'Order food online'
 	},
-	shutdown: 'Shutting down...'
+	shutdown: 'Shutting down...',
+	game: {
+		    healthy: ["You play some League and lose because you think your team is awful. You lose happiness",
+				          "You play some Fortnite and your friends bully you for it. It hurts a little",
+				          "You play some League and win, thinking that you carried. You didn't. Your ego is inflated a little"
+								 ],
+				tilted: "You're absolutely tilted and get destroyed. You should go do something else.",
+				unhappy: "You shouldn't be playing games right now with your current mood."
+	}
 }
 
 let bed = {
@@ -41,6 +50,7 @@ let sink = {
 }
 
 export let sceneText = {
+	intro: "I should probably check what's happening online. Click on the computer to find out what's going on.",
 	comp: comp,
 	bed: bed,
 	storage: storage,

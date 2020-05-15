@@ -16,6 +16,7 @@ import {MallScene}       from './scenes/MallScene.js';
 import {FoodCourtScene}  from './scenes/FoodCourtScene.js';
 import {MusicStoreScene} from './scenes/MusicStoreScene.js';
 import {UIScene}         from './scenes/UIScene.js';
+import {EndScene}        from './scenes/EndScene.js';
 
 let config = {
 	type: Phaser.AUTO,
@@ -36,6 +37,7 @@ let config = {
 		MallScene,
 		FoodCourtScene,
 		MusicStoreScene,
+		EndScene
 	]
 };
 

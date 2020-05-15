@@ -31,6 +31,7 @@ export class ParkScene extends Phaser.Scene {
 		this.load.image('park_arrow', '../assets/images/red_arrow.png')
 		this.load.image('red_arrow', '../assets/images/red_arrow_up.png')
 	}
+	
 	// Load game objects
 	create () {
 		//Scene image

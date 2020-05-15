@@ -11,6 +11,7 @@ let submenu = [];
 
 let computerOn = false;
 let mainButtons;
+let warnMsg = false;
 
 export class HomeScene extends Phaser.Scene {
 	constructor() {
@@ -31,18 +32,6 @@ export class HomeScene extends Phaser.Scene {
 	preload() {
 		// Textbox assets
 		this.load.scenePlugin('rexuiplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexuiplugin.min.js', 'rexUI', 'rexUI');
-		this.load.image('nextPage', '../assets/images/arrow-down-left.png');
-
-		this.load.spritesheet('boy', '../characterspritesheet/boy1.png', { frameWidth: 31, frameHeight: 48 });
-
-		// House assets
-		this.load.image('house_bg', '../assets/backgrounds/home/home_furnished.png');
-		this.load.image('house_computer', '../assets/backgrounds/home/computer.png');
-		this.load.image('house_cabinet', '../assets/backgrounds/home/cabinet.png');
-		this.load.image('house_fridge', '../assets/backgrounds/home/fridge.png');
-		this.load.image('house_sink', '../assets/backgrounds/home/sink.png');
-		this.load.image('house_bed', '../assets/backgrounds/home/bed.png');
-
 	}
 
 	// Load game objects
@@ -53,21 +42,6 @@ export class HomeScene extends Phaser.Scene {
 			.setOrigin(0, 0)
 			.setDisplaySize(918, 650);
 
-		// boy = this.add.sprite(500, 500, 'boy')
-		// 	.setDisplaySize(96, 144)
-		// 	.setInteractive()
-		// 	.on('pointerdown', () => {
-		// 		tb.start('You hit the boy', 50);
-		// 	});
-
-		// this.anims.create({
-		// 	key: 'neutral',
-		// 	frames: this.anims.generateFrameNumbers('boy', { start: 0, end: 2 }),
-		// 	frameRate: 3,
-		// 	repeat: -1,
-		// 	yoyo: true
-		// });
-
 		// Textbox at the bottom of the screen
 		tb = textbox.createTextBox(this,
 			100,
@@ -76,20 +50,30 @@ export class HomeScene extends Phaser.Scene {
 		});
 
 		// Message when entering the scene
-		tb.start("At home", CONSTANTS.TEXT.TEXT_SPEED);
+		if (!playerData.tutorial_done) {
+			tb.start(sceneText.intro, CONSTANTS.TEXT.TEXT_SPEED);
+			playerData.tutorial_done = true;
+		} else {
+			tb.start("At home", CONSTANTS.TEXT.TEXT_SPEED);
+		}
 
 		// Creates all the menu buttons for the scene
 		this.createObjects();
 
 		// Return to Overworld
-		this.overworldButton = this.add.text(
-			CONSTANTS.UI.SCREEN_WIDTH - 100, 0, 'Map', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
+		this.add.image(375, 730, 'red_arrow').setDisplaySize(30, 30)
 			.setInteractive()
-			.on('pointerdown', () => {
+			.on('pointerup', () => {
 				this.scene.start(CONSTANTS.SCENES.OVERWORLD);
 			});
 
 	}
+
+	update() {
+
+	}
+
+	// ==================================================================================================================
 
 	/* All the interactable objects in the scene are made here */
 	createObjects() {
@@ -97,17 +81,20 @@ export class HomeScene extends Phaser.Scene {
 		// Bed
 		this.bed = this.add.image(639, 353, 'house_bed')
 			.setInteractive()
-			.on('pointerdown', () => {
+			.on('pointerup', () => {
 					playerFnc.clearSubmenu(submenu);
 
 				this.listBedChoices();
-				tb.start(sceneText.bed.interact, CONSTANTS.TEXT.TEXT_SPEED);	
+				tb.start(sceneText.bed.interact, CONSTANTS.TEXT.TEXT_SPEED);
+				computerOn = false;	
 			});
+
+		this.add.image(645, 200, 'red_arrow').setDisplaySize(30, 30);
 
 		// Computer
 		this.computer = this.add.image(812, 422, 'house_computer')
 			.setInteractive()
-			.on('pointerdown', () => {
+			.on('pointerup', () => {
 				playerFnc.clearSubmenu(submenu);
 
 				let str = '';
@@ -117,34 +104,39 @@ export class HomeScene extends Phaser.Scene {
 					str += sceneText.comp.interact + '\n';
 					tb.start(str + 'You have ' + playerData.messages.length 
 					+ ' message(s)', CONSTANTS.TEXT.TEXT_SPEED);
+					this.listCompChoices();
 				}
-				this.listCompChoices();
 			});
+			this.add.image(812, 342, 'red_arrow').setDisplaySize(30, 30);
 
 		// Sink
 		this.sink = this.add.image(346, 325, 'house_sink')
 			.setInteractive()
-			.on('pointerdown', () => {
+			.on('pointerup', () => {
 				playerFnc.clearSubmenu(submenu);
 
 				this.washHands();
+				computerOn = false;
 			});
+		this.add.image(346, 225, 'red_arrow').setDisplaySize(30, 30);
 
 		// Fridge
 		this.fridge = this.add.image(212, 303, 'house_fridge')
 			.setInteractive()
-			.on('pointerdown', () => {
+			.on('pointerup', () => {
 				playerFnc.clearSubmenu(submenu);
+				computerOn = false;
 
 				this.listFridgeChoices();
 
 				tb.start('You have:\n' + playerFnc.fridgeContents(), CONSTANTS.TEXT.TEXT_SPEED);
 			});
+			this.add.image(212, 150, 'red_arrow').setDisplaySize(30, 30);
 
 		// Storage Unit
 		this.storage = this.add.image(468, 350, 'house_cabinet')
 			.setInteractive()
-			.on('pointerdown', () => {
+			.on('pointerup', () => {
 				playerFnc.clearSubmenu(submenu);
 
 				let tpCheck = (playerData.storage.toilet_paper < 1) ? 
@@ -152,20 +144,18 @@ export class HomeScene extends Phaser.Scene {
 
 				tb.start('You have:\n' + playerFnc.storageContents() + '\n' + tpCheck, 
 					CONSTANTS.TEXT.TEXT_SPEED);
+				computerOn = false;
 			});
+			this.add.image(468, 280, 'red_arrow').setDisplaySize(30, 30);
 
 			mainButtons = [this.bed, this.computer, this.sink, this.fridge, this.storage];
 	} // end of create objects function
 
-	update() {
-		// boy.anims.play('neutral', true);
-	}
-
-	// Choices when Computer is clicked
+	// COMPUTER CHOICES -------------------------------------------------------------------------------------------------
 	listCompChoices() {
-		this.compNews = this.add.text(50, CONSTANTS.UI.SUBMENU_Y, 'News', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
+		this.compNews = this.add.text(110, CONSTANTS.UI.SUBMENU_Y, 'NEWS', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
 			.setInteractive()
-			.on('pointerdown', () => {
+			.on('pointerup', () => {
 				if (playerData.stats.day == 1) { tb.start(sceneText.comp.news.day1); }
 				else if (playerData.stats.health >= 7) { tb.start(sceneText.comp.news.good, CONSTANTS.TEXT.TEXT_SPEED); }
 				else if (playerData.stats.health >= 5) { tb.start(sceneText.comp.news.neutral, CONSTANTS.TEXT.TEXT_SPEED); }
@@ -174,9 +164,9 @@ export class HomeScene extends Phaser.Scene {
 				else { tb.start(sceneText.comp.news.critical, CONSTANTS.TEXT.TEXT_SPEED); }
 			});
 
-		this.compMessages = this.add.text(200, CONSTANTS.UI.SUBMENU_Y, 'Messages', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
+		this.compMessages = this.add.text(300, CONSTANTS.UI.SUBMENU_Y, 'MESSAGES', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
 			.setInteractive()
-			.on('pointerdown', () => {
+			.on('pointerup', () => {
 				if (playerData.messages == undefined || playerData.messages.length == 0) {
 					tb.start(sceneText.comp.messages.None, CONSTANTS.TEXT.TEXT_SPEED);
 				} else {
@@ -191,28 +181,30 @@ export class HomeScene extends Phaser.Scene {
 				}
 			});
 
-		this.compOrder = this.add.text(400, CONSTANTS.UI.SUBMENU_Y, 'Order online', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
+		this.compGame = this.add.text(500, CONSTANTS.UI.SUBMENU_Y, 'GAME', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
 			.setInteractive()
-			.on('pointerdown', () => {
-				tb.start(sceneText.comp.order.interact);
+			.on('pointerup', () => {
+				this.playCompGame();
 			});
 
-		this.compShutDown = this.add.text(700, CONSTANTS.UI.SUBMENU_Y, 'Shutdown', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
+		this.compShutDown = this.add.text(675, CONSTANTS.UI.SUBMENU_Y, 'SHUTDOWN', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
 			.setInteractive()
-			.on('pointerdown', () => {
+			.on('pointerup', () => {
 				computerOn = false;
 				tb.start(sceneText.comp.shutdown, CONSTANTS.TEXT.TEXT_SPEED);
 
 				playerFnc.clearSubmenu(submenu);
 			});
 
-		submenu = [this.compNews, this.compMessages, this.compOrder, this.compShutDown];
+		submenu = [this.compNews, this.compMessages, this.compGame, this.compShutDown];
 	}
 
+	// BED CHOICES ------------------------------------------------------------------------------------------------------
 	listBedChoices() {
-		this.bedYes = this.add.text(200, CONSTANTS.UI.SUBMENU_Y, 'Yes', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
+		this.sleepTxt = this.add.text(0, CONSTANTS.UI.SUBMENU_Y, 'SLEEP:', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
+		this.bedYes = this.add.text(200, CONSTANTS.UI.SUBMENU_Y, 'YES', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
 			.setInteractive()
-			.on('pointerdown', () => {
+			.on('pointerup', () => {
 				if (playerData.stats.hour >= 21 || playerData.stats.hour < 8) {
 					playerFnc.clearSubmenu(submenu);
 
@@ -236,9 +228,9 @@ export class HomeScene extends Phaser.Scene {
 				}
 			});
 
-		this.bedNo = this.add.text(500, CONSTANTS.UI.SUBMENU_Y, 'No', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
+		this.bedNo = this.add.text(500, CONSTANTS.UI.SUBMENU_Y, 'NO', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
 			.setInteractive()
-			.on('pointerdown', () => {
+			.on('pointerup', () => {
 				if (playerData.messages == undefined || playerData.messages.length == 0) {
 					tb.start(sceneText.comp.messages.None, CONSTANTS.TEXT.TEXT_SPEED);
 				} else {
@@ -254,9 +246,10 @@ export class HomeScene extends Phaser.Scene {
 				}
 			});
 
-			submenu = [this.bedYes, this.bedNo];
+			submenu = [this.sleepTxt, this.bedYes, this.bedNo];
 	}
 
+	// WASH HANDS -------------------------------------------------------------------------------------------------------
 	washHands() {
 		let soapCheck = (playerData.storage.soap > 0);
 		let withSoap = (soapCheck) ? 'with' : 'without';
@@ -274,6 +267,7 @@ export class HomeScene extends Phaser.Scene {
 		playerFnc.changeTime(1);
 	}
 
+	// SLEEP ------------------------------------------------------------------------------------------------------------
 	sleep() {
 		let hoursOfSleep = 0;
 		let startMinute = playerData.stats.minute;
@@ -283,7 +277,7 @@ export class HomeScene extends Phaser.Scene {
 			playerFnc.changeTime(minutesofSleep);
 		}
 
-		while(playerData.stats.hour != 7) {
+		while(playerData.stats.hour != 9) {
 			playerFnc.changeTime(60);
 			hoursOfSleep++;
 		}
@@ -305,71 +299,112 @@ export class HomeScene extends Phaser.Scene {
 		submenu.push(this.add.text(110, CONSTANTS.UI.SUBMENU_Y + 50, 'RAMEN ', {fontSize: CONSTANTS.TEXT.FONT_SIZE})
 									.setInteractive()
 									.on('pointerup', () => {
-										this.eat('apple')
+										this.eat('ramen')
 									}));
 		submenu.push(this.add.text(110, CONSTANTS.UI.SUBMENU_Y + 100, 'BREAD ', {fontSize: CONSTANTS.TEXT.FONT_SIZE})
 									.setInteractive()
 									.on('pointerup', () => {
-										this.eat('apple')
+										this.eat('bread')
 									}));
-		
-		
-
 	} // end of fridge choices
 
+	// EAT --------------------------------------------------------------------------------------------------------------
 	eat(item) {
 		switch(item) {
 			case 'apple':
 					if (playerData.fridge.apple > 0) {
 						playerData.fridge.apple--;
 						tb.start("You eat an apple", CONSTANTS.TEXT.TEXT_SPEED);
-						playerData.stats.hunger += 1;
+						playerFnc.changeHunger(1);
+						playerFnc.changeTime(5);
 					} else {
+						if (!warnMsg) {
+							warnMsg = true;
+							tb.start("You don't have any", CONSTANTS.TEXT.TEXT_SPEED);
+							sceneFnc.disableButtons(mainButtons);
+							this.time.addEvent({
+								delay: 1500,
+								callback: () => {
+									tb.start('You have:\n' + playerFnc.fridgeContents(), CONSTANTS.TEXT.TEXT_SPEED);
+									sceneFnc.enableButtons(mainButtons);
+									warnMsg = false;
+								},
+								callbackScope: this
+							});
+						}
+					}
+				break;
+			case 'ramen':
+				if (playerData.fridge.instant_ramen > 0) {
+					playerData.fridge.ramen--;
+					tb.start("You eat some ramen", CONSTANTS.TEXT.TEXT_SPEED);
+					playerFnc.changeHunger(2);
+					playerData.stats.health -= 2;
+					playerFnc.changeTime(10);
+				} else {
+					if (!warnMsg) {
+						warnMsg = true;
 						tb.start("You don't have any", CONSTANTS.TEXT.TEXT_SPEED);
+						sceneFnc.disableButtons(mainButtons);
 						this.time.addEvent({
-							delay: 3000,
+							delay: 1500,
 							callback: () => {
 								tb.start('You have:\n' + playerFnc.fridgeContents(), CONSTANTS.TEXT.TEXT_SPEED);
+								sceneFnc.enableButtons(mainButtons);
+								warnMsg = false;
 							},
 							callbackScope: this
 						});
 					}
-				break;
-			case 'ramen':
-				if (playerData.fridge.ramen > 0) {
-					playerData.fridge.ramen--;
-					tb.start("You eat some ramen", CONSTANTS.TEXT.TEXT_SPEED);
-					playerData.stats.hunger += 2;
-					playerData.stats.health -= 2;
-				} else {
-					tb.start("You don't have any", CONSTANTS.TEXT.TEXT_SPEED);
-					this.time.addEvent({
-						delay: 3000,
-						callback: () => {
-							tb.start('You have:\n' + playerFnc.fridgeContents(), CONSTANTS.TEXT.TEXT_SPEED);
-						},
-						callbackScope: this
-					});
 				}
 				break;
 			case 'bread':
 				if (playerData.fridge.bread > 0) {
 					playerData.fridge.bread--;
 					tb.start("You eat some bread", CONSTANTS.TEXT.TEXT_SPEED);
-					playerData.stats.hunger += 5;
+					playerFnc.changeHunger(5);
+					playerFnc.changeTime(5);
 				} else {
-					tb.start("You don't have any", CONSTANTS.TEXT.TEXT_SPEED);
-					this.time.addEvent({
-						delay: 3000,
-						callback: () => {
-							tb.start('You have:\n' + playerFnc.fridgeContents(), CONSTANTS.TEXT.TEXT_SPEED);
-						},
-						callbackScope: this
-					});
+					if (!warnMsg) {
+						warnMsg = true;
+						tb.start("You don't have any", CONSTANTS.TEXT.TEXT_SPEED);
+						sceneFnc.disableButtons(mainButtons);
+						this.time.addEvent({
+							delay: 1500,
+							callback: () => {
+								tb.start('You have:\n' + playerFnc.fridgeContents(), CONSTANTS.TEXT.TEXT_SPEED);
+								sceneFnc.enableButtons(mainButtons);
+								warnMsg = false;
+							},
+							callbackScope: this
+						});
+					}
 				}
 				break;
 			default:
 		}
 
 	} // end of eat
+
+	// PLAY COMP GAME ---------------------------------------------------------------------------------------------------
+	playCompGame() {
+		let choice = Math.floor(Math.random() * sceneText.comp.game.healthy.length);
+		if (playerData.stats.happiness < 1) {
+			tb.start(sceneText.comp.game.unhappy);
+		} else if (playerData.stats.happiness < 6) {
+			playerData.stats.happiness--;
+			tb.start(sceneText.comp.game.tilted);
+			playerFnc.changeTime(30);
+		 } else if (choice == 1) {
+			playerData.stats.happiness++;
+			tb.start(sceneText.comp.game.healthy[choice]);
+			playerFnc.changeTime(30);
+		 } else {
+			playerData.stats.happiness--;
+			tb.start(sceneText.comp.game.healthy[choice]);
+			playerFnc.changeTime(30);
+		}
+		
+	} // end of game
+
 }

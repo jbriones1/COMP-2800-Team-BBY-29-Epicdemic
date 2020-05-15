@@ -9,6 +9,8 @@ export let playerData = {
 		hour: 8,
 		minute: 0,
 		minuteStr: '00',
+		donations: 0,
+		last_meal: 0
 	},
 	fridge: {
 		apple: 0,
@@ -33,18 +35,22 @@ export let playerData = {
 			message: 'Goodbye'}
 	],
 	location: null,
-	job: true
+	job: true,
+	tutorial_done: false
 };
 
 export function setTime(hour, minute) {
 
 }
 
+// Amount is the time changed in minutes
 export function changeTime(amount) {
 	playerData.stats.minute += amount;
 	if (playerData.stats.minute >= 60) {
 		playerData.stats.hour += Math.floor(playerData.stats.minute / 60);
+		playerData.stats.last_meal += Math.floor(playerData.stats.minute / 60);
 		playerData.stats.minute = playerData.stats.minute % 60;
+		checkLastMeal();
 	}
 	if (playerData.stats.hour >= 24) {
 		playerData.stats.day += Math.floor(playerData.stats.hour / 24);
@@ -52,8 +58,11 @@ export function changeTime(amount) {
 	}
 	
 	zeroPad();
+	console.log(playerData.stats.hour + ':' + playerData.stats.minuteStr)
+	console.log(playerData.stats.last_meal)
 }
 
+// Returns a string of the fridge contents
 export function fridgeContents() {
 	let str = '';
 	for (let x in playerData.fridge) {
@@ -72,7 +81,7 @@ export function storageContents() {
 	return str;
 }
 
-function zeroPad(num, size) {
+function zeroPad() {
 	playerData.stats.minuteStr = playerData.stats.minute.toString();
 	playerData.stats.minuteStr = playerData.stats.minuteStr.padStart(2, '0');
 }
@@ -83,5 +92,19 @@ export function clearSubmenu (submenu) {
 		for (let i = 0; i < submenu.length; i++) {
 			submenu[i].destroy();
 		}
+	}
+}
+
+export function changeHunger(num) {
+	playerData.stats.hunger += num;
+
+	if (num > 0) {
+		playerData.stats.last_meal = 0;
+	}
+}	
+
+function checkLastMeal() {
+	if (playerData.stats.last_meal >= 4) {
+		playerData.stats.hunger--;
 	}
 }

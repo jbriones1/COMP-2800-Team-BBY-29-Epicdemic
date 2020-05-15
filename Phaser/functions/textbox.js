@@ -86,7 +86,7 @@ export function getBuiltInText (scene, wrapWidth, fixedWidth, fixedHeight) {
 		wordWrap: {
 				width: wrapWidth
 		},
-		maxLines: 3
-})
-.setFixedSize(fixedWidth, fixedHeight);
+		maxLines: 10
+	})
+	.setFixedSize(fixedWidth, fixedHeight);
 }

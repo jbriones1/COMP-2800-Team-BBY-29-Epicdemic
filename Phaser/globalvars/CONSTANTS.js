@@ -3,6 +3,7 @@ export const CONSTANTS = {
 		OVERWORLD:  "OVERWORLD",
 		CHATBOX:    "CHATBOX",
 		UI:         "UI",
+		END:        "END",
 		INTRO:      "INTRO",
 		HOME:       "HOME",
 		AIRPORT:    "AIRPORT",
