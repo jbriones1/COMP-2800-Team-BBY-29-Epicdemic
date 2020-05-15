@@ -20,6 +20,10 @@ export class LobbyScene extends Phaser.Scene {
 
 	init () {
 		console.log("Loaded " + KEY);
+		if (playerData.location != CONSTANTS.SCENES.THEATRE) {
+			sceneFnc.checkDistance(playerData.location, KEY);
+		}
+
 		playerData.location = KEY;
 		console.log(playerData);
 	}
@@ -27,10 +31,6 @@ export class LobbyScene extends Phaser.Scene {
 	// Load assets
 	preload() {
 		this.load.scenePlugin('rexuiplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexuiplugin.min.js', 'rexUI', 'rexUI');
-		this.load.image('nextPage', '../assets/images/arrow-down-left.png');
-		this.load.image('theatreLobby_bg', '../assets/backgrounds/theatreLobby/theatre_lobby.png');
-		this.load.image('theatreLobby_customer', '../assets/backgrounds/theatreLobby/customer.png');
-		this.load.image('theatreLobby_arrow', '../assets/images/red_arrow.png')
 	}
 
 	// Load game objects
@@ -133,17 +133,17 @@ export class LobbyScene extends Phaser.Scene {
 
 	addArrows() {
 		// arrow for large sofa
-		this.add.image(300, 320, 'theatreLobby_arrow')//.setRotation(3.14/2)
+		this.add.image(300, 320, 'red_arrow')//.setRotation(3.14/2)
 		.setOrigin(0, 0)
 		.setDisplaySize(30, 30);
 
 		// arrow for small sofa
-		this.add.image(115, 425, 'theatreLobby_arrow')//.setRotation(3.14)
+		this.add.image(115, 425, 'red_arrow')//.setRotation(3.14)
 		.setOrigin(0, 0)
 		.setDisplaySize(30, 30);
 
 		// arrow for reception
-		this.add.image(655, 195, 'theatreLobby_arrow')
+		this.add.image(655, 195, 'red_arrow')
 		.setOrigin(0, 0)
 		.setDisplaySize(30, 30);		
 	}
