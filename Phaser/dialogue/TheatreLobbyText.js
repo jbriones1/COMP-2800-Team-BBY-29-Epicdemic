@@ -59,17 +59,24 @@ let theatreEntrance = {
 }
 
 //======================================
-// new added -> seat choice 
+// new added -> seat choice in theatre lobby
 //======================================
 let largeSofa = {
-    interact: "A lady is sitting on the sofa"
+    interact: "A lady is sitting on the sofa. Do you want to sit beside her?"
 }
 
-//======================================
-// new added -> seat choice 
-//======================================
 let smallSofa = {
-    interact: "There is an empty seat"
+    interact: "There is an empty sofa. Do you want to sit here?"
+}
+
+let seats = {
+    goodSeat: "You made a good decision",
+    badSeat: "The lady started coughing. You start to panic!"
+}
+
+let sofa = {
+    sit: "This sofa is so comfy",
+    notSit: 'Never mind'
 }
 
 export let sceneText = {
@@ -78,5 +85,7 @@ export let sceneText = {
     //concession: concession,
     kiosk: kiosk,
     largeSofa: largeSofa,
-    smallSofa: smallSofa
+    smallSofa: smallSofa,
+    seats: seats,
+    sofa: sofa
 }
