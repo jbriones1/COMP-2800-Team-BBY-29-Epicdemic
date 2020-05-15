@@ -93,7 +93,7 @@ export class OverworldScene extends Phaser.Scene {
 		.setInteractive()
 		.on('pointerup', () => tb.start('Closed due to the virus', CONSTANTS.TEXT.TEXT_SPEED));
 		
-		this.add.text(750, 720, 'School', { fill: '#f00', fontSize: CONSTANTS.TEXT.FONT_SIZE })
+		this.add.text(750, 720, 'School', { fill: '#fff', fontSize: CONSTANTS.TEXT.FONT_SIZE })
 		.setStroke('#000000', 10);
 
 		// Hospital button
@@ -120,7 +120,7 @@ export class OverworldScene extends Phaser.Scene {
 		.setInteractive()
 		.on('pointerup', () => this.scene.start(CONSTANTS.SCENES.LOBBY));
 		
-		this.add.text(10, 825, 'Movie Theatre', { fill: '#f00', fontSize: CONSTANTS.TEXT.FONT_SIZE })
+		this.add.text(10, 825, 'Movie Theatre', { fill: '#fff', fontSize: CONSTANTS.TEXT.FONT_SIZE })
 		.setStroke('#000000', 10);
 
 		// Mall button
@@ -129,7 +129,7 @@ export class OverworldScene extends Phaser.Scene {
 		.setInteractive()
 		.on('pointerup', () => this.scene.start(CONSTANTS.SCENES.MUSICSTORE));
 		
-		this.add.text(155, 525, 'MALL', { fill: '#f00', fontSize: CONSTANTS.TEXT.FONT_SIZE })
+		this.add.text(155, 525, 'Mall', { fill: '#fff', fontSize: CONSTANTS.TEXT.FONT_SIZE })
 		.setStroke('#000000', 10);
 
 	}

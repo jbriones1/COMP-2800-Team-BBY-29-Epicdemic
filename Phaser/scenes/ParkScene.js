@@ -29,6 +29,7 @@ export class ParkScene extends Phaser.Scene {
 		this.load.image('park_bg', '../assets/backgrounds/park.png')
 		this.load.spritesheet('park_girl', '../characterspritesheet/girl1.png', { frameWidth: 31, frameHeight: 48 })
 	}
+	
 	// Load game objects
 	create () {
 		//Scene image

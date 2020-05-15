@@ -33,14 +33,7 @@ export class HospitalScene extends Phaser.Scene {
 	preload() {
 		// Textbox
 		this.load.scenePlugin('rexuiplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexuiplugin.min.js', 'rexUI', 'rexUI');
-		this.load.image('nextPage', '../assets/images/arrow-down-left.png');
 
-		// Hospital assets
-		// this.load.image(variable_name, 'path to the file');
-		this.load.image('hospital_bg', '../assets/backgrounds/hospital/hospital.png');
-		this.load.image('hospital_desk', '../assets/backgrounds/hospital/reception.png')
-		this.load.spritesheet('hospital_nurse', '../assets/characters/nurse.png', {frameWidth: 90, frameHeight: 150});
-		this.load.spritesheet('hospital_grandma', '../assets/characters/grandma1.png', {frameWidth: 90, frameHeight: 150});
 	}
 
 	// Load game objects
@@ -60,7 +53,7 @@ export class HospitalScene extends Phaser.Scene {
 		this.overworldButton = this.add.text(
 			CONSTANTS.UI.SCREEN_WIDTH - 100, 0, 'Map', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
 			.setInteractive()
-			.on('pointerdown', () => {
+			.on('pointerup', () => {
 				this.scene.start(CONSTANTS.SCENES.OVERWORLD);
 			});
 
@@ -88,7 +81,7 @@ export class HospitalScene extends Phaser.Scene {
 		// Nurse
 		this.nurse = this.add.sprite(350, 375, 'hospital_nurse', 1)
 		.setInteractive()
-		.on('pointerdown', () => {
+		.on('pointerup', () => {
 			playerFnc.clearSubmenu(submenu);
 			
 			tb.start(sceneText.reception.interact, CONSTANTS.TEXT.TEXT_SPEED);
@@ -156,7 +149,7 @@ export class HospitalScene extends Phaser.Scene {
 		playerFnc.clearSubmenu(submenu);
 		submenu.push(this.add.text(50, CONSTANTS.UI.SUBMENU_Y, 'QUESTION', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
 									.setInteractive()
-									.on('pointerdown', () => {
+									.on('pointerup', () => {
 										tb.start(sceneText.reception.question.interact);
 										this.listQuestions();
 									})
@@ -164,7 +157,7 @@ export class HospitalScene extends Phaser.Scene {
 
 		submenu.push(this.add.text(360, CONSTANTS.UI.SUBMENU_Y, 'DONATE $5', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
 									.setInteractive()
-									.on('pointerdown', () => {
+									.on('pointerup', () => {
 										if (playerData.stats.money >= 5) {
 											tb.start(sceneText.reception.donate.thanks);
 											playerData.stats.donations += 5;
@@ -177,7 +170,7 @@ export class HospitalScene extends Phaser.Scene {
 
 		submenu.push(this.add.text(700, CONSTANTS.UI.SUBMENU_Y, 'CHECK UP', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
 									.setInteractive()
-									.on('pointerdown', () => {
+									.on('pointerup', () => {
 										tb.start(sceneText.reception.checkin.confirm);
 									})
 		);
@@ -188,7 +181,7 @@ export class HospitalScene extends Phaser.Scene {
 
 		submenu.push(this.add.text(10, CONSTANTS.UI.SUBMENU_Y, '> How do I help?', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
 									.setInteractive()
-									.on('pointerdown', () => {
+									.on('pointerup', () => {
 
 										if (nurseTalk == 5) {
 											tb.start("")
@@ -200,7 +193,7 @@ export class HospitalScene extends Phaser.Scene {
 		
 		submenu.push(this.add.text(10, CONSTANTS.UI.SUBMENU_Y + 50, '> Can I have a face mask?', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
 									.setInteractive()
-									.on('pointerdown', () => {
+									.on('pointerup', () => {
 										tb.start(sceneText.reception.question.question3.answer);
 									})
 		);

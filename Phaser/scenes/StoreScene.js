@@ -27,10 +27,6 @@ export class StoreScene extends Phaser.Scene {
 	preload() {
 		// Textbox assets
 		this.load.scenePlugin('rexuiplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexuiplugin.min.js', 'rexUI', 'rexUI');
-		this.load.image('nextPage', '../assets/images/arrow-down-left.png');
-
-		// Store assets
-		this.load.image('groceryStore_bg', '../assets/backgrounds/groceryStore/groceryStore.png');
 	}
 
 	// Load game objects
@@ -55,10 +51,9 @@ export class StoreScene extends Phaser.Scene {
 		this.createObjects();
 
 		// Return to Overworld
-		this.overworldButton = this.add.text(
-			CONSTANTS.UI.SCREEN_WIDTH - 100, 0, 'Map', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
+		this.overworldButton = this.add.image(340, 750, 'red_arrow').setDisplaySize(30, 30)
 			.setInteractive()
-			.on('pointerdown', () => {
+			.on('pointerup', () => {
 				this.scene.start(CONSTANTS.SCENES.OVERWORLD);
 			});
 	}
@@ -67,50 +62,66 @@ export class StoreScene extends Phaser.Scene {
 
 	}
 
-	/* All the interactable objects in the scene are made here */
+	// ==================================================================================================================
+
+	// CREATE OBJECTS ---------------------------------------------------------------------------------------------------
 	createObjects() {
 
 		// Shelf
 		this.shelf = this.add.rectangle(510, 280, 360, 175, '#000000', 0)
 			.setOrigin(0,0)
 			.setInteractive()
-			.on('pointerdown', () => {
+			.on('pointerup', () => {
 				playerFnc.clearSubmenu(submenu);
 				
 				tb.start(sceneText.shelf.interact);
 			});
 
+			this.add.image(690, 240, 'red_arrow').setDisplaySize(30, 30);
+
 		// Checkout
 		this.checkout = this.add.rectangle(320, 220, 150, 200, '#000000', 0)
 			.setOrigin(0,0)
 			.setInteractive()
-			.on('pointerdown', () => {
+			.on('pointerup', () => {
 				playerFnc.clearSubmenu(submenu);
 
 				
 				this.listClerkItems();
+				if (playerData.stats.health >= 5) {
+					tb.start(sceneText.checkout.interact, CONSTANTS.TEXT.TEXT_SPEED);
+				} else {
+					tb.start(sceneText.checkout.interact, CONSTANTS.TEXT.TEXT_SPEED);
+				}
+				
 			});
+
+			this.add.image(390, 220, 'red_arrow').setDisplaySize(30, 30);
 
 		// Produce
 		this.produce = this.add.rectangle(125, 520, 150, 175, '#000000', 0)
 			.setOrigin(0,0)
 			.setInteractive()
-			.on('pointerdown', () => {
+			.on('pointerup', () => {
 				playerFnc.clearSubmenu(submenu);
 
 				tb.start(sceneText.produce.interact, CONSTANTS.TEXT.TEXT_SPEED);
 			});
 
+			this.add.image(205, 510, 'red_arrow').setDisplaySize(30, 30);
+
 		// Self checkout
 		this.produce = this.add.rectangle(135, 320, 140, 120, '#000000', 0)
 			.setOrigin(0,0)
 			.setInteractive()
-			.on('pointerdown', () => {
+			.on('pointerup', () => {
 				playerFnc.clearSubmenu(submenu);
 
 				this.listClerkItems();
 				tb.start("Self checkout", CONSTANTS.TEXT.TEXT_SPEED);
 			});
+
+			this.add.image(200, 300, 'red_arrow').setDisplaySize(30, 30);
 
 	} // end of create objects function
 
@@ -121,7 +132,7 @@ export class StoreScene extends Phaser.Scene {
 		// Ramen choice
 		this.checkoutRamen = this.add.text(50, CONSTANTS.UI.SUBMENU_Y, '$1 Ramen', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
 		.setInteractive()
-		.on('pointerdown', () => {
+		.on('pointerup', () => {
 
 			if (this.purchase(1)) {
 				playerData.fridge.instant_ramen++;
@@ -135,10 +146,10 @@ export class StoreScene extends Phaser.Scene {
 		// Apple choice
 		this.checkoutApple = this.add.text(250, CONSTANTS.UI.SUBMENU_Y, '$2 Apple', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
 		.setInteractive()
-		.on('pointerdown', () => {
+		.on('pointerup', () => {
 			
 			if (this.purchase(2)) {
-				playerData.fridge.apples++;
+				playerData.fridge.apple++;
 				tb.start(sceneText.checkout.purchase.clerk + sceneText.checkout.purchase.toFridge);
 			} else {
 				tb.start(sceneText.checkout.purchase.noMoney);
@@ -149,7 +160,7 @@ export class StoreScene extends Phaser.Scene {
 		// Bread choice
 		this.checkoutBread = this.add.text(450, CONSTANTS.UI.SUBMENU_Y, '$3 Bread', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
 		.setInteractive()
-		.on('pointerdown', () => {
+		.on('pointerup', () => {
 			
 			if (this.purchase(3)) {
 				playerData.fridge.bread++;
@@ -163,7 +174,7 @@ export class StoreScene extends Phaser.Scene {
 		// Mask choice
 		this.checkoutMask = this.add.text(250, CONSTANTS.UI.SUBMENU_Y + 100, '$5 Masks', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
 		.setInteractive()
-		.on('pointerdown', () => {
+		.on('pointerup', () => {
 			
 			if (playerData.stats.health < 3) {
 				tb.start(sceneText.checkout.purchase.noStock);
@@ -182,7 +193,7 @@ export class StoreScene extends Phaser.Scene {
 		// Toilet paper choice
 		this.checkoutTp = this.add.text(450, CONSTANTS.UI.SUBMENU_Y + 100, '$5 Toilet Paper', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
 		.setInteractive()
-		.on('pointerdown', () => {
+		.on('pointerup', () => {
 			
 			tb.start(sceneText.checkout.purchase.noStock);
 			
@@ -191,7 +202,7 @@ export class StoreScene extends Phaser.Scene {
 		// Soap choice
 		this.checkoutSoap = this.add.text(50, CONSTANTS.UI.SUBMENU_Y + 100, '$1 Soap', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
 		.setInteractive()
-		.on('pointerdown', () => {
+		.on('pointerup', () => {
 			
 			if (this.purchase(1)) {
 				playerData.storage.soap++;

@@ -19,16 +19,3 @@ export function enableButtons (buttonList) {
 		}
 	}
 }
-
-export function drawUI () {
-
-	let str = '';
-	// Money
-	str += '$' + playerData.stats.money
-
-	str += '                                   ';
-	// Time
-	str += 'Day ' + playerData.stats.day + ' - ' + playerData.stats.hour + ':' + playerData.stats.minuteStr;
-
-	return str;
-}
