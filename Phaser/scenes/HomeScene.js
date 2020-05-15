@@ -23,6 +23,7 @@ export class HomeScene extends Phaser.Scene {
 
 	init() {
 		console.log("Loaded " + KEY);
+		sceneFnc.checkDistance(playerData.location, KEY);
 		playerData.location = KEY;
 
 		console.log(playerData);
@@ -337,7 +338,7 @@ export class HomeScene extends Phaser.Scene {
 			case 'ramen':
 				if (playerData.fridge.instant_ramen > 0) {
 					playerData.fridge.ramen--;
-					tb.start("You eat some ramen", CONSTANTS.TEXT.TEXT_SPEED);
+					tb.start("You eat some ramen. It's not the healthiest thing", CONSTANTS.TEXT.TEXT_SPEED);
 					playerFnc.changeHunger(2);
 					playerData.stats.health -= 2;
 					playerFnc.changeTime(10);
@@ -361,7 +362,7 @@ export class HomeScene extends Phaser.Scene {
 			case 'bread':
 				if (playerData.fridge.bread > 0) {
 					playerData.fridge.bread--;
-					tb.start("You eat some bread", CONSTANTS.TEXT.TEXT_SPEED);
+					tb.start("You eat some bread. It fills you up quite a bit", CONSTANTS.TEXT.TEXT_SPEED);
 					playerFnc.changeHunger(5);
 					playerFnc.changeTime(5);
 				} else {
@@ -406,5 +407,23 @@ export class HomeScene extends Phaser.Scene {
 		}
 		
 	} // end of game
+
+	// STORAGE CHOICES --------------------------------------------------------------------------------------------------
+	listStorageChoices() {
+		playerFnc.clearSubmenu(submenu);
+
+		// Wear a mask
+		if (playerData.storage.masks > 0) {
+			console.log('Wearing mask');
+			submenu.push(
+				this.add.text(200, SUBMENU_Y, 'WEAR MASK')
+				.setInteractive()
+				.on('pointerup', () => {
+					tb.start(sceneText.comp.game.tilted);
+				})
+			);
+		} // end of if statement
+		
+	} // end of storage choices
 
 }

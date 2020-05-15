@@ -18,6 +18,7 @@ export class StoreScene extends Phaser.Scene {
 
 	init() {
 		console.log("Loaded " + KEY);
+		sceneFnc.checkDistance(playerData.location, KEY);
 		playerData.location = KEY;
 
 		console.log(playerData);
@@ -86,10 +87,9 @@ export class StoreScene extends Phaser.Scene {
 			.on('pointerup', () => {
 				playerFnc.clearSubmenu(submenu);
 
-				
-				this.listClerkItems();
 				if (playerData.stats.health >= 5) {
-					tb.start(sceneText.checkout.interact, CONSTANTS.TEXT.TEXT_SPEED);
+					tb.start(sceneText.checkout.good.interact, CONSTANTS.TEXT.TEXT_SPEED);
+					this.listClerkItems();
 				} else {
 					tb.start(sceneText.checkout.interact, CONSTANTS.TEXT.TEXT_SPEED);
 				}
@@ -118,7 +118,7 @@ export class StoreScene extends Phaser.Scene {
 				playerFnc.clearSubmenu(submenu);
 
 				this.listClerkItems();
-				tb.start("Self checkout", CONSTANTS.TEXT.TEXT_SPEED);
+				tb.start(sceneText.checkout.self.interact, CONSTANTS.TEXT.TEXT_SPEED);
 			});
 
 			this.add.image(200, 300, 'red_arrow').setDisplaySize(30, 30);

@@ -35,14 +35,15 @@ let bed = {
 	sleepGood:  'You fall asleep',
 	tooEarly: 'You can\'t sleep now, there are things to do!',
 	sleepSoon: 'You\'re getting sleepy, but you want to do other things first',
-	wakeGood:   'You wake up, feeling refreshed.',
-	wakeBad:    'You wake up, feeling tired.',
+	wakeGood:   'Your alarm clock goes off. You wake up, feeling refreshed.',
+	wakeBad:    'Your alarm clock goes off. You wake up, feeling tired.',
 	wakeMask:   'Your mask broke in your sleep.' //unused
 }
 
 let storage = {
 	interact: 'You open your storage closet',
-	noToiletPaper: 'You should probably buy some toilet paper.'
+	noToiletPaper: 'You should probably buy some toilet paper.',
+	equip: "You put on the mask, making sure to cover your mouth and nose. Now they care who you are."
 }
 
 let sink = {

@@ -44,6 +44,19 @@ export class IntroScene extends Phaser.Scene {
 	
 		// Grocery Store
 		this.load.image('groceryStore_bg', '../assets/backgrounds/groceryStore/groceryStore.png');
+
+		// Toy Store
+		this.load.image('nextPage', '../assets/images/arrow-down-left.png');
+		this.load.image('musicStore_bg', '../assets/backgrounds/musicStore/toystore.png');
+		this.load.image('musicStore_manager', '../assets/backgrounds/musicStore/manager.png');
+
+		// School
+		this.load.image('school_bg', '../assets/backgrounds/school/school_toliet_paper.png');
+
+		// Theatre
+		this.load.image('theatreLobby_bg', '../assets/backgrounds/theatreLobby/theatre_lobby.png');
+		this.load.image('theatreLobby_customer', '../assets/backgrounds/theatreLobby/customer.png');
+		this.load.image('theatreLobby_arrow', '../assets/images/red_arrow.png')
 	}
 
 	// Load game object
@@ -56,7 +69,7 @@ export class IntroScene extends Phaser.Scene {
 
 	update () {
 
-		// this.scene.start(CONSTANTS.SCENES.STORE).launch(CONSTANTS.SCENES.UI);
+		this.scene.start(CONSTANTS.SCENES.SCHOOL).launch(CONSTANTS.SCENES.UI);
 
 		if (tb.isLastPage && !tb.isTyping && !startText) {
 
