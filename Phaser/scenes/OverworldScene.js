@@ -37,7 +37,7 @@ export class OverworldScene extends Phaser.Scene {
 
 	create () {
 
-		let bg = this.add.image(0, 0, 'overworld_bg')
+		let bg = this.add.image(0, 90, 'overworld_bg')
 		.setOrigin(0,0)
 		.setDisplaySize(CONSTANTS.UI.SCREEN_WIDTH, CONSTANTS.UI.SCREEN_HEIGHT - 200);
 

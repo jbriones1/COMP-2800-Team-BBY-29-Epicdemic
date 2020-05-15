@@ -31,12 +31,12 @@ export class UIScene extends Phaser.Scene {
 	update() {
 		if (this.scene.isActive(CONSTANTS.SCENES.MINIGAME)) {
 			this.scene.setVisible(false);
-		} else if (!this.scene.isActive(CONSTANTS.SCENES.OVERWORLD)) {
-			this.scene.setVisible(true);
-			uiText.setY(0);
+		// } else if (!this.scene.isActive(CONSTANTS.SCENES.OVERWORLD)) {
+		// 	this.scene.setVisible(true);
+		// 	uiText.setY(0);
 		} else {
 			this.scene.setVisible(true);
-			uiText.setY(1080);
+			uiText.setY(0);
 		}
 
 		this.checkStatsLimits();

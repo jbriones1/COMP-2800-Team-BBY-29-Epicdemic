@@ -23,7 +23,9 @@ let reception = {
         /* Do you have gloves I could wear? */
         question4: {
             answer: "As much as I would love to provide you with some, our hospital barely has enough as it is. I'm sorry!"
-        }
+				},
+				/* What's going to happen to the places around here? */
+				question5: "Based on how careful people are, some places may close. If we're really bad about being cautious, some places might shut down!"
     },
     /* OPTION: Donate */
     donate: {
@@ -35,9 +37,10 @@ let reception = {
     },
 
     /* OPTION: Check-in */
-    checkin: {
-        confirm: 'Thank you for checking in! We will let you know when it is your turn. Feel free to take a seat in the mean time. Remember to employ social-distancing rules!',
-        fail: 'You have already checked in!'
+    checkup: {
+			good: "Looks like you're good and healthy. Keep it up!",
+			neutral: "You look like you've seen better days, maybe try eating healthier and getting out a bit?",
+			bad: "Oh dear, you need to take care of yourself more! Make sure to wash your hands and quarantine if you're not feeling well."
 		},
 
 		grandma: "Unfortunately, got very sick because someone wasn't cautious around her. Some people are just not being careful enough around the elderly."

@@ -3,11 +3,14 @@ let enter = "I can't wait to watch this movie!";
 let seats = {
     goodSeat: "You picked a great place to sit! You enjoy the movie thoroughly and employ physical distancing.",
 
-    badSeat: "You realize that you picked a poor place to sit... However the movie is starting and its too awkward to switch now."
+		badSeat: "You realize that you picked a poor place to sit... However the movie is starting and its too awkward to switch now.",
+		
+		done: "The movie is over"
 }
 
 let concession = {
-    interact: "Welcome the concession stand! What can I get for you?",
+    // interact: "Welcome the concession stand! What can I get for you?",
+    interact: "Welcome to the concession stand! Please make sure you sit appropriately and are quiet for the movie.",
 
     buy: {
         success: "Here you are! Enjoy the show and stay safe!",

@@ -101,6 +101,17 @@ export class LobbyScene extends Phaser.Scene {
 			this.listSofaChoices();
 		})		
 
+		if (playerData.events.watchMovieWithJon && playerData.stats.hour> 16) {
+			this.jon = this.add.sprite(500, 300, 'Jon', 1)
+			.setInteractive()
+			.on('pointerup', () => {
+				playerFnc.clearSubmenu(submenu);
+				
+				tb.start(sceneText.Jon, CONSTANTS.TEXT.TEXT_SPEED);
+				
+			});
+		}
+
 	}
 
 	// Seat next to the lady
@@ -238,6 +249,7 @@ export class LobbyScene extends Phaser.Scene {
 			tb.start(sceneText.wait.movie_ended, CONSTANTS.TEXT.TEXT_SPEED);
 		}
 		
+		this.scene.restart();
 	} // end of sit and wait
 
 }
