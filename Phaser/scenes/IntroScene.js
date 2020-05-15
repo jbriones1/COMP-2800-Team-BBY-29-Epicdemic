@@ -34,7 +34,6 @@ export class IntroScene extends Phaser.Scene {
 			100, 300, { wrapWidth: 650 });
 
 		tb.start(sceneText.introduction, CONSTANTS.TEXT.TEXT_SPEED);
-		this.scene.start(CONSTANTS.SCENES.MUSICSTORE)
 	}
 
 	update () {
