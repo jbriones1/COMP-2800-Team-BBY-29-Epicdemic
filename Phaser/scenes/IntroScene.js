@@ -56,6 +56,7 @@ export class IntroScene extends Phaser.Scene {
 		// Theatre Lobby
 		this.load.image('theatreLobby_bg', '../assets/backgrounds/theatreLobby/theatre_lobby.png');
 		this.load.image('theatreLobby_customer', '../assets/backgrounds/theatreLobby/customer.png');
+		this.load.spritesheet('Jon', '../assets/characters/boy2.png', {frameWidth: 90, frameHeight: 150});
 
 		// Theatre
 		this.load.image('theatre_bg', '../assets/backgrounds/theatre/theatre_people.png')
@@ -106,7 +107,7 @@ export class IntroScene extends Phaser.Scene {
 
 	update () {
 
-		this.scene.start(CONSTANTS.SCENES.THEATRE).launch(CONSTANTS.SCENES.UI);
+		// this.scene.start(CONSTANTS.SCENES.THEATRE).launch(CONSTANTS.SCENES.UI);
 		// this.scene.start(CONSTANTS.SCENES.MINIGAME);
 
 		if (tb.isLastPage && !tb.isTyping && !startText) {

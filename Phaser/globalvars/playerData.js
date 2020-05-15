@@ -28,6 +28,7 @@ export let playerData = {
 		ticket: false
 	},
 	messages: [
+		{ sender: 'Government', message: "Anything with a red arrow pointing to it is interactable"},
 		{ sender: 'Boss', message: "Make sure you come to work today! I'm not closing this place yet and we got toys to sell."},
 		{ sender: 'Jon', message: 'Hey wanna go watch a movie today? Sonic the Hedgehog is playing at around 6PM.'}
 	],
@@ -48,8 +49,8 @@ export let playerData = {
 	toystore: {
 		healthy_customer: true
 	},
-	theatre: {
-
+	events: {
+		watchMovieWithJon: true
 	}
 };
 
@@ -103,8 +104,8 @@ let startingPlayerData = {
 	toystore: {
 		healthy_customer: true
 	},
-	theatre: {
-
+	events: {
+		watchMovieWithJon: true
 	}
 };
 

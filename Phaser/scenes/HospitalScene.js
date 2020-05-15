@@ -193,6 +193,7 @@ export class HospitalScene extends Phaser.Scene {
 		submenu.push(this.add.text(360, CONSTANTS.UI.SUBMENU_Y, 'DONATE $5', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
 									.setInteractive()
 									.on('pointerup', () => {
+										playerFnc.clearSubmenu(submenu);
 										if (playerData.stats.money >= 5) {
 											tb.start(sceneText.reception.donate.thanks);
 											playerData.stats.donations += 5;
@@ -206,7 +207,19 @@ export class HospitalScene extends Phaser.Scene {
 		submenu.push(this.add.text(700, CONSTANTS.UI.SUBMENU_Y, 'CHECK UP', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
 									.setInteractive()
 									.on('pointerup', () => {
+										playerFnc.clearSubmenu(submenu);
 										tb.start(sceneText.reception.checkin.confirm);
+										let health = playerData.stats.health;
+
+										if (health >= 8) {
+											tb.start(sceneText.reception.checkup.good);
+										} else if (health >= 4) {
+											tb.start(sceneText.reception.checkup.neutral);
+										} else {
+											tb.start(sceneText.reception.checkup.bad);
+										}
+
+										playerFnc.changeTime(10);
 									})
 		);
 
@@ -225,19 +238,22 @@ export class HospitalScene extends Phaser.Scene {
 		submenu.push(this.add.text(10, CONSTANTS.UI.SUBMENU_Y, '> How do I help?', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
 									.setInteractive()
 									.on('pointerup', () => {
-
-										if (nurseTalk == 5) {
-											tb.start("")
-										}
-										
+					
 										tb.start(sceneText.reception.question.question1[Math.floor(Math.random() * sceneText.reception.question.question1.length)]);
 									})
 		);
 		
-		submenu.push(this.add.text(10, CONSTANTS.UI.SUBMENU_Y + 50, '> Can I have a face mask?', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
+		submenu.push(this.add.text(10, CONSTANTS.UI.SUBMENU_Y + 40, '> Can I have a face mask?', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
 									.setInteractive()
 									.on('pointerup', () => {
 										tb.start(sceneText.reception.question.question3.answer);
+									})
+		);
+
+		submenu.push(this.add.text(10, CONSTANTS.UI.SUBMENU_Y + 80, '> What\'s going to happen to the places around town?', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
+									.setInteractive()
+									.on('pointerup', () => {
+										tb.start(sceneText.reception.question.question5);
 									})
 		);
 	}

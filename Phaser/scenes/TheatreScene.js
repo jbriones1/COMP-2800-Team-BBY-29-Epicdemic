@@ -55,46 +55,64 @@ export class TheatreScene extends Phaser.Scene {
 		.setInteractive()
 		.on('pointerup', () => {
 			playerFnc.clearSubmenu(submenu);
+
+			this.listConcessionChoices();
 			tb.start(sceneText.concession.interact, CONSTANTS.TEXT.TEXT_SPEED);
 		})
 
 		// button of seat r1c1
-		this.add.rectangle(120, 370, 275, 70, '#000000', 1)
+		this.add.rectangle(120, 370, 275, 70, '#000000', 0)
 		.setOrigin(0, 0)
 		.setInteractive()
 		.on('pointerup', () => {
 			playerFnc.clearSubmenu(submenu);
 			if (playerData.stats.hour >= 20) {
+				tb.start(sceneText.seats.done, CONSTANTS.TEXT.TEXT_SPEED);
 				return;
 			}
 			this.confirmSeatGood();
 		})
 
 		// button of seat r2c1
-		this.add.rectangle(120, 480, 275, 70, '#000000', 1)
+		this.add.rectangle(120, 480, 275, 70, '#000000', 0)
 		.setOrigin(0, 0)
 		.setInteractive()
 		.on('pointerup', () => {
 			playerFnc.clearSubmenu(submenu);
+
+			if (playerData.stats.hour >= 20) {
+				tb.start(sceneText.seats.done, CONSTANTS.TEXT.TEXT_SPEED);
+				return;
+			}
 
 			this.confirmSeatGood();
 		});
 
 		// button of seat r1c3
-		this.add.rectangle(570, 370, 275, 70, '#000000', 1)
+		this.add.rectangle(570, 370, 275, 70, '#000000', 0)
 		.setOrigin(0, 0)
 		.setInteractive()
 		.on('pointerup', () => {
 			playerFnc.clearSubmenu(submenu);
+
+			if (playerData.stats.hour >= 20) {
+				tb.start(sceneText.seats.done, CONSTANTS.TEXT.TEXT_SPEED);
+				return;
+			}
 			this.confirmSeatBad();
 		});
 
 		// button of seat r2c4
-		this.add.rectangle(720, 480, 50, 70, '#000000', 1)
+		this.add.rectangle(720, 480, 50, 70, '#000000', 0)
 		.setOrigin(0, 0)
 		.setInteractive()
 		.on('pointerup', () => {
 			playerFnc.clearSubmenu(submenu);
+
+			if (playerData.stats.hour >= 20) {
+				tb.start(sceneText.seats.done, CONSTANTS.TEXT.TEXT_SPEED);
+				return;
+			}
 			this.confirmSeatBad();
 		})
 	}
@@ -143,6 +161,12 @@ export class TheatreScene extends Phaser.Scene {
 		while(playerData.stats.hour != 20) {
 			playerFnc.changeTime(60);
 		}
+
+		if (playerData.events.watchMovieWithJon) {
+			playerData.events.watchMovieWithJon = false;
+			playerData.stats.event_done++;
+			playerData.stats.happiness += 2;
+		}
 	}
 	
 	confirmSeatGood() {
@@ -175,7 +199,7 @@ export class TheatreScene extends Phaser.Scene {
 				playerFnc.clearSubmenu(submenu);
 
 				this.watchMovie();
-				tb.start(sceneText.seats.badSeat, CONSTANTS.TEXT.TEXT_SPEED)
+				tb.start(sceneText.seats.badSeat, CONSTANTS.TEXT.TEXT_SPEED);
 			})
 		);
 
@@ -187,5 +211,32 @@ export class TheatreScene extends Phaser.Scene {
 		);
 
 		tb.start("Sit here?", CONSTANTS.TEXT.TEXT_SPEED)
+	}
+
+	listConcessionChoices() {
+		submenu.push(this.add.text(250, CONSTANTS.UI.SUBMENU_Y, "BUY BURGER $10", { fontSize: CONSTANTS.TEXT.FONT_SIZE })
+			.setInteractive()
+			.on('pointerup', () => {
+				if (this.purchase(10)) {
+					playerFnc.changeHunger(5);
+					playerFnc.changeTime(5);
+					tb.start(sceneText.concession.buy.success, CONSTANTS.TEXT.TEXT_SPEED);
+				} else {
+					tb.start(sceneText.concession.buy.fail, CONSTANTS.TEXT.TEXT_SPEED);
+				}
+			})
+		);
+
+		tb.start("Sit here?", CONSTANTS.TEXT.TEXT_SPEED)
+	}
+
+	purchase (price) {
+
+		if (playerData.stats.money >= price) {
+			playerData.stats.money -= price;
+			return true;
+		}
+
+		return false;
 	}
 }

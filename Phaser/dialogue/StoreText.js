@@ -12,7 +12,8 @@ let checkout = {
 		noMoney: 'You can\'t afford this',
 		toFridge: '\nAdded to your fridge',
 		toStorage: '\nAdded to your storage',
-		noStock: 'No stock of this left'
+		noStock: 'No stock of this left',
+		wearingMask: "You already have a mask on! Please leave some for people who really need one."
 	},
 	self: {
 		interact: "*Beep boop* Buy stuff."

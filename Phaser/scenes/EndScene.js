@@ -35,7 +35,7 @@ export class EndScene extends Phaser.Scene {
 
 		if (!endFlag && (playerData.stats.day >= 6 
 			|| playerData.stats.hunger < 1
-			|| playerData.stats.health == 0)) {
+			|| playerData.stats.health < 1)) {
 			this.endgame();
 		}
 
@@ -51,12 +51,12 @@ export class EndScene extends Phaser.Scene {
 		textbox.createEndTextBox(this, 250, 300, 
 			{wrapWidth: 650})
 			.start(this.calculateScore(), CONSTANTS.TEXT.TEXT_SPEED);
-	}	
+	}
 
 	// Checks to see whether some scenes need to be loaded differently
 	checkWorldHealth() {
 		// Good health 8-10
-		if (playerData.stats.health < 7) {
+		if (playerData.stats.health < 8) {
 			playerData.hospital.grandma = false;
 		}
 
@@ -82,9 +82,22 @@ export class EndScene extends Phaser.Scene {
 
 		if (playerData.inventory.mask) { score += 50; }
 		if (playerData.secret) { score += 50; }
-		let str = "Happiness: " + playerData.stats.happiness * 10;
+
+		let str = "";
+		if (playerData.stats.day >= 6) {
+			str += "Congratulations! You've completed all five days!"
+			str += "\nGame completion: 200";
+			score += 200;
+		} else if (playerData.stats.hunger < 1) {
+			str += "Unforunately you starved."
+		} else if (playerData.stats.health < 1) {
+			str += "The world was overtaken by the virus."
+		}
+
+		str += "\nHappiness: " + playerData.stats.happiness * 10;
 		str += "\nHunger: " + playerData.stats.hunger * 10;
 		str += "\nWorld Health: " + playerData.stats.health * 20;
+		str += "\nDonations: " + playerData.stats.donations;
 		str += "\nEvents done: " + playerData.stats.event_done * 10;
 		str += "\nWearing a mask: " + ((playerData.inventory.mask) ? "50" : "0");
 		str += "\nEaster egg found: " + ((playerData.secret) ? "50" : "0");

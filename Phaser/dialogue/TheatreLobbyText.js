@@ -90,6 +90,8 @@ let wait = {
 	wait: "You wait until 6PM."
 }
 
+let Jon = "Jon: I've been waiting for this movie for a while!"
+
 export let sceneText = {
     theatreEntrance: theatreEntrance,
     ticketWindow: ticketWindow,
@@ -99,5 +101,6 @@ export let sceneText = {
     smallSofa: smallSofa,
     seats: seats,
 		sofa: sofa,
-		wait: wait
+		wait: wait,
+		Jon: Jon
 }

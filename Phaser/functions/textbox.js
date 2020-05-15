@@ -91,6 +91,20 @@ export function getBuiltInText (scene, wrapWidth, fixedWidth, fixedHeight) {
 	.setFixedSize(fixedWidth, fixedHeight);
 }
 
+export function getEndBBcodeText (scene, wrapWidth, fixedWidth, fixedHeight) {
+	return scene.rexUI.add.BBCodeText(0, 0, '', {
+		fixedWidth: fixedWidth,
+		fixedHeight: fixedHeight,
+
+		fontSize: '30px',
+		wrap: {
+				mode: 'word',
+				width: wrapWidth
+		},
+		maxLines: 10
+	})
+}
+
 export function createEndTextBox (scene, x, y, config) {
 	var wrapWidth = GetValue(config, 'wrapWidth', 0);
 	var fixedWidth = GetValue(config, 'fixedWidth', 0);
@@ -105,7 +119,7 @@ export function createEndTextBox (scene, x, y, config) {
 					// icon: scene.rexUI.add.roundRectangle(0, 0, 2, 2, 20, CONSTANTS.UI.COLOR_DARK),
 
 					// text: getBuiltInText(scene, wrapWidth, fixedWidth, fixedHeight),
-					text: getBuiltInText (scene, wrapWidth, fixedWidth, fixedHeight),
+					text: getEndBBcodeText (scene, wrapWidth, fixedWidth, fixedHeight),
 
 					action: scene.add.image(0, 0, 'nextPage').setTint(CONSTANTS.UI.COLOR_LIGHT).setVisible(false),
 

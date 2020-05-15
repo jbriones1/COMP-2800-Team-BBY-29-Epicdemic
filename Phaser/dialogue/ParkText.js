@@ -16,9 +16,9 @@ let person1 = {
 }
 
 let fountain = {
-    interact: 'As you stare at the water fountain, you realize how thirsty you are',
+    interact: "It's a fountain. It's pretty.",
 
-    drink: 'You drink from the water fountain.',
+    drink: 'You drink from the water fountain. (That was not wise)',
 
     leave: 'You decide its best to stay away from public water fountains in the meantime...'
 }
@@ -26,13 +26,13 @@ let fountain = {
 let trails = {
     interact: 'A short, popular trail that is covered by lots of shade on this hot, summer day.',
 
-    walk: 'I walked the trail',
+    walk: 'You walk the trail. Exercise is good for you, even if there\'s a pandemic. You feel healthier.',
 
     examine: {
-        good: 'This trail is usually very full, there is not a soul in sight today.',
-        neutral: 'This trail is not very packed today. Only a few people are walking dogs.',
-        bad: 'This trail is packed! Everyone looks like they are having a great time',
-        dead: 'You are watching over this trail from the sky.'
+        good: 'This trail is usually very full, but there\'s less people here',
+        neutral: 'Only a few people are walking dogs.',
+        bad: 'The trail is completely empty',
+        dead: ""
     },
 		leave: 'You decide to leave the trail for now...',
 }

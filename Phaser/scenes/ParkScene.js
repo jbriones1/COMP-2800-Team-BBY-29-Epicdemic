@@ -184,11 +184,13 @@ export class ParkScene extends Phaser.Scene {
 		 	})
 		);
 	}
-	//Founctain choices
+	//Fountain choices
 	listFountainChoices() {
 		submenu.push(this.add.text(20, CONSTANTS.UI.SUBMENU_Y, "DRINK", {fontSize: CONSTANTS.TEXT.FONT_SIZE})
 			.setInteractive()
 			.on('pointerdown', () => {
+				playerData.stats.bad_decisions++;
+				playerData.stats.health--;
 				tb.start(sceneText.fountain.drink, CONSTANTS.TEXT.TEXT_SPEED);
 		 	})
 		);
@@ -206,6 +208,8 @@ export class ParkScene extends Phaser.Scene {
 			.setInteractive()
 			.on('pointerdown', () => {
 				tb.start(sceneText.trails.walk, CONSTANTS.TEXT.TEXT_SPEED);
+				playerFnc.changeTime(180);
+				playerData.stats.health += 2;
 		 	})
 		);
 

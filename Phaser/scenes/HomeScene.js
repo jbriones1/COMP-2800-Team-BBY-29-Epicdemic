@@ -426,4 +426,14 @@ export class HomeScene extends Phaser.Scene {
 		
 	} // end of storage choices
 
+	updateWorldEvents() {
+		if (playerData.stats.day == 2) {
+			if (playerData.events.watchMovieWithJon) {
+				playerData.events.watchMovieWithJon = false;
+				playerData.messages.push({sender: "Jon", message: "Thanks for standing me up! We're not friends anymore."});
+			} else {
+				playerData.messages.push({sender: "Jon", message: "Thanks for hanging out with me! We should do that when this quarantine is all done."});
+			}
+		} // day 2
+	}
 }

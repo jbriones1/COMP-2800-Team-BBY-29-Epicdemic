@@ -181,9 +181,13 @@ export class StoreScene extends Phaser.Scene {
 				return;
 			}
 
-			if (this.purchase(5)) {
-				playerData.storage.masks++;
-				tb.start(sceneText.checkout.purchase.clerk + sceneText.checkout.purchase.toStorage);
+			if (this.purchase(5) && !playerData.inventory.mask) {
+				// playerData.storage.masks++;
+				playerData.inventory.mask = true;
+				tb.start(sceneText.checkout.purchase.clerk + " You put on the mask.");
+				// tb.start(sceneText.checkout.purchase.clerk + sceneText.checkout.purchase.toStorage);
+			} else if (playerData.inventory.mask) {
+				tb.start(sceneText.checkout.purchase.wearingMask);
 			} else {
 				tb.start(sceneText.checkout.purchase.noMoney);
 			}
