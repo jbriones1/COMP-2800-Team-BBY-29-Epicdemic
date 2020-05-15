@@ -14,7 +14,7 @@
     
   </head>
   <body>
-    <nav class="navbar navbar-expand-md">
+    <nav class="navbar fixed-top navbar-expand-md">
       <a class="navbar-brand" href="/"><img id="logo" src="images/favicon/img/favicon.png"></a>
       <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#links">
         <span class="navbar-toggler-icon"></span>
@@ -25,7 +25,7 @@
             <a class="nav-link" href="/leaderboard">Leaderboards</a>
           </li>
           <li class="navbar-item">
-            <a class="nav-link" href="/settings">Settings</a>
+            <a class="nav-link" href="/about">About</a>
           </li>
           <li class="navbar-item">
             <a class="nav-link" href="/profile">Account</a>
@@ -42,8 +42,8 @@
         <div class="header-info">
           <h1 class="text-uppercase font-weight-bold">Welcome to Epicdemic <%= name %>!</h1>
           <h1 class="text-uppercase font-weight-bold"></h1>
-          <button class="btn btn-outline-secondary btn-large">New Game</button>
-          <button class="btn btn-outline-secondary btn-large">Load Game</button>
+          <button id="newGame"class="btn btn-outline-secondary btn-large">New Game</button>
+          <button id="loadGame" class="btn btn-outline-secondary btn-large">Load Game</button>
         </div>
       </div>
     </header>
@@ -52,6 +52,8 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="js/bgresize.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="js/functions/bgresize.js"></script>
+    <script src="js/functions/main.js"></script>
 </body>
 </html>
