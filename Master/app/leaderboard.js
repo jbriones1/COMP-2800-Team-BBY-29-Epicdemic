@@ -4,7 +4,7 @@ var pool = mysql.createPool(dbconfig.connection);
 
 // Function to get scores for the leaderboard
 exports.getScores = function(callback) {
-    var sql = "SELECT username, score FROM score ORDER BY score DESC LIMIT 10";
+    var sql = "SELECT username, score, display_name FROM score ORDER BY score DESC LIMIT 10";
     pool.getConnection(function(err, connection) {
         if (err) {
             console.log(err);
@@ -13,6 +13,7 @@ exports.getScores = function(callback) {
         }
         connection.query("USE " + dbconfig.database);
         connection.query(sql, function(err, results) {
+            console.log(results);
             connection.release();
             if (err) {
                 console.log(err);
@@ -23,5 +24,3 @@ exports.getScores = function(callback) {
         });
     });
 }
-
-

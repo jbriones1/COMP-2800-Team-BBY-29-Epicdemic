@@ -2,10 +2,10 @@ var mysql = require('mysql');
 var dbconfig = require('../config/database');
 var pool = mysql.createPool(dbconfig.connection);
 
-exports.saveScore = function(username, score, callback) {
+exports.saveScore = function(username, display_name, score, callback) {
     let date = new Date().toISOString().slice(0, 19).replace('T', ' ');
     console.log(date);
-    var sql = "INSERT INTO score VALUES (?, ?, ?)";
+    var sql = "INSERT INTO score VALUES (?, ?, ?, ?)";
     pool.getConnection(function(err, connection) {
         if (err) {
             console.log(err);
@@ -13,7 +13,7 @@ exports.saveScore = function(username, score, callback) {
             return;
         }
         connection.query("USE " + dbconfig.database);
-        connection.query(sql, [username, date, score], function(error, results) {
+        connection.query(sql, [username, date, score, display_name], function(error, results) {
             if (error) {
                 console.log(error);
                 callback(true);
@@ -24,12 +24,14 @@ exports.saveScore = function(username, score, callback) {
         });
 
         connection.query("SELECT high_score FROM user WHERE username = ?", [username], function(error, results) {
+            console.log("High score");
             if (error) {
                 console.log(error);
                 callback(true);
                 return;
             } else {
-                if (results < score) {
+                console.log(results[0].high_score);
+                if (results[0].high_score < score) {
                     connection.query("UPDATE user SET high_score = ? WHERE username = ?", [score, username], function(error, results) {
                         connection.release();
                         if (error) {
