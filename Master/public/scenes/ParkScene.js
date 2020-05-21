@@ -183,6 +183,7 @@ export class ParkScene extends Phaser.Scene {
 		 	})
 		);
 	}
+
 	//Fountain choices
 	listFountainChoices() {
 		submenu.push(this.add.text(20, CONSTANTS.UI.SUBMENU_Y, "DRINK", {fontSize: CONSTANTS.TEXT.FONT_SIZE})
@@ -193,7 +194,7 @@ export class ParkScene extends Phaser.Scene {
 				tb.start(sceneText.fountain.drink, CONSTANTS.TEXT.TEXT_SPEED);
 		 	})
 		);
-
+			 
 		submenu.push(this.add.text(300, CONSTANTS.UI.SUBMENU_Y, "LEAVE", {fontSize: CONSTANTS.TEXT.FONT_SIZE})
 			.setInteractive()
 			.on('pointerdown', () => {

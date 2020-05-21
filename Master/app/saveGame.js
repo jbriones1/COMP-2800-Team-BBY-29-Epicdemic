@@ -23,7 +23,6 @@ var defaultPlayerData = {
 		bread: 0
 	},
 	storage: {
-		masks: 0,
 		toilet_paper: 0,
 		soap: 3
 	},

@@ -293,6 +293,7 @@ export class HomeScene extends Phaser.Scene {
 
 	// SLEEP ------------------------------------------------------------------------------------------------------------
 	sleep() {
+		let day = this.playerData.stats.day;
 		let hoursOfSleep = 0;
 		let startMinute = this.playerData.stats.minute;
 		let minutesofSleep = ((60 - startMinute) != 60) ? 60 - startMinute : 0;
@@ -301,9 +302,10 @@ export class HomeScene extends Phaser.Scene {
 			playerFnc.changeTime(this.playerData, minutesofSleep);
 		}
 
-		while(this.playerData.stats.hour != 9) {
+		while(this.playerData.stats.hour != 9 || this.playerData.stats.day == day) {
 			playerFnc.changeTime(this.playerData, 60);
 			hoursOfSleep++;
+			console.log("added an hour" + this.playerData.stats.hour);
 		}
 
 		console.log('Day ' + this.playerData.stats.day + '\nTime: ' + this.playerData.stats.hour + ':' + this.playerData.stats.minuteStr);
@@ -436,7 +438,7 @@ export class HomeScene extends Phaser.Scene {
 		playerFnc.clearSubmenu(submenu);
 
 		// Wear a mask
-		if (playerData.storage.masks > 0) {
+		if (this.playerData.storage.masks > 0) {
 			console.log('Wearing mask');
 			submenu.push(
 				this.add.text(200, SUBMENU_Y, 'WEAR MASK')
@@ -450,13 +452,37 @@ export class HomeScene extends Phaser.Scene {
 	} // end of storage choices
 
 	updateWorldEvents() {
-		if (playerData.stats.day == 2) {
-			if (playerData.events.watchMovieWithJon) {
-				playerData.events.watchMovieWithJon = false;
-				playerData.messages.push({sender: "Jon", message: "Thanks for standing me up! We're not friends anymore."});
+		// DAY 2
+		if (this.playerData.stats.day == 2) {
+			if (this.playerData.events.watchMovieWithJon) {
+				this.playerData.events.watchMovieWithJon = false;
+				this.playerData.messages.push({sender: "Jon", message: "Thanks for standing me up! We're not friends anymore."});
 			} else {
-				playerData.messages.push({sender: "Jon", message: "Thanks for hanging out with me! We should do that when this quarantine is all done."});
+				this.playerData.messages.push({sender: "Jon", message: "Thanks for hanging out with me! We should do that when this quarantine is all done."});
+			}			
+
+			// Create new events with messages
+			this.playerData.events.runWithBrian = true;
+			this.playerData.messages.push(
+				{sender: "Brian", message: "Hey, wanna go for a run at the park? We could meet up at 1PM."}
+			)
+
+			if (!this.playerData.inventory.mask) {
+				this.playerData.messages.push(
+					{sender: "Crowntown Health Organization", message: "Make sure you are wearing a mask when you go out, before they run out!"}
+				)
 			}
-		} // day 2
-	}
+		} 
+
+		// DAY 3
+		if (this.playerData.stats.day == 3) {
+			if (this.playerData.events.runWithBrian) {
+				this.playerData.events.runWithBrian = false;
+				this.playerData.messages.push({sender: "Brian", message: "Had a good time running"});
+			} else {
+				this.playerData.messages.push({sender: "Brian", message: "Thanks for hanging out with me! We should do that when this quarantine is all done."});
+			}	
+		} 
+
+	} // end of world events
 }
