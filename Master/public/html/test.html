@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+    
+        
+    <section>
+        <span>This is not green.</span>
+                <span>This is not red.</span>
+                <p>Here is a paragraph.</p>
+                <code>Here is some code.</code>
+                <span>And here is a red span!</span>
+                <code>More code...</code>
+                <span>And this is a red span!</span>
+            </section>
+    </section>
+    <script>
+        $(document).ready(function() {
+            $('p ~ span').css('background-color','teal');
+        });
+        
+    </script>
+</body>
+</html>

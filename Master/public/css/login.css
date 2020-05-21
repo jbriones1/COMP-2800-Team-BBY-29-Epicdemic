@@ -1,0 +1,66 @@
+
+.form-title {
+    color: darkslategray;
+    margin-bottom: 1.3em;
+    font-size: 30pt;
+}
+
+.header {
+    background-image: url("../images/covid-19.jpg");
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.overlay {
+    position: absolute;
+    min-height: 100%;
+    min-width: 100%;
+    left: 0;
+    top: 0;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.login-form {
+    text-align: center;
+    top: 45%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -55%);
+    color: white;
+    background: rgba(255, 255, 255, 0.651);
+    padding: 3em;   
+}
+
+.login-form button {
+    background: darkslateblue;
+    color: white;
+    border: 1px solid darkslateblue;
+}
+
+#register {
+    background: grey;
+    color: white;
+    margin-bottom: 1em;
+}
+
+#submit {
+    background: darkslategray;
+    border: 1px solid darkslategray;
+    color: white;
+    margin-top: 5em;
+}
+
+#submit:hover {
+    background: rgb(121, 121, 121);
+    border: 1px solid rgb(121, 121, 121);
+}
+
+
+@media (max-width: 400px) {
+    .login-form {
+        top: 50%;
+    }
+}
+
+

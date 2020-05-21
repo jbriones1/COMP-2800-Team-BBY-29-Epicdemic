@@ -1,0 +1,1 @@
+Feel free move the chairs around. I turned off/hid chair and tile layer. -Andi
