@@ -21,7 +21,7 @@ export class MusicStoreScene extends Phaser.Scene {
 	init (data) {
 		this.playerData = data.playerData;
 		console.log("Loaded " + KEY);
-		sceneFnc.checkDistance(this.playerData.location, KEY);
+		sceneFnc.checkDistance(this.playerData, KEY);
 		this.playerData.location = KEY;
 
 	}

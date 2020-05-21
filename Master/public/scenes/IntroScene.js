@@ -1,13 +1,13 @@
-import {CONSTANTS} from '/js/CONSTANTS.js';
-import * as textbox from '/js/functions/textbox.js'
-import * as sceneText from '/js/dialogue/IntroSceneText.js';
+import {CONSTANTS} from '../js/CONSTANTS.js';
+import * as textbox from '../js/functions/textbox.js'
+import * as sceneText from '../js/dialogue/IntroSceneText.js';
 
 let KEY = CONSTANTS.SCENES.INTRO
 let tb;
 let startText = false;
-let beginText;
 let scenebl;
-var score = 20;
+let beginText;
+let helpText;
 
 
 export class IntroScene extends Phaser.Scene {
@@ -99,52 +99,58 @@ export class IntroScene extends Phaser.Scene {
 	// Load game object
 	create () {
 		tb = textbox.createTextBox(this,
-			100, 300, { wrapWidth: 650 });
+			100, 300, { wrapWidth: 650 })
+		.setVisible(false);
+
 		$.getJSON('/loadgame', function(data) {
 			console.log(data);
 			console.log("Game loaded");
 			this.playerData = data;
-			console.log(this.playerData);
+
 			if (this.playerData.location != null) {
 				scenebl.scene.start(this.playerData.location, {playerData: this.playerData}).launch(CONSTANTS.SCENES.UI, {playerData: this.playerData});
 			} else {
-				tb.start(sceneText.introduction, CONSTANTS.TEXT.TEXT_SPEED);
-				beginText = scenebl.add.text(400, 700, "START", 
+				tb.setVisible(true).start(sceneText.introduction, CONSTANTS.TEXT.TEXT_SPEED);
+
+				beginText = scenebl.add.text(400, 700, "START\n", 
 				{fontSize: CONSTANTS.TEXT.FONT_SIZE + 10})
-			.setInteractive()
-			.on('pointerup', () => {
+				.setInteractive()
+				.on('pointerup', () => {
 				// Boots all necessary scenes
 				scenebl.scene.start(CONSTANTS.SCENES.HOME, {playerData: this.playerData})
 				.launch(CONSTANTS.SCENES.UI, {playerData: this.playerData});
 			});
-			
-			startText = true;
 				
-			}
-		});
-		
-		console.log(this.scene);
+
+			helpText = scenebl.add.text(325, 800, "HOW TO PLAY\n", {fontSize: CONSTANTS.TEXT.FONT_SIZE + 10})
+			.setInteractive()
+			.on('pointerup', () => {
+				scenebl.scene.launch(CONSTANTS.SCENES.HOWTOPLAY);
+			});
+			} // end of else
+		}); // end of JSON load
+
+
+
 		
 	}
 
 	update () {
-		if (tb.isLastPage && !tb.isTyping && !startText) {
-
-			beginText = this.add.text(400, 700, "START", 
-				{fontSize: CONSTANTS.TEXT.FONT_SIZE + 10})
-			.setInteractive()
-			.on('pointerup', () => {
-				// Boots all necessary scenes
-				this.scene.start(CONSTANTS.SCENES.HOME, {playerData: this.playerData})
-				.launch(CONSTANTS.SCENES.UI);
-			});
+		// if (tb.isLastPage && !tb.isTyping && !startText) {
+		// 	beginText = this.add.text(400, 700, "START", 
+		// 		{fontSize: CONSTANTS.TEXT.FONT_SIZE + 10})
+		// 	.setInteractive()
+		// 	.on('pointerup', () => {
+		// 		// Boots all necessary scenes
+		// 		this.scene.start(CONSTANTS.SCENES.HOME, {playerData: this.playerData})
+		// 		.launch(CONSTANTS.SCENES.UI);
+		// 	});
 			
-			startText = true;
-		}
-		// this.scene.start(CONSTANTS.SCENES.STORE).launch(CONSTANTS.SCENES.UI);
+		// 	startText = true;
+		// }
+
 	
 	} // end of update
-	
 
 }
 

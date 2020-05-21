@@ -1,16 +1,12 @@
 import {CONSTANTS} from '/js/CONSTANTS.js';
 import {playerData} from '/js/playerData.js';
 import * as playerFnc from '/js/playerData.js';
-import * as textbox   from '/js/functions/textbox.js' 
+import * as textbox   from '/js/functions/textbox.js'
+import * as sceneFnc from '/js/functions/sceneFunctions.js'
 import {sceneText}     from '/js/dialogue/SchoolText.js';
 
 let KEY = CONSTANTS.SCENES.SCHOOL;
 let tb;
-let submenu;
-let mainMenu;
-let stationeryMenu;
-let deskActive = false;
-let subSubMenuActive = false;
 
 
 export class SchoolScene extends Phaser.Scene {

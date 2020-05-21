@@ -28,7 +28,6 @@ export class HospitalScene extends Phaser.Scene {
 		sceneFnc.checkDistance(this.playerData.location, KEY);
 		this.playerData.location = KEY;
 
-		console.dir(this.playerData);
 		nurseTalk = 0;
 		grannyTalk = 0;
 	}
@@ -70,7 +69,7 @@ export class HospitalScene extends Phaser.Scene {
 		if (grannyTalk && !tb.isTyping && tb.isLastPage) {
 			grannyTalk = false;
 			sceneFnc.enableButtons(mainButtons);
-			playerFnc.changeTime(180);
+			playerFnc.changeTime(this.playerData, 180);
 		} // end of granny talking
 	}
 
@@ -102,10 +101,10 @@ export class HospitalScene extends Phaser.Scene {
 		.on('pointerup', () => {
 			if (this.grandma != undefined) {
 				tb.start(sceneText.seats.takeASeat.badSeats, CONSTANTS.TEXT.TEXT_SPEED);
-				playerFnc.changeTime(5);
+				playerFnc.changeTime(this.playerData, 5);
 			} else {
 				tb.start(sceneText.seats.takeASeat.goodSeat, CONSTANTS.TEXT.TEXT_SPEED);
-				playerFnc.changeTime(5);
+				playerFnc.changeTime(this.playerData, 5);
 			}
 			
 		});
@@ -116,7 +115,7 @@ export class HospitalScene extends Phaser.Scene {
 		.setInteractive()
 		.on('pointerup', () => {
 			tb.start(sceneText.seats.takeASeat.goodSeat, CONSTANTS.TEXT.TEXT_SPEED);
-			playerFnc.changeTime(5);
+			playerFnc.changeTime(this.playerData, 5);
 		});
 
 		// Good seat
@@ -220,7 +219,7 @@ export class HospitalScene extends Phaser.Scene {
 											tb.start(sceneText.reception.checkup.bad);
 										}
 
-										playerFnc.changeTime(10);
+										playerFnc.changeTime(this.playerData, 10);
 									})
 		);
 

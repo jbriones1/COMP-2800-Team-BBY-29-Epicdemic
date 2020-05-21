@@ -34,7 +34,7 @@ export class EndScene extends Phaser.Scene {
 
 	update() {
 
-		if (!endFlag && (this.playerData.stats.day >= 6 
+		if (!endFlag && (this.playerData.stats.day >= 4 
 			|| this.playerData.stats.hunger < 1
 			|| this.playerData.stats.health == 0)) {
 			this.endgame();
@@ -86,7 +86,7 @@ export class EndScene extends Phaser.Scene {
 		if (this.playerData.secret) { score += 50; }
 
 		let str = "";
-		if (this.playerData.stats.day >= 6) {
+		if (this.playerData.stats.day >= 4) {
 			str += "Congratulations! You've completed all five days!"
 			str += "\nGame completion: 200";
 			score += 200;

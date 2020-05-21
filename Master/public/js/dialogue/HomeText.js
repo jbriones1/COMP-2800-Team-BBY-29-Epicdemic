@@ -14,7 +14,8 @@ let comp = {
 		Jon:   'Wanna go to the pub? (You wonder why Jon keeps asking to go to the pub, this town doesn\'t have one.)',
 		Andi:  'Wanna go get some food at the mall?',
 		Mandy: 'Wanna go for a walk in the park?',
-		Boss:  "Don't be late for work! There's a shipment of toys I want you to come deal with."
+		Boss:  "Don't be late for work! There's a shipment of toys I want you to come deal with.",
+		deleted: "Messages deleted"
 	},
 	order: {
 		interact: 'Order food online'

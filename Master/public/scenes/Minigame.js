@@ -45,7 +45,6 @@ export class MiniGame extends Phaser.Scene {
 	}
 	init(data) {
 		this.playerData = data.playerData;
-		console.log("Line 49 " + this.playerData.stats.money);
 	}
 
 	create() {
@@ -223,7 +222,7 @@ export class MiniGame extends Phaser.Scene {
 				"-Hitting the red objects will cost you 1 life.",
 				"",
 				"You have three lives",
-				"You must get 300 points to finish your day at work"
+				"You must get 50 points to finish your day at work"
 		];
 
 		instructions = this.add.text(20, 400, instructionsText, {
@@ -339,8 +338,6 @@ export class MiniGame extends Phaser.Scene {
 	} // hit baddie
 
 	collectGoodie(dude, goodie) {
-		
-		
 		scene.__proto__.collide(goodie, dude);
 		score += 10;
 		scoreText.setText('Score: ' + score);
@@ -361,7 +358,7 @@ export class MiniGame extends Phaser.Scene {
 						strokeThickness: 10
 				}).setInteractive().on('pointerdown', () => {
 						scene.playerData.stats.money += Math.floor(score / 5);
-						playerFnc.changeTime(scene.playerData, 4);
+						playerFnc.changeTime(scene.playerData, 240);
 						scene.scene.start(CONSTANTS.SCENES.MUSICSTORE, {playerData: scene.playerData, finished: gameOver});
 				});
 		}

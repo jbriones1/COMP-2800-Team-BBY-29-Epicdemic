@@ -66,7 +66,7 @@ export class OverworldScene extends Phaser.Scene {
 		}
 		
 		// Home button
-		this.homeButton = this.add.rectangle(115, 100, 200, 175, '#000000', 0)
+		this.homeButton = this.add.rectangle(115, 190, 200, 175, '#000000', 0)
 		.setOrigin(0,0)
 		.setInteractive()
 		.on('pointerup', () => this.scene.start(CONSTANTS.SCENES.HOME));
@@ -75,7 +75,7 @@ export class OverworldScene extends Phaser.Scene {
 		.setStroke('#000000', 10);
 
 		// Airport button
-		this.airportButton = this.add.rectangle(680, 125, 200, 200, '#000000', 0)
+		this.airportButton = this.add.rectangle(680, 215, 200, 200, '#000000', 0)
 		.setOrigin(0,0)
 		.setInteractive()
 		.on('pointerup', () => {
@@ -87,7 +87,7 @@ export class OverworldScene extends Phaser.Scene {
 		.setStroke('#000000', 10)
 
 		// Store button
-		this.storeButton = this.add.rectangle(700, 400, 200, 185, '#000000', 0)
+		this.storeButton = this.add.rectangle(700, 490, 200, 185, '#000000', 1)
 		.setOrigin(0,0)
 		.setInteractive()
 		.on('pointerup', () => this.scene.start(CONSTANTS.SCENES.STORE) );
@@ -96,7 +96,7 @@ export class OverworldScene extends Phaser.Scene {
 		.setStroke('#000000', 10);
 		
 		// School button
-		this.schoolButton = this.add.rectangle(700, 590, 200, 185, '#000000', 0)
+		this.schoolButton = this.add.rectangle(700, 770, 200, 185, '#000000', 0)
 		.setOrigin(0,0)
 		.setInteractive()
 		.on('pointerup', () => {
@@ -111,7 +111,7 @@ export class OverworldScene extends Phaser.Scene {
 		.setStroke('#000000', 10);
 
 		// Hospital button
-		this.hospitalButton = this.add.rectangle(550, 775, 200, 185, '#000000', 0)
+		this.hospitalButton = this.add.rectangle(550, 865, 200, 185, '#000000', 0)
 		.setOrigin(0,0)
 		.setInteractive()
 		.on('pointerup', () => this.scene.start(CONSTANTS.SCENES.HOSPITAL));
@@ -120,7 +120,7 @@ export class OverworldScene extends Phaser.Scene {
 		.setStroke('#000000', 10);
 
 		// Park button
-		this.parkButton = this.add.rectangle(320, 750, 130, 200, '#000000', 0)
+		this.parkButton = this.add.rectangle(320, 840, 130, 200, '#000000', 0)
 		.setOrigin(0,0)
 		.setInteractive()
 		.on('pointerup', () => {
@@ -135,7 +135,7 @@ export class OverworldScene extends Phaser.Scene {
 		.setStroke('#000000', 10);
 
 		// Lobby button
-		this.lobbyButton = this.add.rectangle(0, 700, 275, 175, '#0000ff', 0)
+		this.lobbyButton = this.add.rectangle(0, 790, 275, 175, '#0000ff', 0)
 		.setOrigin(0,0)
 		.setInteractive()
 		.on('pointerup', () => this.scene.start(CONSTANTS.SCENES.LOBBY));
@@ -144,7 +144,7 @@ export class OverworldScene extends Phaser.Scene {
 		.setStroke('#000000', 10);
 
 		// Mall button
-		this.mallButton = this.add.rectangle(100, 300, 200, 300, '#0000ff', 0)
+		this.mallButton = this.add.rectangle(100, 390, 200, 300, '#0000ff', 0)
 		.setOrigin(0,0)
 		.setInteractive()
 		.on('pointerup', () => {

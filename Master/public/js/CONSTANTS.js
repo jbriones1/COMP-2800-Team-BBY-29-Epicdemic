@@ -2,6 +2,7 @@ export const CONSTANTS = {
 	SCENES: {
 		OVERWORLD:  "OVERWORLD",
 		CHATBOX:    "CHATBOX",
+		HOWTOPLAY:  "HOWTOPLAY",
 		UI:         "UI",
 		END:        "END",
 		INTRO:      "INTRO",

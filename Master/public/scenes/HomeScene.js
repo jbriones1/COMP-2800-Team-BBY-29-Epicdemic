@@ -1,5 +1,4 @@
 import { CONSTANTS } from '/js/CONSTANTS.js';
-// import { playerData } from '/js/playerData.js';
 import * as playerFnc from '/js/playerData.js';
 import * as textbox from '/js/functions/textbox.js'
 import * as sceneFnc from '/js/functions/sceneFunctions.js'
@@ -183,6 +182,17 @@ export class HomeScene extends Phaser.Scene {
 					tb.start(str, CONSTANTS.TEXT.TEXT_SPEED);
 				}
 			});
+
+		this.compMessages = this.add.text(300, CONSTANTS.UI.SUBMENU_Y, 'DELETE MESSAGES', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
+		.setInteractive()
+		.on('pointerup', () => {
+			if (this.playerData.messages == undefined || this.playerData.messages.length == 0) {
+				tb.start(sceneText.comp.messages.deleted, CONSTANTS.TEXT.TEXT_SPEED);
+			} else {
+				this.playerData.messages = [];
+				tb.start(sceneText.comp.messages.deleted, CONSTANTS.TEXT.TEXT_SPEED);
+			}
+		});
 
 		this.compGame = this.add.text(500, CONSTANTS.UI.SUBMENU_Y, 'GAME', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
 			.setInteractive()
