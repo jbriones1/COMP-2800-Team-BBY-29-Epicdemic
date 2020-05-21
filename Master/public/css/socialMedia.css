@@ -1,0 +1,65 @@
+html, body {
+    overflow-x: hidden;
+}
+body {
+    background-color: #6d8484;
+}
+#social {
+    margin-top: 2em;
+    text-align: center;
+    letter-spacing: 1.5px;
+    margin-bottom: 150px;
+}
+
+#twitterLogo, #facebookLogo {
+    max-width: 144px;
+    margin: 0;
+    display: inline-block;
+    margin-right: 1em;
+}
+
+.fb-page {
+
+}
+
+.fb-share-button {
+    display: block;
+}
+
+.fb-page {
+    margin-top: 2em;
+}
+
+
+.twitter, .facebook {
+    margin-bottom: 3em;
+}
+
+@media (max-width: 400px) {
+
+    #twitter-widget-1 {
+        margin-top: 1em;
+        width: 80px !important;
+        height: 35px !important;
+        display: block;
+    }
+
+    #twitter-widget-0 {
+        display: block;
+        height: 35px !important;
+        width: 200px !important;
+    }
+
+    div.fb-share-button {
+        display: block !important;
+    }
+
+    div.fb-share-button span iframe {
+        width: auto !important;
+        height: auto !important;
+        
+    }
+
+    
+    
+}
