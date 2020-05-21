@@ -120,6 +120,7 @@ module.exports = function(app, passport) {
     });
 
 
+
     // GET: Game page
     app.get('/Epicdemic', isLoggedIn, function(req, res) {
         res.render('game.ejs');
