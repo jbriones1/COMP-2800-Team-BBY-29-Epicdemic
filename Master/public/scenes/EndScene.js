@@ -34,7 +34,7 @@ export class EndScene extends Phaser.Scene {
 
 	update() {
 
-		if (!endFlag && (this.playerData.stats.day >= 4 
+		if (!endFlag && (this.playerData.stats.day >= 4
 			|| this.playerData.stats.hunger < 1
 			|| this.playerData.stats.health == 0)) {
 			this.endgame();
@@ -111,7 +111,8 @@ export class EndScene extends Phaser.Scene {
 		return str;
 	}
 
-	postScore() {
+	postScore(score) {
+		console.log("Posting Score");
 		let data = {
 			score: score
 		};

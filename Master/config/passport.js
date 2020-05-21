@@ -204,6 +204,20 @@ module.exports = function(passport) {
                                 }
                                 return done(null, newUserGoogle);
                             });
+
+                            stringPlayerData = JSON.stringify(defaultPlayerData);
+                            var insertQuerySave = "INSERT INTO save (username, playerdata) VALUES (?, ?)";
+
+                            connection.query(insertQuerySave, [profile.id, stringPlayerData], function(err, rows) {
+                                console.log("Inserting save");
+                                if (err) {
+                                    console.log(err);
+                                    throw err;
+                                }
+                                else {
+                                    console.log(rows);
+                                }
+                            });
                         } else {
                             return done(null, rows[0]);
                         }
