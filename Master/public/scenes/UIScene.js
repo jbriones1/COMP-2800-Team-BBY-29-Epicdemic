@@ -30,7 +30,7 @@ export class UIScene extends Phaser.Scene {
 	}
 
 	update() {
-		this.checkActiveScenes();
+
 		// if (this.scene.isActive(CONSTANTS.SCENES.MINIGAME)) {
 		// 	this.scene.setVisible(false);
 		// // } else if (!this.scene.isActive(CONSTANTS.SCENES.OVERWORLD)) {

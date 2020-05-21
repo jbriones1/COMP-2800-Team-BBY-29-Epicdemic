@@ -1,5 +1,4 @@
 import {CONSTANTS} from '/js/CONSTANTS.js';
-import {playerData} from '/js//playerData.js';
 import * as playerFnc from '/js/playerData.js';
 
 var goodChars = ['chicken', 'bunny', 'duck', 'rino', 'bird'];
@@ -46,6 +45,7 @@ export class MiniGame extends Phaser.Scene {
 	}
 	init(data) {
 		this.playerData = data.playerData;
+		console.log("Line 49 " + this.playerData.stats.money);
 	}
 
 	create() {
@@ -226,13 +226,13 @@ export class MiniGame extends Phaser.Scene {
 				"You must get 300 points to finish your day at work"
 		];
 
-		instructions = this.add.text(20, 500, instructionsText, {
+		instructions = this.add.text(20, 400, instructionsText, {
 				fontSize: '45px',
-				fill: '#000000',
+				tint: '#000000',
 				fontWeight: 'bold',
 				wordWrap: {width: 920},
 				stroke: '#000000',
-				strokeThickness: 1
+				strokeThickness: 10
 		});
 		
 
@@ -272,7 +272,6 @@ export class MiniGame extends Phaser.Scene {
 	}
 
 	update() {
-		
 		
 		if (score >= 50) {
 				timer.timeScale = 2;
@@ -355,15 +354,15 @@ export class MiniGame extends Phaser.Scene {
 				gameOver = true;
 				win = scene.add.text(30, 300, winText, {
 						fontSize: '50px',
-						fill: '#000000',
+						tint: '#fff',
 						fontWeight: 'bold',
 						wordWrap: {width: 920},
 						stroke: '#000000',
-						strokeThickness: 1
+						strokeThickness: 10
 				}).setInteractive().on('pointerdown', () => {
-						this.playerData.stats.money += Math.floor(score / 5);
-						playerFnc.changeTime(4);
-						scene.scene.start(CONSTANTS.SCENES.MUSICSTORE, {playerData: this.playerData, finished: gameOver});
+						scene.playerData.stats.money += Math.floor(score / 5);
+						playerFnc.changeTime(scene.playerData, 4);
+						scene.scene.start(CONSTANTS.SCENES.MUSICSTORE, {playerData: scene.playerData, finished: gameOver});
 				});
 		}
 
