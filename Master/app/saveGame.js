@@ -4,7 +4,7 @@ var pool = mysql.createPool(dbconfig.connection);
 
 var defaultPlayerData = {
 	stats: {
-		hunger: 4, 
+		hunger: 10, 
 		health: 10, // 7-10 good, 5-6 neutral, 3-4 is bad, 0-2 is dead
 		money: 10,
 		happiness: 10,
@@ -23,7 +23,6 @@ var defaultPlayerData = {
 		bread: 0
 	},
 	storage: {
-		masks: 0,
 		toilet_paper: 0,
 		soap: 3
 	},
@@ -32,7 +31,6 @@ var defaultPlayerData = {
 		ticket: false
 	},
 	messages: [
-		{ sender: 'Government', message: "Anything with a red arrow pointing to it is interactable"},
 		{ sender: 'Boss', message: "Make sure you come to work today! I'm not closing this place yet and we got toys to sell."},
 		{ sender: 'Jon', message: 'Hey wanna go watch a movie today? Sonic the Hedgehog is playing at around 6PM.'}
 	],

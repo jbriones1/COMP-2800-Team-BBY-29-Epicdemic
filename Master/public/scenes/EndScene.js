@@ -111,7 +111,7 @@ export class EndScene extends Phaser.Scene {
 		return str;
 	}
 
-	postScore() {
+	postScore(score) {
 		let data = {
 			score: score
 		};
