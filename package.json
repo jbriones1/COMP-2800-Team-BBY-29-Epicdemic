@@ -1,31 +1,27 @@
 {
-  "name": "epicdemic",
-  "version": "1.0.0",
-  "description": "COMP 2800 Project by Team 29",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/jbriones1/Epicdemic.git"
-  },
-  "keywords": [
-    "JavaScript",
-    "Node",
-    "Phaser"
-  ],
-  "author": "Jon Briones, Brian Li, Andi Hung, Mandy Jin",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/jbriones1/Epicdemic/issues"
-  },
-  "homepage": "https://github.com/jbriones1/Epicdemic#readme",
-  "dependencies": {
-    "http": "0.0.1-security",
-    "http-server": "^0.12.3",
-    "parcel": "^1.12.4",
-    "phaser": "^3.23.0",
-    "server": "^1.0.27"
-  }
+    "name": "epicdemic",
+    "main": "server.js",
+    "scripts": {
+        "start": "node ./server"
+    },
+    "dependencies": {
+        "bcrypt-nodejs": "0.0.3",
+        "body-parser": "^1.13.1",
+        "connect-flash": "^0.1.1",
+        "cookie-parser": "^1.3.5",
+        "ejs": "^2.3.2",
+        "express": "^4.17.1",
+        "express-session": "^1.11.3",
+        "http": "0.0.1-security",
+        "http-server": "^0.12.3",
+        "morgan": "^1.10.0",
+        "mysql": "^2.7.0",
+        "parcel": "^1.12.4",
+        "passport": "^0.2.2",
+        "passport-google-oauth": "^2.0.0",
+        "passport-local": "^1.00",
+        "phaser": "^3.23.0",
+        "serve-favicon": "^2.5.0",
+        "server": "^1.0.27"
+    }
 }
