@@ -3,7 +3,7 @@ var dbconfig = require('../config/database');
 var pool = mysql.createPool(dbconfig.connection);
 
 var defaultPlayerData = {
-    stats: {
+	stats: {
 		hunger: 10, 
 		health: 10, // 7-10 good, 5-6 neutral, 3-4 is bad, 0-2 is dead
 		money: 10,
@@ -51,8 +51,14 @@ var defaultPlayerData = {
 	toystore: {
 		healthy_customer: true
 	},
+	park: {
+		sally_annoyed: false,
+		brian_refused: false
+	},
 	events: {
-		watchMovieWithJon: true
+		watchMovieWithJon: true, 
+		runWithBrian: false,
+		protest: false
 	}
 };
 

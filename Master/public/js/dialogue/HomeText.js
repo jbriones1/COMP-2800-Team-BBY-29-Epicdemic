@@ -37,7 +37,7 @@ let bed = {
 	tooEarly: 'You can\'t sleep now, there are things to do!',
 	sleepSoon: 'You\'re getting sleepy, but you want to do other things first',
 	wakeGood:   'Your alarm clock goes off. You wake up, feeling refreshed.',
-	wakeBad:    'Your alarm clock goes off. You wake up, feeling tired.',
+	wakeBad:    'Your alarm clock goes off. You wake up, feeling groggy.',
 	wakeMask:   'Your mask broke in your sleep.' //unused
 }
 

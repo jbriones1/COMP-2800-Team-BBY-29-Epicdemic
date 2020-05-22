@@ -22,7 +22,6 @@ export class TheatreScene extends Phaser.Scene {
 		this.playerData = data.playerData;
 		console.log("Loaded " + KEY);
 		this.playerData.location = KEY;
-		console.dir(this.playerData);
 	}
 
 	// Load assets
@@ -156,18 +155,19 @@ export class TheatreScene extends Phaser.Scene {
 		let minutesofSleep = ((60 - startMinute) != 60) ? 60 - startMinute : 0;
 		
 		if (startMinute != 0) {
-			playerFnc.changeTime(minutesofSleep);
+			playerFnc.changeTime(this.playerData, minutesofSleep);
 		}
 
 		while(this.playerData.stats.hour != 20) {
-			playerFnc.changeTime(60);
+			playerFnc.changeTime(this.playerData, 60);
 		}
 
 		if (this.playerData.events.watchMovieWithJon) {
 			this.playerData.events.watchMovieWithJon = false;
 			this.playerData.stats.event_done++;
-			this.playerData.stats.happiness += 2;
 		}
+
+		this.playerData.stats.happiness += 2;
 	}
 	
 	confirmSeatGood() {
@@ -211,7 +211,7 @@ export class TheatreScene extends Phaser.Scene {
 			})
 		);
 
-		tb.start("Sit here?", CONSTANTS.TEXT.TEXT_SPEED)
+		tb.start("Sit here?", CONSTANTS.TEXT.TEXT_SPEED);
 	}
 
 	listConcessionChoices() {
@@ -219,8 +219,8 @@ export class TheatreScene extends Phaser.Scene {
 			.setInteractive()
 			.on('pointerup', () => {
 				if (this.purchase(10)) {
-					playerFnc.changeHunger(5);
-					playerFnc.changeTime(5);
+					playerFnc.changeHunger(this.playerData, 5);
+					playerFnc.changeTime(this.playerData, 5);
 					tb.start(sceneText.concession.buy.success, CONSTANTS.TEXT.TEXT_SPEED);
 				} else {
 					tb.start(sceneText.concession.buy.fail, CONSTANTS.TEXT.TEXT_SPEED);

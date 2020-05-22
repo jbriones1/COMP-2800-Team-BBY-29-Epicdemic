@@ -7,18 +7,20 @@ let person1 = {
         /* Why is there nobody here? */
         answer1: "I think everyone is trying to abide by the social-distancing rules. This is why we're standing at least 6 feet away from each other while talking.",
         /* Can I have some of your food? */
-        answer2: "Honestly, I'm usually a very sharing person, but in the midst of this crisis, I have to say no. It's not just for my own sake, but for your own as well.",
+        answer2: "I wouldn't do that if I were you. I saw some other people drinking out of that earlier.",
         /* Want to go back to my place and play video games? */
-        answer3: "Video games sound like a lot of fun! However, let's just play together at our own houses. That's the magic of the Internet!"
+				answer3: "That sounds like a lot of fun! But I live with my grandma, and I'm afraid of getting her sick.",
+				annoyed: "Please leave me alone.",
+				angry: "(She doesn't even acknowledge your presence. Feels bad.)"
     },
 
     bye: "It was really nice talking to you!"
 }
 
 let fountain = {
-    interact: "It's a fountain. It's pretty.",
+    interact: "It's a pretty fountain.",
 
-    drink: 'You drink from the water fountain. (That was not wise)',
+    drink: 'You drink from the water fountain. You feel a bit worse.',
 
     leave: 'You decide its best to stay away from public water fountains in the meantime...'
 }
@@ -37,8 +39,22 @@ let trails = {
 		leave: 'You decide to leave the trail for now...',
 }
 
+let protester = [
+	"MY BODY MY CHOICE",
+	""
+]
+
+let Brian = {
+	interact: "Hey, you ready to race?",
+	yes: "Loser gets the virus! (You run beside each other the whole way until you're both gasping for air.)",
+	no: "Well, let me know when you're ready!",
+	refuse: "Aw, well, I'm going to go on ahead."
+}
+
 export let sceneText = {
     trails: trails,
     fountain: fountain,
-    person1: person1
+		person1: person1,
+		protester: protester,
+		Brian: Brian
 }

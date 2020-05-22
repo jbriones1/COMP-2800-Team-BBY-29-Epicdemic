@@ -46,7 +46,9 @@ export class EndScene extends Phaser.Scene {
 			this.add.text(400, 700, "PLAY AGAIN", {fontSize: CONSTANTS.TEXT.FONT_SIZE})
 			.setInteractive()
 			.on('pointerup', () => {
-				this.scene.start(CONSTANTS.SCENES.HOME, {playerData: JSON.parse(JSON.stringify(playerData))});
+				this.playerData = JSON.parse(JSON.stringify(playerData));
+				this.scene.start(CONSTANTS.SCENES.HOME, {playerData: this.playerData})
+				.launch(CONSTANTS.SCENES.UI, {playerData: this.playerData});
 				menuUp = true;
 			});
 		}
@@ -57,6 +59,7 @@ export class EndScene extends Phaser.Scene {
 
 	endgame() {
 		endFlag = true;
+		this.scene.stop(CONSTANTS.SCENES.UI);
 		this.scene.pause(CONSTANTS.SCENES.UI);
 		this.scene.stop(this.playerData.location);
 		this.scene.setVisible(true, CONSTANTS.SCENES.END);
@@ -98,11 +101,13 @@ export class EndScene extends Phaser.Scene {
 
 		let str = "";
 		if (this.playerData.stats.day >= 4) {
-			str += "Congratulations! You've completed all five days!"
+			str += "Congratulations! You survived!"
 			str += "\nGame completion: 200";
 			score += 200;
 		} else if (this.playerData.stats.hunger < 1) {
-			str += "Unforunately you starved."
+			str += "Unforunately, you starved."
+		} else if (this.playerData.stats.happiness < 1) {
+			str += "You die of a broken heart. Make sure to keep your mental health up too!"
 		} else if (this.playerData.stats.health < 1) {
 			str += "The world was overtaken by the virus."
 		}
@@ -117,7 +122,6 @@ export class EndScene extends Phaser.Scene {
 		str += "\nBad decisions made: -" + this.playerData.stats.bad_decisions * 10;
 		str += "\nScore: " + score;
 		
-
 		this.postScore(score);
 		return str;
 	}

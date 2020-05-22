@@ -47,8 +47,14 @@ export let playerData = {
 	toystore: {
 		healthy_customer: true
 	},
+	park: {
+		sally_annoyed: false,
+		brian_refused: false
+	},
 	events: {
-		watchMovieWithJon: true
+		watchMovieWithJon: true, 
+		runWithBrian: false,
+		protest: false
 	}
 };
 
@@ -104,7 +110,7 @@ export function changeHunger(data, num) {
 	data.stats.hunger += num;
 
 	if (num > 0) {
-		data.stats.last_meal -= num;
+		data.stats.last_meal = 0;
 	}
 }	
 

@@ -3,5 +3,5 @@ export let introduction =
  
 export let overworldText = {
 	closed: "Closed due to the virus",
-	locked: "Locked due to the virus"
+	locked: "Locked"
 }
