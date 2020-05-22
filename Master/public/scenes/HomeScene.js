@@ -183,7 +183,7 @@ export class HomeScene extends Phaser.Scene {
 				}
 			});
 
-		this.compMessages = this.add.text(300, CONSTANTS.UI.SUBMENU_Y, 'DELETE MESSAGES', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
+		this.compDelete = this.add.text(200, CONSTANTS.UI.SUBMENU_Y + 100, 'DELETE MESSAGES', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
 		.setInteractive()
 		.on('pointerup', () => {
 			if (this.playerData.messages == undefined || this.playerData.messages.length == 0) {
@@ -209,7 +209,7 @@ export class HomeScene extends Phaser.Scene {
 				playerFnc.clearSubmenu(submenu);
 			});
 
-		submenu = [this.compNews, this.compMessages, this.compGame, this.compShutDown];
+		submenu = [this.compNews, this.compMessages, this.compDelete, this.compGame, this.compShutDown];
 	}
 
 	// BED CHOICES ------------------------------------------------------------------------------------------------------
@@ -305,10 +305,10 @@ export class HomeScene extends Phaser.Scene {
 		while(this.playerData.stats.hour != 9 || this.playerData.stats.day == day) {
 			playerFnc.changeTime(this.playerData, 60);
 			hoursOfSleep++;
-			console.log("added an hour" + this.playerData.stats.hour);
 		}
 
-		console.log('Day ' + this.playerData.stats.day + '\nTime: ' + this.playerData.stats.hour + ':' + this.playerData.stats.minuteStr);
+
+		this.updateWorldEvents();
 		return 'You slept for ' + hoursOfSleep + ' hours and ' + minutesofSleep + ' minutes.';
 	} // end of sleep
 
@@ -421,7 +421,7 @@ export class HomeScene extends Phaser.Scene {
 			this.playerData.stats.happiness--;
 			tb.start(sceneText.comp.game.tilted);
 			playerFnc.changeTime(this.playerData, 30);
-		 } else if (choice == 1) {
+		 } else if (choice > 1) {
 			this.playerData.stats.happiness++;
 			tb.start(sceneText.comp.game.healthy[choice]);
 			playerFnc.changeTime(this.playerData, 30);
@@ -463,12 +463,12 @@ export class HomeScene extends Phaser.Scene {
 
 			// Create new events with messages
 			this.playerData.events.runWithBrian = true;
-			this.playerData.messages.push(
+			this.playerData.messages.unshift(
 				{sender: "Brian", message: "Hey, wanna go for a run at the park? We could meet up at 1PM."}
 			)
 
 			if (!this.playerData.inventory.mask) {
-				this.playerData.messages.push(
+				this.playerData.messages.unshift(
 					{sender: "Crowntown Health Organization", message: "Make sure you are wearing a mask when you go out, before they run out!"}
 				)
 			}
@@ -478,11 +478,11 @@ export class HomeScene extends Phaser.Scene {
 		if (this.playerData.stats.day == 3) {
 			if (this.playerData.events.runWithBrian) {
 				this.playerData.events.runWithBrian = false;
-				this.playerData.messages.push({sender: "Brian", message: "Had a good time running"});
+				this.playerData.messages.unshift({sender: "Brian", message: "Had a good time running"});
 			} else {
-				this.playerData.messages.push({sender: "Brian", message: "Thanks for hanging out with me! We should do that when this quarantine is all done."});
+				this.playerData.messages.unshift({sender: "Brian", message: "Thanks for going on that run with me. Gotta go fast!"});
 			}	
-		} 
+		} // end of day 3
 
 	} // end of world events
 }

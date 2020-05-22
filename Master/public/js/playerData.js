@@ -19,7 +19,6 @@ export let playerData = {
 		bread: 0
 	},
 	storage: {
-		masks: 0,
 		toilet_paper: 0,
 		soap: 3
 	},
@@ -110,8 +109,9 @@ export function changeHunger(data, num) {
 }	
 
 function checkLastMeal(data) {
-	if (data.stats.last_meal >= 6) {
+	if (data.stats.last_meal >= 4) {
 		data.stats.hunger--;
+		data.stats.last_meal = 0;
 	}
 }
 

@@ -61,6 +61,11 @@ export class IntroScene extends Phaser.Scene {
 
 		// Theatre
 		this.load.image('theatre_bg', '/assets/backgrounds/theatre/theatre_people.png')
+
+		//Park
+		this.load.image('park_bg', '/assets/backgrounds/park.png')
+		this.load.spritesheet('park_girl', '/characterspritesheet/girl1.png', { frameWidth: 31, frameHeight: 48 })
+		this.load.image('park_arrow', '/assets/images/red_arrow.png')
 		
 		// Mini-game ==============================================================
 		// bg

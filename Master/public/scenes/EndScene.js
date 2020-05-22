@@ -1,11 +1,13 @@
-import {CONSTANTS} from '/js/CONSTANTS.js';
-import {playerData} from '/js/playerData.js';
+import {CONSTANTS} from '../js/CONSTANTS.js';
+import {playerData} from '../js/playerData.js';
 import * as textbox from '/js/functions/textbox.js'
 
 let KEY = CONSTANTS.SCENES.END;
 
 let uiScene;
 let endFlag = false;
+let tb;
+let menuUp = false;
 
 export class EndScene extends Phaser.Scene {
 	constructor() {
@@ -40,6 +42,15 @@ export class EndScene extends Phaser.Scene {
 			this.endgame();
 		}
 
+		if (tb != undefined && !tb.isTyping && tb.isLastPage && !menuUp) {
+			this.add.text(400, 700, "PLAY AGAIN", {fontSize: CONSTANTS.TEXT.FONT_SIZE})
+			.setInteractive()
+			.on('pointerup', () => {
+				this.scene.start(CONSTANTS.SCENES.HOME, {playerData: JSON.parse(JSON.stringify(playerData))});
+				menuUp = true;
+			});
+		}
+
 		// Checks the world health and updates things appropriately
 		this.checkWorldHealth();
 	}
@@ -49,7 +60,7 @@ export class EndScene extends Phaser.Scene {
 		this.scene.pause(CONSTANTS.SCENES.UI);
 		this.scene.stop(this.playerData.location);
 		this.scene.setVisible(true, CONSTANTS.SCENES.END);
-		textbox.createEndTextBox(this, 250, 300, 
+		tb = textbox.createEndTextBox(this, 250, 300, 
 			{wrapWidth: 650})
 			.start(this.calculateScore(), CONSTANTS.TEXT.TEXT_SPEED);
 		
@@ -63,7 +74,7 @@ export class EndScene extends Phaser.Scene {
 		}
 
 		// Bad health 4-7
-
+		
 
 		// Critical health 1-3
 
