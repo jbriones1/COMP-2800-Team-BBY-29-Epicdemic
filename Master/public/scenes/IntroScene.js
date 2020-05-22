@@ -70,7 +70,12 @@ export class IntroScene extends Phaser.Scene {
 		this.load.image('park_arrow', '/assets/images/red_arrow.png');
 
 		// Park protest
-		this.load.spritesheet('park_girl', '/characterspritesheet/girl1.png', { frameWidth: 31, frameHeight: 48 });
+		this.load.spritesheet('park_protester1', '/characterspritesheet/girl2.png', { frameWidth: 31, frameHeight: 48 });
+		this.load.spritesheet('park_protester2', '/characterspritesheet/lady3.png', { frameWidth: 31, frameHeight: 48 });
+		this.load.spritesheet('park_protester3', '/characterspritesheet/worker1.png', { frameWidth: 31, frameHeight: 48 });
+		this.load.spritesheet('park_protester4', '/characterspritesheet/man2.png', { frameWidth: 31, frameHeight: 48 });
+		this.load.spritesheet('park_protester5', '/characterspritesheet/grandpa2.png', { frameWidth: 31, frameHeight: 48 });
+		this.load.spritesheet('park_protester6', '/characterspritesheet/grandpa1.png', { frameWidth: 31, frameHeight: 48 });
 		
 		// Mini-game ==============================================================
 		// bg

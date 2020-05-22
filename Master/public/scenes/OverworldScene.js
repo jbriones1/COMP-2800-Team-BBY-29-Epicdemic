@@ -69,7 +69,8 @@ export class OverworldScene extends Phaser.Scene {
 		this.homeButton = this.add.rectangle(115, 190, 200, 175, '#000000', 0)
 		.setOrigin(0,0)
 		.setInteractive()
-		.on('pointerup', () => this.scene.start(CONSTANTS.SCENES.HOME), {playerData: this.playerData});
+		.on('pointerup', () => this.scene.start(CONSTANTS.SCENES.HOME, {playerData: this.playerData})
+		);
 
 		this.add.text(175, 210, 'Home', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
 		.setStroke('#000000', 10);

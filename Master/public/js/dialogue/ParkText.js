@@ -39,10 +39,34 @@ let trails = {
 		leave: 'You decide to leave the trail for now...',
 }
 
-let protester = [
-	"MY BODY MY CHOICE",
-	""
-]
+let protester = {
+	main: {
+		interact: "SCREW THE QUARANTINE, WE WILL NOT BE SHACKLED! Join us, drink the fountain water and expose the government's lies!",
+		yes: "You approach the fountain, but the cops have arrived and send you home. You're fined all your money.",
+		no: "Whatever, guess you're just part of the sheep.",
+		noMask: "That mask of yours is cutting off the oxygen to your brain. Get out of here!"
+	},
+	sub: [
+		"We want haircuts!",
+		"Open the pub!",
+		"Bring us toilet paper!",
+		"Selling toilet paper, $200 a roll!",
+		"We want to work!",
+		"We will not be stopped by tyrants!",
+		"Even Pharaoh free people during a plague!",
+		"#endtheshutdown",
+		"Give me liberty or give me the virus!",
+		"Bring me Thanos!",
+		"My body, my choice to work!",
+		"Reopen Crowntown!",
+		"I'm sorry, I thought this was the land of the free!",
+		"We want out of the coop!",
+		"Set us free!",
+		"2020? More like 1984!",
+		"5G caused this!",
+		"Wake up sheep!"
+	]
+}
 
 let Brian = {
 	interact: "Hey, you ready to race?",
