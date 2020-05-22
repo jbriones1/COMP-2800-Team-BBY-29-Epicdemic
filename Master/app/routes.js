@@ -1,6 +1,6 @@
 let leaderboard = require("./leaderboard")
 let save = require("./saveGame")
-let load = require('./loadPlayerData')
+let load = require('./loadFunctions')
 let saveScore = require('./saveScore')
 let profile = require('./profile')
 
@@ -142,6 +142,7 @@ module.exports = function(app, passport) {
         });
     });
 
+    // GET: Check if user has a game to load
     app.get('/checkLoad', isLoggedIn, function(req, res) {
         load.checkForLoad(req.user.username, function(err, results) {
             if (!results) {
@@ -172,6 +173,7 @@ module.exports = function(app, passport) {
         });
     });
 
+    // POST: Score to database
     app.post('/saveScore', isLoggedIn, function(req, res) {
         let score = req.body.score;
         console.log("score" + score);
@@ -209,7 +211,7 @@ module.exports = function(app, passport) {
 };
 
 
-
+// Function used to determine if the current user is logged in or not
 function isLoggedIn(req, res, next) {
     if (req.isAuthenticated())
         return next();

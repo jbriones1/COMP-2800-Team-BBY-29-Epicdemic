@@ -1,3 +1,4 @@
+/* Config for database. */
 module.exports = {
     'connection': {
         'host': 'us-cdbr-iron-east-01.cleardb.net',

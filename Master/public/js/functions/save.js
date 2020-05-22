@@ -1,5 +1,5 @@
-export function saveGame(playerData, callback) {
-    
+/* Function used to save the game.  */
+export function saveGame(playerData, callback) {  
     console.log(playerData);
 
     $.ajax({
@@ -13,6 +13,7 @@ export function saveGame(playerData, callback) {
     });
 }
 
+/* Function used to load the game */
 export function loadGame() {
         $.getJSON('/loadgame', function(data) {
             return data;

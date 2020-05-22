@@ -1,80 +1,115 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <title>Epicdemic</title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/navbar.css" type="text/css">
-    <link rel="stylesheet" href="css/landing.css" type="text/css">
-    <link rel="stylesheet" href="css/socialMedia.css" type="text/css">
-    <link rel="stylesheet" href="fonts/stylesheet.css" type="text/css">
-    <link rel="icon" type="image/png" href="images/favicon/img/favicon.ico">
+<head>
+  <title>Epicdemic</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <!-- Static Stylesheet Files Import -->
+  <link rel="stylesheet" href="css/navbar.css" type="text/css">
+  <link rel="stylesheet" href="css/landing.css" type="text/css">
+  <link rel="stylesheet" href="css/socialMedia.css" type="text/css">
+  <link rel="stylesheet" href="fonts/stylesheet.css" type="text/css">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="images/favicon/img/favicon.ico">
 </head>
-  <body>
-    <div id="fb-root"></div>
-    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v7.0"></script>
-    <nav class="navbar fixed-top navbar-expand-md">
-      <a class="navbar-brand" href="/"><img id="logo" src="images/favicon/img/favicon.png"></a>
-      <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#links">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="links">
-        <ul class="navbar-nav">
-          <li class="navbar-item">
-            <a class="nav-link" href="/about">About</a>
-          </li>
-          <li class="navbar-item">
-            <a class="nav-link" href="/register">Register</a>
-          </li>
-          <li class="navbar-item">
-            <a class="nav-link" href="/leaderboard">Leaderboards</a>
-          </li>
-        </ul>
-      </div>
-    </nav>  
 
-    <header class="page-header header container-fluid">
-      <div class="overlay">
-        <div class="header-info">
-          <h1 class="text-uppercase font-weight-bold">Epicdemic</h1>
-          <ul>
-            <li>Free-to-play</li>
-            <li>Choose your own adventure</li>
-            <li>Learn to properly employ social distancing</li>
-            <li>Learn how to prevent the spread of COVID-19</li>
-          </ul>
-          <a href="/login"><button class="btn btn-outline-secondary btn-large">Play Now</button></a>
-        </div>
-      </div>
-      
-    </header>
-    <div id="social" class="container features">
-      <h1 id="socialmedia" class="text-uppercase font-weight-bold ">Social Media</h1>
-      <div class="row">
-        <div class="col-lg-6 col-md-6 col-sm-12 twitter">
-          <img id="twitterLogo" class="image-fluid" src="/images/Twitter_Logo_Blue.png" alt="Twitter">
-          <a class="twitter-share-button" href="https://twitter.com/intent/tweet?text=Epicdemic%20is%20a%20really%20fun%20game!" target='_blank'>Tweet</a>
-          <a href="https://twitter.com/epicdemic3?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow Us On Twitter!</a>
-          <a class="twitter-timeline" href="https://twitter.com/Epicdemic3?ref_src=twsrc%5Etfw">Tweets by Epicdemic3</a>
-        </div>
-        <div class='col-lg-6 col-md-6 col-sm-12 facebook'>
-          <img id="facebookLogo" class="image-fluid" src="/images/f_logo_RGB-Blue_144.png" alt="Facebook">
-          <div class="fb-share-button" data-href="https://lit-wildwood-38743.herokuapp.com/" data-layout="button" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flit-wildwood-38743.herokuapp.com%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
-          <div class="fb-page" data-href="https://www.facebook.com/Epicdemic-110124684044614/" data-tabs="timeline" data-width="" data-height="" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/Epicdemic-110124684044614/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/Epicdemic-110124684044614/">Epicdemic</a></blockquote></div>
-        </div>
-        
+<body>
+  <!-- Facebook requirement -->
+  <div id="fb-root"></div>
+  <script async defer crossorigin="anonymous"
+    src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v7.0"></script>
+
+  <!-- Navbar -->
+  <nav class="navbar fixed-top navbar-expand-md">
+    <a class="navbar-brand" href="/"><img id="logo" src="images/favicon/img/favicon.png"></a>
+    <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#links">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="links">
+      <ul class="navbar-nav">
+        <li class="navbar-item">
+          <a class="nav-link" href="/about">About</a>
+        </li>
+        <li class="navbar-item">
+          <a class="nav-link" href="/register">Register</a>
+        </li>
+        <li class="navbar-item">
+          <a class="nav-link" href="/leaderboard">Leaderboards</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <header class="page-header header container-fluid">
+    <div class="overlay">
+      <div class="header-info">
+        <h1 class="text-uppercase font-weight-bold">Epicdemic</h1>
+        <ul>
+          <li>Free-to-play</li>
+          <li>Choose your own adventure</li>
+          <li>Learn to properly employ social distancing</li>
+          <li>Learn how to prevent the spread of COVID-19</li>
+        </ul>
+        <a href="/login"><button class="btn btn-outline-secondary btn-large">Play Now</button></a>
       </div>
     </div>
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="js/functions/bgresize.js"></script>
-    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+  </header>
+
+  <!-- Social Media Portion -->
+  <div id="social" class="container features">
+    <h1 id="socialmedia" class="text-uppercase font-weight-bold ">Social Media</h1>
+    <div class="row">
+      <div class="col-lg-6 col-md-6 col-sm-12 twitter">
+        <img id="twitterLogo" class="image-fluid" src="/images/Twitter_Logo_Blue.png" alt="Twitter">
+        <a class="twitter-share-button"
+          href="https://twitter.com/intent/tweet?text=Epicdemic%20is%20a%20really%20fun%20game!"
+          target='_blank'>Tweet</a>
+        <a href="https://twitter.com/epicdemic3?ref_src=twsrc%5Etfw" class="twitter-follow-button"
+          data-show-count="false">Follow Us On Twitter!</a>
+        <a class="twitter-timeline" href="https://twitter.com/Epicdemic3?ref_src=twsrc%5Etfw">Tweets by Epicdemic3</a>
+      </div>
+      <div class='col-lg-6 col-md-6 col-sm-12 facebook'>
+        <img id="facebookLogo" class="image-fluid" src="/images/f_logo_RGB-Blue_144.png" alt="Facebook">
+        <div id="pageWidgit">
+          <div class="fb-share-button" data-href="https://lit-wildwood-38743.herokuapp.com/" data-layout="button"
+            data-size="small"><a target="_blank"
+              href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flit-wildwood-38743.herokuapp.com%2F&amp;src=sdkpreparse"
+              class="fb-xfbml-parse-ignore">Share</a></div>
+        </div>
+        <div class="fb-page" data-href="https://www.facebook.com/Epicdemic-110124684044614/" data-tabs="timeline"
+          data-width="" data-height="" data-small-header="false" data-adapt-container-width="true"
+          data-hide-cover="false" data-show-facepile="true">
+          <blockquote cite="https://www.facebook.com/Epicdemic-110124684044614/" class="fb-xfbml-parse-ignore"><a
+              href="https://www.facebook.com/Epicdemic-110124684044614/">Epicdemic</a></blockquote>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- External Script Import -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+  <!-- Function Import -->
+  <script src="js/functions/bgresize.js"></script>
+
 </body>
+
 </html>

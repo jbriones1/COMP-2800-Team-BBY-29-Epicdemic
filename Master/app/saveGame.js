@@ -2,6 +2,7 @@ var mysql = require('mysql');
 var dbconfig = require('../config/database');
 var pool = mysql.createPool(dbconfig.connection);
 
+// Default player data (Starting player data)
 var defaultPlayerData = {
     stats: {
 		hunger: 10, 
@@ -57,8 +58,7 @@ var defaultPlayerData = {
 	}
 };
 
-
-
+// If a user clicks new game, saves default player data into database
 exports.newGame = function(username, callback) {
     let query = "UPDATE save SET playerdata = ? WHERE username = ?";
     pool.getConnection(function(err, connection) {
@@ -69,6 +69,7 @@ exports.newGame = function(username, callback) {
         let stringifiedData = JSON.stringify(defaultPlayerData);
         connection.query("USE " + dbconfig.database);
         connection.query(query, [stringifiedData, username], function(err, results) {
+            connection.release();
             if (err) {
                 console.log(err);
                 callback(true);
@@ -80,6 +81,7 @@ exports.newGame = function(username, callback) {
     });
 }
 
+// If a user saves game, this function stores the playerdata into the database
 exports.saveGame = function(username, playerData, callback) {
     var sql = "INSERT INTO save VALUES (?, ?)";
     pool.getConnection(function(err, connection) {
