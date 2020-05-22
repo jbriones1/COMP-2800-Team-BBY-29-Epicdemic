@@ -22,7 +22,7 @@
         "parcel": "^1.12.4",
         "passport": "^0.2.2",
         "passport-google-oauth": "^2.0.0",
-        "passport-local": "^1.00",
+        "passport-local": "^1.0.0",
         "phaser": "^3.23.0",
         "serve-favicon": "^2.5.0",
         "server": "^1.0.27"
