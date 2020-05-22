@@ -10,7 +10,7 @@ var defaultPlayerData = {
 		money: 10,
 		happiness: 10,
 		event_done: 0,
-		day: 3,
+		day: 1,
 		hour: 9,
 		minute: 0,
 		minuteStr: '00',
