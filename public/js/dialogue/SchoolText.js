@@ -1,3 +1,4 @@
+// UNUSED: Dialogue for the School
 let desk = {
     interact: 'This is my desk!',
     stationery: {

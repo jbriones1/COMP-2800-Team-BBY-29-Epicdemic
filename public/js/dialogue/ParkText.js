@@ -1,3 +1,4 @@
+// Dialogue for the Park
 let person1 = {
     /* First line of dialogue when selecting this person. */
     interact: "Hey! I'm Sally!",

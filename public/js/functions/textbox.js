@@ -2,6 +2,13 @@ import {CONSTANTS}  from '/js/CONSTANTS.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
+/**
+ * Type of text styling for the text box. Max lines is 6 before starting a new page.
+ * @param {Scene} scene scene being created in
+ * @param {Number} wrapWidth how far the text will type before making a new line
+ * @param {Number} fixedWidth  how wide the text will be absolutely
+ * @param {Number} fixedHeight  how tall the text will be absolutely
+ */
 export function getBBcodeText (scene, wrapWidth, fixedWidth, fixedHeight) {
 	return scene.rexUI.add.BBCodeText(0, 0, '', {
 		fixedWidth: fixedWidth,
@@ -16,6 +23,13 @@ export function getBBcodeText (scene, wrapWidth, fixedWidth, fixedHeight) {
 	})
 }
 
+/**
+ * Regular textbox that is create for most scenes.
+ * @param {Scene} scene scene being created in
+ * @param {Number} x position in the scene it's created at
+ * @param {Number} y position in the scene it's create at
+ * @param {Object} config extra configurations to go beyond defaults
+ */
 export function createTextBox (scene, x, y, config) {
 	var wrapWidth = GetValue(config, 'wrapWidth', 0);
 	var fixedWidth = GetValue(config, 'fixedWidth', 0);
@@ -91,6 +105,13 @@ export function getBuiltInText (scene, wrapWidth, fixedWidth, fixedHeight) {
 	.setFixedSize(fixedWidth, fixedHeight);
 }
 
+/**
+ * Type of text styling for the text box. Max lines is 15 before starting a new page.
+ * @param {Scene} scene scene being created in
+ * @param {Number} wrapWidth how far the text will type before making a new line
+ * @param {Number} fixedWidth  how wide the text will be absolutely
+ * @param {Number} fixedHeight  how tall the text will be absolutely
+ */
 export function getEndBBcodeText (scene, wrapWidth, fixedWidth, fixedHeight) {
 	return scene.rexUI.add.BBCodeText(0, 0, '', {
 		fixedWidth: fixedWidth,
@@ -105,6 +126,13 @@ export function getEndBBcodeText (scene, wrapWidth, fixedWidth, fixedHeight) {
 	})
 }
 
+/**
+ * Special that is created for the End scene and Intro scene.
+ * @param {Scene} scene scene being created in
+ * @param {Number} x position in the scene it's created at
+ * @param {Number} y position in the scene it's create at
+ * @param {Object} config extra configurations to go beyond defaults
+ */
 export function createEndTextBox (scene, x, y, config) {
 	var wrapWidth = GetValue(config, 'wrapWidth', 0);
 	var fixedWidth = GetValue(config, 'fixedWidth', 0);

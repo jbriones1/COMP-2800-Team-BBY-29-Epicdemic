@@ -1,14 +1,13 @@
 import {CONSTANTS} from '/js/CONSTANTS.js';
-import {playerData} from '/js/playerData.js';
-import * as playerFnc from '/js/playerData.js';
 import * as textbox   from '/js/functions/textbox.js'
 import * as sceneFnc from '/js/functions/sceneFunctions.js'
-import {sceneText}     from '/js/dialogue/SchoolText.js';
 
 let KEY = CONSTANTS.SCENES.SCHOOL;
 let tb;
 
-
+/********************
+ * Easter Egg Scene * 
+ ********************/
 export class SchoolScene extends Phaser.Scene {
 	constructor() {
 		super({
@@ -57,6 +56,9 @@ export class SchoolScene extends Phaser.Scene {
 
 	}
 
+	/********************************************
+	 * Background for the scene is created here *
+	 ********************************************/
 	createObjects() {
 		// Background
 		this.add.image(5, 100, 'school_bg')
@@ -64,6 +66,9 @@ export class SchoolScene extends Phaser.Scene {
 		.setDisplaySize(950, 680);
 	}
 
+	/**************************************************************
+	 * Toggles the player's stats on if they found the easter egg *
+	 **************************************************************/
 	findSecret() {
 		if (!this.playerData.secret) {
 			this.playerData.secret = true;

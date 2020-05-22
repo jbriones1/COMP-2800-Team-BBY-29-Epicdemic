@@ -1,5 +1,4 @@
-import { playerData, changeTime } from '/js/playerData.js';
-import { CONSTANTS } from '/js/CONSTANTS.js';
+import { changeTime } from '/js/playerData.js';
 
 // Used to disable all the buttons in a list
 export function disableButtons (buttonList) {
@@ -19,6 +18,8 @@ export function enableButtons(buttonList) {
 	}
 }
 
+// Checks if the user moved away from their current location to another one,
+// incrementing time by 30 minutes if they do.
 export function checkDistance(data, finishScene) {
 	if (data.location != finishScene && data.location != null) {
 		changeTime(data, 30);

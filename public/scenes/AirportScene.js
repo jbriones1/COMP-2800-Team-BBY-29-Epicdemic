@@ -8,6 +8,10 @@ let KEY = CONSTANTS.SCENES.AIRPORT;
 let tb;
 let submenu;
 
+/**************************************
+ * UNUSED                             *
+ * Removed from the game due to scope *
+ **************************************/
 export class AirportScene extends Phaser.Scene {
 	constructor() {
 		super({

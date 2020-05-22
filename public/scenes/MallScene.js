@@ -3,6 +3,10 @@ import {playerData} from '/js/playerData.js';
 
 let KEY = CONSTANTS.SCENES.MALL;
 
+/**************************************
+ * UNUSED                             *
+ * Removed from the game due to scope *
+ **************************************/
 export class MallScene extends Phaser.Scene {
 	constructor() {
 		super({
@@ -13,7 +17,7 @@ export class MallScene extends Phaser.Scene {
 	init (data) {
 		this.playerData = data.playerData;
 		console.log("Loaded " + KEY);
-		playerData.location = KEY;
+		this.playerData.location = KEY;
 
 
 		console.dir(this.playerData);

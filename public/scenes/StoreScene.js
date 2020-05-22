@@ -9,6 +9,10 @@ let KEY = CONSTANTS.SCENES.STORE;
 let tb;
 let submenu;
 
+/*********************************************************************
+ * Store scene                                                       *
+ * Contains the checkouts, shelves and has the area to purchase food *
+ *********************************************************************/
 export class StoreScene extends Phaser.Scene {
 	constructor() {
 		super({
@@ -64,7 +68,9 @@ export class StoreScene extends Phaser.Scene {
 
 	// ==================================================================================================================
 
-	// CREATE OBJECTS ---------------------------------------------------------------------------------------------------
+	/*******************************************************
+	 * Interactable objects for the scene are created here *
+	 *******************************************************/
 	createObjects() {
 
 		// Shelf
@@ -124,7 +130,9 @@ export class StoreScene extends Phaser.Scene {
 
 	} // end of create objects function
 
-	// Items available to buy
+	/******************************************************
+	 * List of items available for purchase to the player *
+	 ******************************************************/
 	listClerkItems () {
 		tb.start(sceneText.checkout.good);
 		
@@ -225,6 +233,12 @@ export class StoreScene extends Phaser.Scene {
 			this.checkoutSoap];
 	}
 
+	/**
+	 * Allows the player to purchase an item, reducing their money
+	 * if they can afford it. Returns true if successfully bought,
+	 * false if not
+	 * @param {Number} price is the price of the object
+	 */
 	purchase (price) {
 
 		if (this.playerData.stats.money >= price) {

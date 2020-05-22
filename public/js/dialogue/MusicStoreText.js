@@ -1,3 +1,4 @@
+// Dialogue for the Toy store. Kept as MusicStore due to numberous dependencies needing to be renamed
 let manager = {
     interact: "Hey, get to work! The government may not consider this place essential, but I sure do.",
 

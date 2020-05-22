@@ -9,7 +9,10 @@ let scenebl;
 let beginText;
 let helpText;
 
-
+/******************************************************************************
+ * Intro scene                                                                *
+ * Contains the opening title crawl along with a how to play and start button *
+ ******************************************************************************/
 export class IntroScene extends Phaser.Scene {
 	constructor() {
 		super({
@@ -24,7 +27,9 @@ export class IntroScene extends Phaser.Scene {
 		scenebl = this;
 	}
 
-	// Load assets
+	/*****************************************************************
+	 * Loads all the game assets that are to be used for all scenes. *
+	 *****************************************************************/
 	preload() {
 		this.load.scenePlugin('rexuiplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexuiplugin.min.js', 'rexUI', 'rexUI');
 		this.load.image('nextPage', '/assets/images/arrow-down-left.png');
@@ -113,14 +118,17 @@ export class IntroScene extends Phaser.Scene {
 
 	// Load game object
 	create () {
+		// Textbox used to display all dialogue to the player
 		tb = textbox.createTextBox(this,
 			100, 300, { wrapWidth: 650 })
 		.setVisible(false);
 
+		// Loads the user's save file when called
 		$.getJSON('/loadgame', function(data) {
 
 			this.playerData = data;
 
+			// Launches the Home scene after the player's data is loaded
 			if (this.playerData.location != null) {
 				scenebl.scene.start(this.playerData.location, {playerData: this.playerData}).launch(CONSTANTS.SCENES.UI, {playerData: this.playerData});
 			} else {
@@ -135,7 +143,7 @@ export class IntroScene extends Phaser.Scene {
 				.launch(CONSTANTS.SCENES.UI, {playerData: this.playerData});
 			});
 				
-
+			// How to Play button
 			helpText = scenebl.add.text(325, 800, "HOW TO PLAY\n", {fontSize: CONSTANTS.TEXT.FONT_SIZE + 10})
 			.setInteractive()
 			.on('pointerup', () => {
@@ -148,23 +156,6 @@ export class IntroScene extends Phaser.Scene {
 
 		
 	}
-
-	update () {
-		// if (tb.isLastPage && !tb.isTyping && !startText) {
-		// 	beginText = this.add.text(400, 700, "START", 
-		// 		{fontSize: CONSTANTS.TEXT.FONT_SIZE + 10})
-		// 	.setInteractive()
-		// 	.on('pointerup', () => {
-		// 		// Boots all necessary scenes
-		// 		this.scene.start(CONSTANTS.SCENES.HOME, {playerData: this.playerData})
-		// 		.launch(CONSTANTS.SCENES.UI);
-		// 	});
-			
-		// 	startText = true;
-		// }
-
-	
-	} // end of update
 
 }
 

@@ -4,11 +4,13 @@ import * as textbox from '/js/functions/textbox.js'
 
 let KEY = CONSTANTS.SCENES.END;
 
-let uiScene;
 let endFlag = false;
 let tb;
 let menuUp = false;
 
+/***********************************************
+ * Used to trigger listening to end events and *
+ ***********************************************/
 export class EndScene extends Phaser.Scene {
 	constructor() {
 		super({
@@ -16,6 +18,7 @@ export class EndScene extends Phaser.Scene {
 		});
 	}
 
+	// Initializes the scene
 	init (data) {
 		this.playerData = data.playerData;
 		uiScene = this.scene.get(CONSTANTS.SCENES.UI);
@@ -36,12 +39,14 @@ export class EndScene extends Phaser.Scene {
 
 	update() {
 
+		// Checks if the world is ending
 		if (!endFlag && (this.playerData.stats.day >= 4
 			|| this.playerData.stats.hunger < 1
 			|| this.playerData.stats.health == 0)) {
 			this.endgame();
 		}
 
+		// Creates the PLAY AGAIN button
 		if (tb != undefined && !tb.isTyping && tb.isLastPage && !menuUp) {
 			this.add.text(400, 700, "PLAY AGAIN", {fontSize: CONSTANTS.TEXT.FONT_SIZE})
 			.setInteractive()
@@ -57,6 +62,9 @@ export class EndScene extends Phaser.Scene {
 		this.checkWorldHealth();
 	}
 
+/********************************
+ * Triggers the end of the game *
+ ********************************/
 	endgame() {
 		endFlag = true;
 		this.scene.stop(CONSTANTS.SCENES.UI);
@@ -69,7 +77,9 @@ export class EndScene extends Phaser.Scene {
 		
 	}	
 
-	// Checks to see whether some scenes need to be loaded differently
+	/*************************************************************
+   * Sets certain events up in the world based on world health *
+   *************************************************************/
 	checkWorldHealth() {
 		// Good health 8-10
 		if (this.playerData.stats.health < 7) {
@@ -83,14 +93,14 @@ export class EndScene extends Phaser.Scene {
 
 	}
 
-	/* 
+	/*****************************************************************************
 	Score is calculated by adding happiness and hunger, multiplying them by 10.
 	The health of the world is multiplied by 20 and added to this.
 	If the player has a mask on they gain another 50 points.
 	Every time they spend time with their friend they gain 10 points.
 	Bad decisions lower score by 10 points per decision. Finding the secret adds
 	100 points. If you end the game wearing a mask you are given 
-	*/
+	******************************************************************************/
 	calculateScore() {
 		let score = this.playerData.stats.happiness * 10 + this.playerData.stats.hunger * 10 
 			- this.playerData.stats.bad_decisions * 10 + this.playerData.stats.health * 20
@@ -126,6 +136,10 @@ export class EndScene extends Phaser.Scene {
 		return str;
 	}
 
+	/**********************************************
+	 * Send the score to the leaderboards         *
+	 * @param {Number} score is the score to post *
+	 **********************************************/
 	postScore(score) {
 		let data = {
 			score: score

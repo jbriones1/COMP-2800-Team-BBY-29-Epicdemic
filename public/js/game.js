@@ -1,5 +1,4 @@
 /** @type {import("../typings/phaser")} */
-
 import {CONSTANTS}       from '/js/CONSTANTS.js';
 
 import {IntroScene}      from '../scenes/IntroScene.js';
@@ -20,7 +19,11 @@ import {MiniGame}        from '../scenes/Minigame.js';
 import {UIScene}         from '../scenes/UIScene.js';
 import {HowToPlayScene}  from '../scenes/HowToPlayScene.js';
 
-
+/****************************************************************
+ * Configuration when starting the game.                        *
+ * Sets what scenes are available, the screens height and width *
+ * and any physics required in scenes.                          *
+ ****************************************************************/
 let config = {
 	type: Phaser.AUTO,
 	width: CONSTANTS.UI.SCREEN_WIDTH,
