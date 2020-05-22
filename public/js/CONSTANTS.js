@@ -1,3 +1,4 @@
+/* Constants used throughout the game */
 export const CONSTANTS = {
 	SCENES: {
 		OVERWORLD:  "OVERWORLD",

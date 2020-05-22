@@ -5,6 +5,10 @@ let KEY = CONSTANTS.SCENES.UI;
 let uiText;
 let stats;
 
+/*****************************************************************
+ * UI Scene                                                      *
+ * Used to overlay stats for the player at the top of the screen *
+ *****************************************************************/
 export class UIScene extends Phaser.Scene {
 	constructor() {
 		super({
@@ -29,17 +33,10 @@ export class UIScene extends Phaser.Scene {
 		uiText = this.add.text(0, 0, 'UI', {fontSize: '35px'});
 	}
 
+	/********************
+	 * Runs every frame *
+	 ********************/
 	update() {
-
-		// if (this.scene.isActive(CONSTANTS.SCENES.MINIGAME)) {
-		// 	this.scene.setVisible(false);
-		// // } else if (!this.scene.isActive(CONSTANTS.SCENES.OVERWORLD)) {
-		// // 	this.scene.setVisible(true);
-		// // 	uiText.setY(0);
-		// } else {
-		// 	this.scene.setVisible(true);
-		// 	uiText.setY(0);
-		// }
 
 		this.checkStatsLimits();
 
@@ -48,6 +45,9 @@ export class UIScene extends Phaser.Scene {
 		+ '\nDay ' + this.playerData.stats.day + ' - ' + this.playerData.stats.hour + ':' + this.playerData.stats.minuteStr);
 	}
 
+	/*********************************************************************
+	 * Checks whether the player's stats don't exceed certain boundaries *
+	 *********************************************************************/
 	checkStatsLimits() {
 		if (stats.health < 0) {
 			stats.health = 0;
@@ -74,12 +74,6 @@ export class UIScene extends Phaser.Scene {
 		if (stats.last_meal < 0) {
 			stats.last_meal = 0;
 		}
-	}
-
-	checkActiveScenes() {
-		console.log("Minigame " + this.scene.isActive(CONSTANTS.SCENES.MINIGAME));
-		console.log("Store " + this.scene.isActive(CONSTANTS.SCENES.STORE));
-		console.log("Home " + this.scene.isActive(CONSTANTS.SCENES.HOME));
 	}
 
 }

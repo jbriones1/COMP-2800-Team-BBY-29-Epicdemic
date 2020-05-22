@@ -1,3 +1,4 @@
+// UNUSED: Dialogue for the Airport
 let window = {
 	good: 'Planes go brrr',
 	bad: 'There doesn\'t seem to be any activity out there. The world seems to have shut down.'

@@ -3,6 +3,10 @@ import {playerData} from '/js/playerData.js';
 
 let KEY = CONSTANTS.SCENES.FOODCOURT;
 
+/**************************************
+ * UNUSED                             *
+ * Removed from the game due to scope *
+ **************************************/
 export class FoodCourtScene extends Phaser.Scene {
 	constructor() {
 		super({

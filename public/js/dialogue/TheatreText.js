@@ -1,3 +1,4 @@
+// Dialogue for the Theatre
 let enter = "I can't wait to watch this movie!";
 
 let seats = {

@@ -1,3 +1,4 @@
+// Dialogue for the Store
 let checkout = {
 	good: {
 		interact: 'Welcome! What would you like?',

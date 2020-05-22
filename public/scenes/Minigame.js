@@ -36,6 +36,9 @@ var scene;
 
 let KEY = CONSTANTS.SCENES.MINIGAME;
 
+/********************************************
+ * Work mini-game accessed in the Toy store *
+ ********************************************/
 export class MiniGame extends Phaser.Scene {
 
 	constructor() {
@@ -79,7 +82,7 @@ export class MiniGame extends Phaser.Scene {
 		dude.setScale(3);
 		dude.setBounce(0, 0);
 		
-		// Left, turn, right
+		// Left, turn, right got the character movement
 		this.anims.create({
 				key: 'left',
 				frames: this.anims.generateFrameNumbers('dude', {start: 0, end: 3}),
@@ -212,6 +215,7 @@ export class MiniGame extends Phaser.Scene {
 				
 		}
 
+		// Text to show the instructions to the player
 		var instructionsText = [
 				"Click the left or right side of the screen to move",
 				"that direction",
@@ -225,6 +229,7 @@ export class MiniGame extends Phaser.Scene {
 				"You must get 50 points to finish your day at work"
 		];
 
+		// Instructions that are displayed on the screen
 		instructions = this.add.text(20, 400, instructionsText, {
 				fontSize: '45px',
 				tint: '#000000',
@@ -234,10 +239,7 @@ export class MiniGame extends Phaser.Scene {
 				strokeThickness: 10
 		});
 		
-
-
-
-
+		// Start button 
 		start = this.add.text(gameWidth / 2.9, 300, 'START', {
 				fontSize: '80px',
 				fill: '#000000'
@@ -270,6 +272,9 @@ export class MiniGame extends Phaser.Scene {
 
 	}
 
+	/**********************************************
+	 * Updates the game every frame that it's run *
+	 **********************************************/
 	update() {
 		
 		if (score >= 50) {
@@ -289,7 +294,10 @@ export class MiniGame extends Phaser.Scene {
 		}
 
 		
-
+		// Player movement
+		// Checks whether the player should move left or right based on the
+		// position on the screen that's tapped.
+		// Left side moves left, right side moves right, anywhere else will stop the player
 		if (this.input.activePointer.isDown) {
 				
 				let x = this.input.activePointer.x;
@@ -312,6 +320,11 @@ export class MiniGame extends Phaser.Scene {
 		
 	} // update
 
+  /**
+	 * Hitting a baddie causes loss of life
+	 * @param {Object} dude is the player character
+	 * @param {Object} baddie is the bad item colliding
+	 */
 	hitBaddie(dude, baddie) {
 		scene.__proto__.collide(baddie, dude);
 		lives--;
@@ -337,6 +350,11 @@ export class MiniGame extends Phaser.Scene {
 		}
 	} // hit baddie
 
+	/**
+	 * Collision with a good item increases points
+	 * @param {Entity} dude is the player character
+	 * @param {Entity} goodie is the good item colliding
+	 */
 	collectGoodie(dude, goodie) {
 		scene.__proto__.collide(goodie, dude);
 		score += 10;
@@ -365,10 +383,20 @@ export class MiniGame extends Phaser.Scene {
 
 	} // collect goodie
 
+	/**
+	 * Colliding with objects causes the objects to be destroyed
+	 * @param {Entity} entity is the entity being destroyed
+	 * @param {Entity} platform 
+	 */
 	collide(entity, platform) {
 		entity.destroy();
 	} // collide
 
+	/**
+	 * Spawns goodies at set intervals.
+	 * Spaces out the good items to spawn randomly
+	 * @param {Number} num number of goodies to spawn 
+	 */
 	spawnGood(num) {
 		var x = Phaser.Math.Between(0, gameWidth);
 		let goodie = goodies.create(x, 0, goodChars[num]);
@@ -396,6 +424,11 @@ export class MiniGame extends Phaser.Scene {
 		}
 	} // spawn good
 
+	/**
+	 * Spawns baddies at set intervals.
+	 * Spaces out the bad items to spawn randomly
+	 * @param {Number} num number of baddies to spawn 
+	 */
 	spawnBad(num) {
 		
 		var x = Phaser.Math.Between(0, gameWidth);
@@ -424,6 +457,9 @@ export class MiniGame extends Phaser.Scene {
 		}
 	} // spawn bad
 
+	/************************************
+	 * Randomly chooses things to spawn *
+	 ************************************/
 	randomSpawn() {
 		if (score < 300) {
 				for (let i = 0; i < 5; i++) {

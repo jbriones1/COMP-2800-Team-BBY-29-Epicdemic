@@ -11,6 +11,11 @@ let tb;
 let objectDebug = 0;
 let submenu = [];
 
+/**************************************************************
+ * Toy store scene. Not renamed because of file dependencies. *
+ * Changed from Music Store late in the project.              * 
+ * Contains the work mini-game and a few interactable NPCs    *
+ **************************************************************/
 export class MusicStoreScene extends Phaser.Scene {
 	constructor() {
 		super({
@@ -119,6 +124,9 @@ export class MusicStoreScene extends Phaser.Scene {
 
 	}
 
+	/*****************************************
+	 * Add arrows above interactable objects *
+	 *****************************************/
 	addArrows() {
 		// arrow for manager
 		this.add.image(370, 606, 'red_arrow')
@@ -152,6 +160,9 @@ export class MusicStoreScene extends Phaser.Scene {
 
 	}
 
+	/*************************************************
+	 * List the dialogue options when trying to work *
+	 ************************************************/
 	listWorkChoices() {
 		playerFnc.clearSubmenu(submenu);
 
@@ -173,6 +184,9 @@ export class MusicStoreScene extends Phaser.Scene {
 
 	} // end of list work choices
 
+	/**********************************************************
+	 * List the dialogue options when talking to the customer *
+	 **********************************************************/
 	interactCustomer() {
 		playerFnc.clearSubmenu(submenu);
 

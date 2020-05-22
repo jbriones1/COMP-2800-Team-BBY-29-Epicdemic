@@ -15,6 +15,10 @@ let nurseTalk;
 let grannyTalk = false;
 let eggTalk = 0;
 
+/*********************************************************
+ * Hospital scene.                                       *
+ * Contains the nurse, old lady and several seats.       *
+ *********************************************************/
 export class HospitalScene extends Phaser.Scene {
 	constructor() {
 		super({
@@ -75,6 +79,9 @@ export class HospitalScene extends Phaser.Scene {
 
 // ----------------------------------------------------------------------------
 
+	/*******************************************************
+	 * Interactable objects for the scene are created here *
+	 *******************************************************/
 	createObjects () {
 		// Scene image
 		// this.add.image(x, y, key/variable)
@@ -162,7 +169,7 @@ export class HospitalScene extends Phaser.Scene {
 
 		mainButtons = [this.nurse, this.badSeats, this.goodSeat, this.goodSeats, this.grandma]
 
-		// Nurse animation ------------------------------------------------------------------------------------------------
+		// Nurse animation 
 		this.anims.create({
 			key: 'hospital_nurse_neutral',
 			frames: this.anims.generateFrameNumbers('hospital_nurse', {start: 0, end: 2}),
@@ -179,7 +186,9 @@ export class HospitalScene extends Phaser.Scene {
 		
 	} // end of createObjects ()
 
-	/* RECEPTION CODE */
+	/*******************************************
+	 * List of dialogue options with the nurse *
+	 *******************************************/
 	listReceptionChoices() {
 		playerFnc.clearSubmenu(submenu);
 		submenu.push(this.add.text(50, CONSTANTS.UI.SUBMENU_Y, 'QUESTION', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
@@ -232,6 +241,9 @@ export class HospitalScene extends Phaser.Scene {
 		);
 	}
 
+	/**************************************
+	 * List of questions to ask the nurse *
+	 **************************************/
 	listQuestions() {
 		playerFnc.clearSubmenu(submenu);
 
@@ -258,6 +270,9 @@ export class HospitalScene extends Phaser.Scene {
 		);
 	}
 
+	/*******************************************
+	 * Arrows to indicate interactable objects *
+	 *******************************************/
 	addArrows() {
 		// Right seats
 		this.add.image(870, 340, 'red_arrow')

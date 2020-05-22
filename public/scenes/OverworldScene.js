@@ -11,6 +11,10 @@ let tb;
 
 let schoolTextTint = '#f00'
 
+/*********************************************************************
+ * Overworld or Map scene                                            *
+ * Allows the player to choose which location to travel to           *
+ *********************************************************************/
 export class OverworldScene extends Phaser.Scene {
 	constructor() {
 		super({
@@ -56,6 +60,9 @@ export class OverworldScene extends Phaser.Scene {
 
 	}
 
+	/*******************************************************
+	 * Interactable objects for the scene are created here *
+	 *******************************************************/
 	createButtons () {
 
 		// Easter egg
@@ -167,7 +174,9 @@ export class OverworldScene extends Phaser.Scene {
 		this.setLocationStatuses()
 	}
 
-	// Locks certain locations if the health of the world is not good
+	/*******************************************************************************
+	 * Locks certain locations and sets their text color based on world conditions *
+	 *******************************************************************************/
 	setLocationStatuses() {
 		// Movies
 		if (this.playerData.stats.health < 8) {

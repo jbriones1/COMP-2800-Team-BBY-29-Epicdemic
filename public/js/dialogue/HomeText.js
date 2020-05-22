@@ -1,3 +1,5 @@
+// Dialogue for the Home
+
 let comp = {
 	interact: 'Booted computer...',
 	news: {

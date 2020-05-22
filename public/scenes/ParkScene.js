@@ -1,5 +1,4 @@
 import {CONSTANTS} from '/js/CONSTANTS.js';
-import {playerData} from '/js/playerData.js';
 import * as playerFnc from '/js/playerData.js';
 import * as textbox from '/js/functions/textbox.js'
 import * as sceneFnc from '../js/functions/sceneFunctions.js'
@@ -12,6 +11,10 @@ let sallyAnnoyed = 0;
 let protests = false;
 let protestButtons = [];
 
+/*********************************************************
+ * Park scene                                            *
+ * Contains the fountain and running trails              *
+ *********************************************************/
 export class ParkScene extends Phaser.Scene {
 	constructor() {
 		super({
@@ -83,6 +86,9 @@ export class ParkScene extends Phaser.Scene {
 
 	}
 
+	/*******************************************************
+	 * Interactable objects for the scene are created here *
+	 *******************************************************/
 	createObjects(){
 		/*red arrow indicating clickable objects*/
 		//arrow above fountain
@@ -186,7 +192,10 @@ export class ParkScene extends Phaser.Scene {
 			this.listTrailsChoices();
 		})
 	}
-	/* PARK GIRL CODE */
+	
+	/***********************************
+	 * List dialogue options for Sally *
+	 **********************************/
 	listPersonChoices() {
 			playerFnc.clearSubmenu(submenu);
 	
@@ -211,9 +220,7 @@ export class ParkScene extends Phaser.Scene {
 										})
 			);
 	
-			/**
-			 * Asking Sally too many times will make her angry, which will eventually cause you to become sad.
-			 */
+			//Asking Sally too many times will make her angry, which will eventually cause you to become sad.
 			submenu.push(this.add.text(10, CONSTANTS.UI.SUBMENU_Y + 80, ">Wanna hang out at my place?", { fontSize: CONSTANTS.TEXT.FONT_SIZE })
 										.setInteractive()
 										.on('pointerup', () => {
@@ -232,7 +239,9 @@ export class ParkScene extends Phaser.Scene {
 
 	}
 
-	//Fountain choices
+	/******************************************
+	 * List dialogue options for the fountain *
+	 ******************************************/
 	listFountainChoices() {
 		submenu.push(this.add.text(20, CONSTANTS.UI.SUBMENU_Y, "DRINK", {fontSize: CONSTANTS.TEXT.FONT_SIZE})
 			.setInteractive()
@@ -251,7 +260,10 @@ export class ParkScene extends Phaser.Scene {
 		 	})
 		);
 	}
-	//Trail Choices
+	
+	/***************************************
+	 * List dialogue options for the trail *
+	 ***************************************/
 	listTrailsChoices(){
 		submenu.push(this.add.text(20, CONSTANTS.UI.SUBMENU_Y, "WALK", {fontSize: CONSTANTS.TEXT.FONT_SIZE})
 			.setInteractive()
@@ -490,9 +502,9 @@ export class ParkScene extends Phaser.Scene {
 		protestButtons = [protester1, protester2, protester3, protester4, protester5, protester6, this.exitButton]
 	}
 
-	/**
-	 * Talk to the lead protester and these are the choices.
-	 */
+	/*********************************************************
+	 * Talk to the lead protester and these are the choices. *
+	 *********************************************************/
 	listProtesterChoices() {
 		playerFnc.clearSubmenu(submenu);
 
@@ -527,6 +539,9 @@ export class ParkScene extends Phaser.Scene {
 
 	}
 
+	/**************************************************
+	 * Randomly chooses a protester's dialogue option *
+	 **************************************************/
 	randomProtesterTalk() {
 		return sceneText.protester.sub[Math.floor(Math.random() * sceneText.protester.sub.length)]
 	}

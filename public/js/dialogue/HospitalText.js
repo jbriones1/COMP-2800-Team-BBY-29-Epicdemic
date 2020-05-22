@@ -1,3 +1,5 @@
+// Dialogue for the Hospital
+
 let reception = {
     /* First line of dialogue */
     interact: 'Hello! How can I help you?',

@@ -1,5 +1,4 @@
 import {CONSTANTS} from '/js/CONSTANTS.js';
-import {playerData} from '/js/playerData.js';
 import * as playerFnc from '/js/playerData.js';
 import * as textbox from '/js/functions/textbox.js'
 import * as sceneFnc from '/js/functions/sceneFunctions.js'
@@ -115,7 +114,10 @@ export class LobbyScene extends Phaser.Scene {
 
 	}
 
-	// Seat next to the lady
+	/************************************************************
+	 * List the dialogue options when sitting next to the lady. *
+	 * Lose health if a mask is not worn                        *
+	 ************************************************************/
 	listSeatChoices() {
 		submenu.push(this.add.text(250, CONSTANTS.UI.SUBMENU_Y, "YES", { fontSize: CONSTANTS.TEXT.FONT_SIZE })
 			.setInteractive()
@@ -140,6 +142,10 @@ export class LobbyScene extends Phaser.Scene {
 		);
 	}
 
+	/************************************************************
+	 * List the dialogue options when sitting next to the lady. *
+	 * Lose health if a mask is not worn                        *
+	 ************************************************************/
 	listSofaChoices() {
 		submenu.push(this.add.text(250, CONSTANTS.UI.SUBMENU_Y, "YES", { fontSize: CONSTANTS.TEXT.FONT_SIZE })
 			.setInteractive()
@@ -159,6 +165,10 @@ export class LobbyScene extends Phaser.Scene {
 		);
 	}
 
+	/************************************************************
+	 * List the dialogue options when sitting next to the lady. *
+	 * Lose health if a mask is not worn                        *
+	 ************************************************************/
 	listTicketWindowChoices() {
 		submenu.push(this.add.text(100, CONSTANTS.UI.SUBMENU_Y, "BUY TICKET $8", { fontSize: CONSTANTS.TEXT.FONT_SIZE })
 			.setInteractive()
@@ -189,6 +199,9 @@ export class LobbyScene extends Phaser.Scene {
 		);
 	}
 
+	/************************************************************************
+	 * List the dialogue options when attempting to enter the movie theatre *
+	 ************************************************************************/
 	listMovieEntranceChoices() {
 		submenu.push(this.add.text(250, CONSTANTS.UI.SUBMENU_Y, "YES", { fontSize: CONSTANTS.TEXT.FONT_SIZE })
 			.setInteractive()
@@ -217,6 +230,9 @@ export class LobbyScene extends Phaser.Scene {
 		);
 	}
 
+	/*****************************************
+	 * Add arrows above interactable objects *
+	 *****************************************/
 	addArrows() {
 		// arrow for large sofa
 		this.add.image(300, 320, 'red_arrow')//.setRotation(3.14/2)
@@ -234,6 +250,10 @@ export class LobbyScene extends Phaser.Scene {
 		.setDisplaySize(30, 30);		
 	}
 
+	/*******************************************************************************
+	 * Makes the player wait until 6PM (18:00) in game time for the movie to start *
+	 * Restarts the scene to enact any world changes that may occur                *
+	 *******************************************************************************/
 	sitAndWait() {
 		let startMinute = this.playerData.stats.minute;
 		let minutesofSleep = ((60 - startMinute) != 60) ? 60 - startMinute : 0;

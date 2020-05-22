@@ -1,3 +1,4 @@
+// UNUSED: Dialogue for the Food court
 let enter = "The smell of food makes you realize how hungry you are...";
 
 let foodPlace = {

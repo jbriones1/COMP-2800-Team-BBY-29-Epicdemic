@@ -14,6 +14,10 @@ let computerOn = false;
 let mainButtons;
 let warnMsg = false;
 
+/*********************************************************
+ * Home scene used to show the user's home.              *
+ * Contains the fridge, storage, sink, bed and computer. *
+ *********************************************************/
 export class HomeScene extends Phaser.Scene {
 	constructor() {
 		super({
@@ -22,6 +26,10 @@ export class HomeScene extends Phaser.Scene {
 
 	}
 
+	/******************************************************
+	 * Initializes the scene with the player data         *
+	 * @param {Object} data                               *
+	 ******************************************************/
 	init(data) {
 		this.playerData = data.playerData;
 		sceneFnc.checkDistance(this.playerData, KEY);
@@ -75,7 +83,9 @@ export class HomeScene extends Phaser.Scene {
 
 	// ==================================================================================================================
 
-	/* All the interactable objects in the scene are made here */
+	/*******************************************************
+	 * Interactable objects for the scene are created here *
+	 *******************************************************/
 	createObjects() {
 
 		// Bed
@@ -151,9 +161,9 @@ export class HomeScene extends Phaser.Scene {
 			mainButtons = [this.bed, this.computer, this.sink, this.fridge, this.storage];
 	} // end of create objects function
 
-	// ------------------------------------------------------------------------------------------------------------------
-	// COMPUTER CHOICES -------------------------------------------------------------------------------------------------
-	// ------------------------------------------------------------------------------------------------------------------
+	/*******************************************************
+	 * Interactable objects for the scene are created here *
+	 *******************************************************/
 	listCompChoices() {
 		this.compNews = this.add.text(110, CONSTANTS.UI.SUBMENU_Y, 'NEWS', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
 			.setInteractive()
@@ -212,9 +222,9 @@ export class HomeScene extends Phaser.Scene {
 		submenu = [this.compNews, this.compMessages, this.compDelete, this.compGame, this.compShutDown];
 	}
 
-	// ------------------------------------------------------------------------------------------------------------------
-	// BED CHOICES ------------------------------------------------------------------------------------------------------
-	// ------------------------------------------------------------------------------------------------------------------
+	/*********************************************
+	 * The list of options that the bed can show *
+	 *********************************************/
 	listBedChoices() {
 		this.sleepTxt = this.add.text(0, CONSTANTS.UI.SUBMENU_Y, 'SLEEP:', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
 		this.bedYes = this.add.text(200, CONSTANTS.UI.SUBMENU_Y, 'YES', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
@@ -277,9 +287,10 @@ export class HomeScene extends Phaser.Scene {
 			submenu = [this.sleepTxt, this.bedYes, this.bedNo];
 	}
 
-	// ------------------------------------------------------------------------------------------------------------------
-	// WASH HANDS -------------------------------------------------------------------------------------------------------
-	// ------------------------------------------------------------------------------------------------------------------
+	/*******************************
+	 * Washing hands at the sink   *
+	 * Increases health, uses soap *
+	 *******************************/
 	washHands() {
 		let soapCheck = (this.playerData.storage.soap > 0);
 		let withSoap = (soapCheck) ? 'with' : 'without';
@@ -332,9 +343,9 @@ export class HomeScene extends Phaser.Scene {
 		return 'You slept for ' + hoursOfSleep + ' hours and ' + minutesofSleep + ' minutes.';
 	} // end of sleep
 
-	/*************************************************
-	 * Lists the options for the player to eat food. *
-	 *************************************************/
+	/***************************************************************
+	 * Lists the options for things in the player's fridge to eat. *
+	 ***************************************************************/
 	listFridgeChoices() {
 		
 		submenu.push(this.add.text(10, CONSTANTS.UI.SUBMENU_Y, 'EAT: ', {fontSize: CONSTANTS.TEXT.FONT_SIZE}));
@@ -356,9 +367,11 @@ export class HomeScene extends Phaser.Scene {
 									}));
 	} // end of fridge choices
 
-	// ------------------------------------------------------------------------------------------------------------------
-	// EAT --------------------------------------------------------------------------------------------------------------
-	// ------------------------------------------------------------------------------------------------------------------
+	/***********************************************************
+	 * Player attempts to eat the item passed in.              *
+	 * Increases health if successful, decreases health if not *
+	 * @param {String} item is the item to eat                 * 
+	 ***********************************************************/
 	eat(item) {
 		switch(item) {
 			case 'apple':
@@ -436,9 +449,10 @@ export class HomeScene extends Phaser.Scene {
 
 	} // end of eat
 
-	// ------------------------------------------------------------------------------------------------------------------
-	// PLAY COMP GAME ---------------------------------------------------------------------------------------------------
-	// ------------------------------------------------------------------------------------------------------------------
+	/***********************************************************************
+	 * Allows the player to play a game on the computer                    *
+	 * The player will play a random game and their happiness is affected. *
+	 ***********************************************************************/
 	playCompGame() {
 		let choice = Math.floor(Math.random() * sceneText.comp.game.healthy.length);
 		if (this.playerData.stats.happiness < 1) {
@@ -459,9 +473,9 @@ export class HomeScene extends Phaser.Scene {
 		
 	} // end of game
 
-	// ------------------------------------------------------------------------------------------------------------------
-	// STORAGE CHOICES --------------------------------------------------------------------------------------------------
-	// ------------------------------------------------------------------------------------------------------------------
+	/***********************************************************************
+	 * Lists what inside the player's storage right now                    *
+	 ***********************************************************************/
 	listStorageChoices() {
 		playerFnc.clearSubmenu(submenu);
 
@@ -478,11 +492,13 @@ export class HomeScene extends Phaser.Scene {
 		
 	} // end of storage choices
 
-	// ------------------------------------------------------------------------------------------------------------------
-	// UPDATE WORLD EVENTS-----------------------------------------------------------------------------------------------
-	// ------------------------------------------------------------------------------------------------------------------
+	/********************************************************************************
+	 * Updates the world's events when sleeping.                                    *
+	 * Gives the player some new messages and events to play through after a sleep. *
+	 ********************************************************************************/
 	updateWorldEvents() {
 		// DAY 2
+		// remove Jon event
 		if (this.playerData.stats.day == 2) {
 			if (this.playerData.events.watchMovieWithJon) {
 				this.playerData.events.watchMovieWithJon = false;
@@ -507,7 +523,6 @@ export class HomeScene extends Phaser.Scene {
 		// DAY 3
 		if (this.playerData.stats.day == 3) {
 			// Remove the Brian event
-
 			if (this.playerData.park.brian_refused) {
 				this.playerData.messages.unshift({sender: "Brian", message: "Hey, I understand why you refused. Maybe we can chill at the pub after this is all over."});
 				this.playerData.events.runWithBrian = false;

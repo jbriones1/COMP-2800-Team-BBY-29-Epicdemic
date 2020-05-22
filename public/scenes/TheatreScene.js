@@ -11,6 +11,10 @@ let tb;
 
 let submenu = [];
 
+/*************************************
+ * Theatre scene                     *
+ * Contains the seats and concession *
+ *************************************/
 export class TheatreScene extends Phaser.Scene {
 	constructor() {
 		super({
@@ -29,7 +33,10 @@ export class TheatreScene extends Phaser.Scene {
 		this.load.scenePlugin('rexuiplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexuiplugin.min.js', 'rexUI', 'rexUI');
 	}
 
-	// Load game objects
+	/********************************************************
+	 * Interactable objects for the scene are created here, *
+	 * as well as backgrounds and arrows                    *
+	 ********************************************************/
 	create () {
 		// scene image
 		this.add.image(7, 100, 'theatre_bg')
@@ -117,6 +124,9 @@ export class TheatreScene extends Phaser.Scene {
 		})
 	}
 
+	/*****************************************
+	 * Add arrows above interactable objects *
+	 *****************************************/
 	addArrows() {
 		// arrow for concession
 		this.add.image(455, 560, 'red_arrow')
@@ -150,6 +160,11 @@ export class TheatreScene extends Phaser.Scene {
 	
 	}
 
+	/**************************************************************************************
+	 * Has the player watch the movie until the end, provided the movie is still running. *
+	 * Called when sitting at a seat.                                                     *
+	 * Movies run until 8PM (2 hours)                                                     *
+	 **************************************************************************************/
 	watchMovie() {
 		let startMinute = this.playerData.stats.minute;
 		let minutesofSleep = ((60 - startMinute) != 60) ? 60 - startMinute : 0;
@@ -170,6 +185,9 @@ export class TheatreScene extends Phaser.Scene {
 		this.playerData.stats.happiness += 2;
 	}
 	
+	/************************************************************
+	 * List of options to have the players sit in the good seat *
+	 ************************************************************/
 	confirmSeatGood() {
 
 		submenu.push(this.add.text(250, CONSTANTS.UI.SUBMENU_Y, "YES", { fontSize: CONSTANTS.TEXT.FONT_SIZE })
@@ -192,6 +210,9 @@ export class TheatreScene extends Phaser.Scene {
 		tb.start("Sit here?", CONSTANTS.TEXT.TEXT_SPEED)
 	}
 
+	/************************************************************
+	 * List of options to have the players sit in the bad seat *
+	 ************************************************************/
 	confirmSeatBad() {
 
 		submenu.push(this.add.text(250, CONSTANTS.UI.SUBMENU_Y, "YES", { fontSize: CONSTANTS.TEXT.FONT_SIZE })
@@ -214,6 +235,9 @@ export class TheatreScene extends Phaser.Scene {
 		tb.start("Sit here?", CONSTANTS.TEXT.TEXT_SPEED);
 	}
 
+	/************************************************************
+	 * List of options when the player talks to the concession  *
+	 ************************************************************/
 	listConcessionChoices() {
 		submenu.push(this.add.text(250, CONSTANTS.UI.SUBMENU_Y, "BUY BURGER $10", { fontSize: CONSTANTS.TEXT.FONT_SIZE })
 			.setInteractive()
@@ -231,6 +255,12 @@ export class TheatreScene extends Phaser.Scene {
 		tb.start("Sit here?", CONSTANTS.TEXT.TEXT_SPEED)
 	}
 
+	/**
+	 * Allows the player to purchase an item, reducing their money
+	 * if they can afford it. Returns true if successfully bought,
+	 * false if not
+	 * @param {Number} price is the price of the object
+	 */
 	purchase (price) {
 
 		if (this.playerData.stats.money >= price) {
