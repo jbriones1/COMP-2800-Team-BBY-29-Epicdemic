@@ -1,9 +1,12 @@
 body {
-    margin: 0;
-    padding-top: 70px;
-    background-color: black;
+	margin: 0;
+	padding-top: 70px;
+	background-color: black;
+	height: 90vh !important;
 }
 
-#game {
-    padding-top: 30px;
+@media (min-width: 500px) {
+	#game {
+			padding-top: 50px;
+	}
 }

@@ -1,6 +1,6 @@
 import {CONSTANTS} from '/js/CONSTANTS.js';
 import {playerData} from '/js/playerData.js';
-import * as playerFnc from '/js/playerData.js';
+import * as playerFnc from '../js/playerData.js';
 import * as textbox from '/js/functions/textbox.js'
 import * as sceneFnc from '/js/functions/sceneFunctions.js'
 import { sceneText } from '/js/dialogue/MusicStoreText.js';
@@ -20,7 +20,7 @@ export class MusicStoreScene extends Phaser.Scene {
 
 	init (data) {
 		this.playerData = data.playerData;
-		console.log("Loaded " + KEY);
+
 		sceneFnc.checkDistance(this.playerData, KEY);
 		this.playerData.location = KEY;
 
@@ -96,6 +96,7 @@ export class MusicStoreScene extends Phaser.Scene {
 		.setOrigin(0, 0)
 		.setInteractive()
 		.on('pointerup', () => {
+			playerFnc.changeTime(this.playerData, 1);
 			tb.start(sceneText.misc.kid, CONSTANTS.TEXT.TEXT_SPEED);
 		})
 

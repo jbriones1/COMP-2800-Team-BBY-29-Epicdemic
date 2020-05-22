@@ -14,7 +14,7 @@ export class UIScene extends Phaser.Scene {
 
 	init (data) {
 		this.playerData = data.playerData;
-		console.log("Loaded " + KEY);
+
 		this.scene.launch(CONSTANTS.SCENES.END, {playerData: this.playerData})
 		stats = this.playerData.stats;
 	}

@@ -21,8 +21,6 @@ export class OverworldScene extends Phaser.Scene {
 	// Load data and plugins from other 
 	init (data) {
 		this.playerData = data.playerData;
-		console.dir(this.playerData);
-		console.log("Loaded " + KEY);
 
 	}
 

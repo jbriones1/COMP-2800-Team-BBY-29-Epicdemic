@@ -23,8 +23,6 @@ export class HomeScene extends Phaser.Scene {
 	}
 
 	init(data) {
-		console.log("Loaded " + KEY);
-
 		this.playerData = data.playerData;
 		sceneFnc.checkDistance(this.playerData, KEY);
 		this.playerData.location = KEY;
@@ -469,7 +467,6 @@ export class HomeScene extends Phaser.Scene {
 
 		// Wear a mask
 		if (this.playerData.storage.masks > 0) {
-			console.log('Wearing mask');
 			submenu.push(
 				this.add.text(200, SUBMENU_Y, 'WEAR MASK')
 				.setInteractive()

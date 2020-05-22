@@ -24,7 +24,7 @@ export class HospitalScene extends Phaser.Scene {
 
 	init (data) {
 		this.playerData = data.playerData;
-		console.log("Loaded " + KEY);
+
 		sceneFnc.checkDistance(this.playerData.location, KEY);
 		this.playerData.location = KEY;
 
@@ -194,10 +194,10 @@ export class HospitalScene extends Phaser.Scene {
 									.setInteractive()
 									.on('pointerup', () => {
 										playerFnc.clearSubmenu(submenu);
-										if (playerData.stats.money >= 5) {
+										if (this.playerData.stats.money >= 5) {
 											tb.start(sceneText.reception.donate.thanks);
-											playerData.stats.donations += 5;
-											playerData.stats.money -= 5;
+											this.playerData.stats.donations += 5;
+											this.playerData.stats.money -= 5;
 										} else {
 											tb.start(sceneText.reception.donate.notEnough);
 										}
@@ -209,7 +209,7 @@ export class HospitalScene extends Phaser.Scene {
 									.on('pointerup', () => {
 										playerFnc.clearSubmenu(submenu);
 										tb.start(sceneText.reception.checkin.confirm);
-										let health = playerData.stats.health;
+										let health = this.playerData.stats.health;
 
 										if (health >= 8) {
 											tb.start(sceneText.reception.checkup.good);
