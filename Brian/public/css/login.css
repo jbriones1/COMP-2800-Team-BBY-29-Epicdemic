@@ -41,6 +41,7 @@
 #register {
     background: grey;
     color: white;
+    margin-bottom: 1em;
 }
 
 #submit {
@@ -55,9 +56,10 @@
     border: 1px solid rgb(121, 121, 121);
 }
 
+
 @media (max-width: 400px) {
     .login-form {
-        top: 43%;
+        top: 50%;
     }
 }
 

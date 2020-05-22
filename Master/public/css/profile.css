@@ -6,7 +6,7 @@
 }
 
 .header {
-    background-image: url("../images/covid-19.jpg");
+    background-image: url("../images/bgtest.png");
     background-size: cover;
     background-position: center;
     position: relative;
@@ -23,7 +23,7 @@
 
 .login-form {
     text-align: center;
-    top: 45%;
+    top: 60%;
     left: 50%;
     position: absolute;
     transform: translate(-50%, -55%);

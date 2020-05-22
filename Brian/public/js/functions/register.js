@@ -1,3 +1,4 @@
+// Show password function for registration page
 $(document).ready(function() {
     $('input[type="checkbox"]').click(function() {
         if ($(this).is(":checked")) {

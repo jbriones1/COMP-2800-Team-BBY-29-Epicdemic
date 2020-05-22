@@ -18,7 +18,7 @@
 
 .header-info {
     text-align: center;
-    top: 35%;
+    top: 40%;
     left: 50%;
     position: absolute;
     transform: translate(-50%, -55%);
@@ -46,4 +46,10 @@
     width: 100%;
     height: 60px;
     margin-top: 1em;
+}
+
+@media (max-width: 400px) {
+    .header-info {
+        top: 50%;
+    }
 }

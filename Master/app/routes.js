@@ -103,10 +103,16 @@ module.exports = function(app, passport) {
         leaderboard.getScores(function(err, results) {
             if (err) {
                 console.log("Error");
+            } else {
+                for (let i = 0; i < results.length; i++) {
+                    if (results[i].display_name != null) {
+                        results[i].username = results[i].display_name;
+                    }
+                }
+                res.render('leaderboard.ejs', {
+                    user: results
+                });
             }
-            res.render('leaderboard.ejs', {
-                user:results
-            });
         });
     });
 
@@ -118,6 +124,7 @@ module.exports = function(app, passport) {
             } 
         });
     });
+
 
 
     // GET: Game page
@@ -169,10 +176,11 @@ module.exports = function(app, passport) {
         let score = req.body.score;
         console.log("score" + score);
         let username = req.user.username;
+        let display_name = req.user.display_name;
         console.log("request: " + req.body);
         console.log(username);
 
-        saveScore.saveScore(username, score, function(err, results) {
+        saveScore.saveScore(username, display_name, score, function(err, results) {
             if (err) {
                 console.log("Error");
             } else {
