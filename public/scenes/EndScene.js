@@ -19,7 +19,7 @@ export class EndScene extends Phaser.Scene {
 	init (data) {
 		this.playerData = data.playerData;
 		uiScene = this.scene.get(CONSTANTS.SCENES.UI);
-		console.log("Loaded " + KEY);
+
 		this.scene.setVisible(false);
 	}
 

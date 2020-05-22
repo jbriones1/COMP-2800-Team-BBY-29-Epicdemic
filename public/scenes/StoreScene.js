@@ -17,9 +17,7 @@ export class StoreScene extends Phaser.Scene {
 	}
 
 	init(data) {
-		console.dir(data);
 		this.playerData = data.playerData;
-		console.log("Loaded " + KEY);
 
 		sceneFnc.checkDistance(this.playerData, KEY);
 		this.playerData.location = KEY;
@@ -182,7 +180,7 @@ export class StoreScene extends Phaser.Scene {
 				return;
 			}
 
-			if (this.purchase(5) && !this.playerData.inventory.mask) {
+			if (!this.playerData.inventory.mask && this.purchase(5)) {
 				// playerData.storage.masks++;
 				this.playerData.inventory.mask = true;
 				tb.start(sceneText.checkout.purchase.clerk + " You put on the mask.");

@@ -20,7 +20,7 @@ export class IntroScene extends Phaser.Scene {
 
 	init () {
 		localStorage.removeItem('savedPlayerData');
-		console.log("Loaded " + KEY);
+
 		scenebl = this;
 	}
 
@@ -118,8 +118,7 @@ export class IntroScene extends Phaser.Scene {
 		.setVisible(false);
 
 		$.getJSON('/loadgame', function(data) {
-			console.log(data);
-			console.log("Game loaded");
+
 			this.playerData = data;
 
 			if (this.playerData.location != null) {
