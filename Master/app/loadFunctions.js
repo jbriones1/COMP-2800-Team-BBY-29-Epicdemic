@@ -29,6 +29,7 @@ exports.loadGame = function(username, callback) {
     })
 }
 
+// Function used to check if the player has a loaded game
 exports.checkForLoad = function(username, callback) {
     var sql = "SELECT username FROM save WHERE username = ?";
     pool.getConnection(function(err, connection) {

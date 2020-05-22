@@ -10,6 +10,7 @@
     background-size: cover;
     background-position: center;
     position: relative;
+    height: 100vh !important;
 }
 
 .overlay {
@@ -21,7 +22,7 @@
     background: rgba(0, 0, 0, 0.6);
 }
 
-.login-form {
+.profile-container {
     text-align: center;
     top: 60%;
     left: 50%;

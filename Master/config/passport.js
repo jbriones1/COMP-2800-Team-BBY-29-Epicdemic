@@ -6,8 +6,9 @@ var bcrypt = require('bcrypt-nodejs');
 var dbconfig = require('./database');
 var pool = mysql.createPool(dbconfig.connection);
 
+// Default / starting player data
 var defaultPlayerData = {
-	stats: {
+    stats: {
 		hunger: 10, 
 		health: 10, // 7-10 good, 5-6 neutral, 3-4 is bad, 0-2 is dead
 		money: 10,
@@ -36,7 +37,6 @@ var defaultPlayerData = {
 		ticket: false
 	},
 	messages: [
-		{ sender: 'Government', message: "Anything with a red arrow pointing to it is interactable"},
 		{ sender: 'Boss', message: "Make sure you come to work today! I'm not closing this place yet and we got toys to sell."},
 		{ sender: 'Jon', message: 'Hey wanna go watch a movie today? Sonic the Hedgehog is playing at around 6PM.'}
 	],
@@ -64,12 +64,13 @@ var defaultPlayerData = {
 
 module.exports = function(passport) {
 
-
+    // Serialize
     passport.serializeUser(function(user, done) {
             done(null, user.username);
         
     });
 
+    // Deserialize
     passport.deserializeUser(function(username, done) {
         console.log("deserializing: " + username);
         pool.getConnection(function(error, connection) {
@@ -175,7 +176,7 @@ module.exports = function(passport) {
         })
     );
 
-    // Google
+    // Google Account
     passport.use(new GoogleStrategy({
         clientID: '271196140535-s1842l90m4r2gders61n25fceaaj7d6l.apps.googleusercontent.com',
         clientSecret: 'Ia3aMfBZayUnYl13F6wYPpQQ',

@@ -1,4 +1,4 @@
-/* Function for scrolling feature when a button is clicked. */
+/* Function for scrolling feature when the button on the about page is clicked. */
 $(document).ready(function() {
     $("#learnMore").click(function() {
         console.log("clicked");

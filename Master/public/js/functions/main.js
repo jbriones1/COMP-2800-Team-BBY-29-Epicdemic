@@ -13,7 +13,7 @@ $(document).ready(function() {
         } 
     });
 
-    // Whjen Load Game is pressed
+    // When Load Game is pressed
     $('#loadGame').click(function() {
         $.ajax({
             url: 'checkLoad',

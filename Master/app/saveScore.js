@@ -15,6 +15,7 @@ exports.saveScore = function(username, display_name, score, callback) {
         connection.query("USE " + dbconfig.database);
         connection.query(sql, [username, date, score, display_name], function(error, results) {
             if (error) {
+                connection.release();
                 console.log(error);
                 callback(true);
                 return;
@@ -43,5 +44,7 @@ exports.saveScore = function(username, display_name, score, callback) {
                 }
             }
         });
+
+        connection.release();
     });
 }

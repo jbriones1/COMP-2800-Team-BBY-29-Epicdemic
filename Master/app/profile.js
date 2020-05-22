@@ -4,7 +4,7 @@ var pool = mysql.createPool(dbconfig.connection);
 
 // Function to get scores for profile page
 exports.getHistory = function(username, callback) {
-    var sql = "SELECT score, date FROM score WHERE username = ?";
+    var sql = "SELECT score, date FROM score WHERE username = ? ORDER BY date DESC LIMIT 10";
     pool.getConnection(function(err, connection) {
         if (err) {
             console.log(err);

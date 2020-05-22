@@ -28,6 +28,7 @@
 .header-info h1 {
     font-size: 40pt;
     text-shadow: 1px 2px 2px black;
+    letter-spacing: 0.05em;
 }
 
 .header-info ul {
