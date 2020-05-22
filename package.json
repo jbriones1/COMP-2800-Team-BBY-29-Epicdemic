@@ -1,9 +1,9 @@
 {
     "name": "epicdemic",
-		"main": "server.js",
-		"engines": {
-			"node": "12.13.x"
-		},
+    "main": "server.js",
+    "engines": {
+        "node": "12.13.x"
+    },
     "scripts": {
         "start": "node server.js"
     },
