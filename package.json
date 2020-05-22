@@ -2,7 +2,10 @@
     "name": "epicdemic",
     "main": "server.js",
     "scripts": {
-        "start": "node ./server"
+        "start": "node ./server.js"
+    "engines": {
+       "node": "12.13.1"
+     }
     },
     "dependencies": {
         "bcrypt-nodejs": "0.0.3",
