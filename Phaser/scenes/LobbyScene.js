@@ -203,7 +203,6 @@ export class LobbyScene extends Phaser.Scene {
 					playerFnc.clearSubmenu(submenu);
 					tb.start(sceneText.theatreEntrance.noMovie, CONSTANTS.TEXT.TEXT_SPEED);
 				}
-
 			})
 		);
 
@@ -233,19 +232,19 @@ export class LobbyScene extends Phaser.Scene {
 	}
 
 	sitAndWait() {
-		let startMinute = playerData.stats.minute;
-		let minutesofSleep = ((60 - startMinute) != 60) ? 60 - startMinute : 0;
+		let startMinute = this.playerData.stats.minute;
+		let minutesofSitting = ((60 - startMinute) != 60) ? 60 - startMinute : 0;
 		
-		if (playerData.stats.hour < 18) {
+		if (this.playerData.stats.hour < 18) {
 			if (startMinute != 0) {
-				playerFnc.changeTime(minutesofSleep);
+				playerFnc.changeTime(this.playerData, minutesofSitting);
 			}
-			while(playerData.stats.hour != 18) {
-				playerFnc.changeTime(60);
+			while(this.playerData.stats.hour != 18) {
+				playerFnc.changeTime(this.playerData, 60);
 			}
-		} else if (playerData.stats.hour >= 18 && playerData.stats.hour < 20) {
+		} else if (this.playerData.stats.hour >= 18 && this.playerData.stats.hour < 20) {
 			tb.start(sceneText.wait.movie_started, CONSTANTS.TEXT.TEXT_SPEED);
-		} else if (playerData.stats.hour < 24) {
+		} else if (this.playerData.stats.hour < 24) {
 			tb.start(sceneText.wait.movie_ended, CONSTANTS.TEXT.TEXT_SPEED);
 		}
 		

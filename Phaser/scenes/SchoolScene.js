@@ -25,7 +25,6 @@ export class SchoolScene extends Phaser.Scene {
 		console.log("Loaded " + KEY);
 		playerData.location = KEY;
 
-
 		console.log(playerData);
 	}
 
