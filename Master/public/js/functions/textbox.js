@@ -101,7 +101,7 @@ export function getEndBBcodeText (scene, wrapWidth, fixedWidth, fixedHeight) {
 				mode: 'word',
 				width: wrapWidth
 		},
-		maxLines: 10
+		maxLines: 15
 	})
 }
 

@@ -58,9 +58,24 @@ export class IntroScene extends Phaser.Scene {
 		// Theatre Lobby
 		this.load.image('theatreLobby_bg', '/assets/backgrounds/theatreLobby/theatre_lobby.png');
 		this.load.image('theatreLobby_customer', '/assets/backgrounds/theatreLobby/customer.png');
+		this.load.spritesheet('Jon', '../assets/characters/boy2.png', {frameWidth: 90, frameHeight: 150});
 
 		// Theatre
 		this.load.image('theatre_bg', '/assets/backgrounds/theatre/theatre_people.png')
+
+		// Park
+		this.load.image('park_bg', '/assets/backgrounds/park.png');
+		this.load.spritesheet('park_girl', '/characterspritesheet/girl1.png', { frameWidth: 31, frameHeight: 48 });
+		this.load.spritesheet('Brian', '../assets/characters/boy1.png', {frameWidth: 90, frameHeight: 150});
+		this.load.image('park_arrow', '/assets/images/red_arrow.png');
+
+		// Park protest
+		this.load.spritesheet('park_protester1', '/characterspritesheet/girl2.png', { frameWidth: 31, frameHeight: 48 });
+		this.load.spritesheet('park_protester2', '/characterspritesheet/lady3.png', { frameWidth: 31, frameHeight: 48 });
+		this.load.spritesheet('park_protester3', '/characterspritesheet/worker1.png', { frameWidth: 31, frameHeight: 48 });
+		this.load.spritesheet('park_protester4', '/characterspritesheet/man2.png', { frameWidth: 31, frameHeight: 48 });
+		this.load.spritesheet('park_protester5', '/characterspritesheet/grandpa2.png', { frameWidth: 31, frameHeight: 48 });
+		this.load.spritesheet('park_protester6', '/characterspritesheet/grandpa1.png', { frameWidth: 31, frameHeight: 48 });
 		
 		// Mini-game ==============================================================
 		// bg

@@ -4,13 +4,13 @@ var pool = mysql.createPool(dbconfig.connection);
 
 // Default player data (Starting player data)
 var defaultPlayerData = {
-    stats: {
+	stats: {
 		hunger: 10, 
 		health: 10, // 7-10 good, 5-6 neutral, 3-4 is bad, 0-2 is dead
 		money: 10,
 		happiness: 10,
 		event_done: 0,
-		day: 1,
+		day: 3,
 		hour: 9,
 		minute: 0,
 		minuteStr: '00',
@@ -52,8 +52,14 @@ var defaultPlayerData = {
 	toystore: {
 		healthy_customer: true
 	},
+	park: {
+		sally_annoyed: false,
+		brian_refused: false
+	},
 	events: {
-		watchMovieWithJon: true
+		watchMovieWithJon: true, 
+		runWithBrian: false,
+		protest: false
 	}
 };
 

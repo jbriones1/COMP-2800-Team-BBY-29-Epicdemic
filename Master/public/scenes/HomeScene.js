@@ -1,8 +1,8 @@
-import { CONSTANTS } from '/js/CONSTANTS.js';
+import { CONSTANTS } from '../js/CONSTANTS.js';
 import * as playerFnc from '/js/playerData.js';
 import * as textbox from '/js/functions/textbox.js'
 import * as sceneFnc from '/js/functions/sceneFunctions.js'
-import { sceneText } from '/js/dialogue/HomeText.js';
+import { sceneText } from '../js/dialogue/HomeText.js';
 import { saveGame } from '/js/functions/save.js';
 
 
@@ -153,7 +153,9 @@ export class HomeScene extends Phaser.Scene {
 			mainButtons = [this.bed, this.computer, this.sink, this.fridge, this.storage];
 	} // end of create objects function
 
+	// ------------------------------------------------------------------------------------------------------------------
 	// COMPUTER CHOICES -------------------------------------------------------------------------------------------------
+	// ------------------------------------------------------------------------------------------------------------------
 	listCompChoices() {
 		this.compNews = this.add.text(110, CONSTANTS.UI.SUBMENU_Y, 'NEWS', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
 			.setInteractive()
@@ -183,7 +185,7 @@ export class HomeScene extends Phaser.Scene {
 				}
 			});
 
-		this.compMessages = this.add.text(300, CONSTANTS.UI.SUBMENU_Y, 'DELETE MESSAGES', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
+		this.compDelete = this.add.text(200, CONSTANTS.UI.SUBMENU_Y + 100, 'DELETE MESSAGES', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
 		.setInteractive()
 		.on('pointerup', () => {
 			if (this.playerData.messages == undefined || this.playerData.messages.length == 0) {
@@ -209,10 +211,12 @@ export class HomeScene extends Phaser.Scene {
 				playerFnc.clearSubmenu(submenu);
 			});
 
-		submenu = [this.compNews, this.compMessages, this.compGame, this.compShutDown];
+		submenu = [this.compNews, this.compMessages, this.compDelete, this.compGame, this.compShutDown];
 	}
 
+	// ------------------------------------------------------------------------------------------------------------------
 	// BED CHOICES ------------------------------------------------------------------------------------------------------
+	// ------------------------------------------------------------------------------------------------------------------
 	listBedChoices() {
 		this.sleepTxt = this.add.text(0, CONSTANTS.UI.SUBMENU_Y, 'SLEEP:', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
 		this.bedYes = this.add.text(200, CONSTANTS.UI.SUBMENU_Y, 'YES', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
@@ -228,7 +232,6 @@ export class HomeScene extends Phaser.Scene {
 					this.time.addEvent({
 						delay: 1500,
 						callback: () => {
-							tb.start(sceneText.bed.wakeGood, CONSTANTS.TEXT.TEXT_SPEED);
 							sceneFnc.enableButtons(mainButtons);
 							this.sleep();
 						},
@@ -247,11 +250,14 @@ export class HomeScene extends Phaser.Scene {
 							console.log(result);
 						}
 					});
-				} else {
-					tb.start(sceneText.bed.tooEarly, CONSTANTS.TEXT.TEXT_SPEED);
-				}
+					} else {
+						tb.start(sceneText.bed.tooEarly, CONSTANTS.TEXT.TEXT_SPEED);
+					}
 			});
 
+		/*********************************************************************************************************************
+		 ***** No option for the bed. Allows the player to say no to sleeping. Prints a message based on what time it is *****
+		 ********************************************************************************************************************/
 		this.bedNo = this.add.text(500, CONSTANTS.UI.SUBMENU_Y, 'NO', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
 			.setInteractive()
 			.on('pointerup', () => {
@@ -273,7 +279,9 @@ export class HomeScene extends Phaser.Scene {
 			submenu = [this.sleepTxt, this.bedYes, this.bedNo];
 	}
 
+	// ------------------------------------------------------------------------------------------------------------------
 	// WASH HANDS -------------------------------------------------------------------------------------------------------
+	// ------------------------------------------------------------------------------------------------------------------
 	washHands() {
 		let soapCheck = (this.playerData.storage.soap > 0);
 		let withSoap = (soapCheck) ? 'with' : 'without';
@@ -291,7 +299,11 @@ export class HomeScene extends Phaser.Scene {
 		playerFnc.changeTime(this.playerData, 1);
 	}
 
-	// SLEEP ------------------------------------------------------------------------------------------------------------
+	/***********************************************************************************
+	 * Sleep function for the player.                                                  *
+	 * Sleeping allows for the passage of time and progresses the world events forward *
+	 * Sleeping too much or too little penalizes the player.                           *
+	 ***********************************************************************************/
 	sleep() {
 		let day = this.playerData.stats.day;
 		let hoursOfSleep = 0;
@@ -305,15 +317,27 @@ export class HomeScene extends Phaser.Scene {
 		while(this.playerData.stats.hour != 9 || this.playerData.stats.day == day) {
 			playerFnc.changeTime(this.playerData, 60);
 			hoursOfSleep++;
-			console.log("added an hour" + this.playerData.stats.hour);
 		}
 
-		console.log('Day ' + this.playerData.stats.day + '\nTime: ' + this.playerData.stats.hour + ':' + this.playerData.stats.minuteStr);
+		
+		if (hoursOfSleep > 10 || hoursOfSleep < 7) {
+			this.playerData.stats.happiness--;
+			this.playerData.stats.bad_decisions++;
+			let str = hoursOfSleep > 10 ? " You shouldn't sleep so much." : " You should sleep more."
+			tb.start(sceneText.bed.wakeBad + str, CONSTANTS.TEXT.TEXT_SPEED);
+		} else {
+			this.playerData.stats.happiness++;
+			tb.start(sceneText.bed.wakeGood, CONSTANTS.TEXT.TEXT_SPEED);
+		}
+
+		this.updateWorldEvents();
 		return 'You slept for ' + hoursOfSleep + ' hours and ' + minutesofSleep + ' minutes.';
 	} // end of sleep
 
+	/*************************************************
+	 * Lists the options for the player to eat food. *
+	 *************************************************/
 	listFridgeChoices() {
-		let contents = this.playerData.fridge
 		
 		submenu.push(this.add.text(10, CONSTANTS.UI.SUBMENU_Y, 'EAT: ', {fontSize: CONSTANTS.TEXT.FONT_SIZE}));
 
@@ -334,7 +358,9 @@ export class HomeScene extends Phaser.Scene {
 									}));
 	} // end of fridge choices
 
+	// ------------------------------------------------------------------------------------------------------------------
 	// EAT --------------------------------------------------------------------------------------------------------------
+	// ------------------------------------------------------------------------------------------------------------------
 	eat(item) {
 		switch(item) {
 			case 'apple':
@@ -412,7 +438,9 @@ export class HomeScene extends Phaser.Scene {
 
 	} // end of eat
 
+	// ------------------------------------------------------------------------------------------------------------------
 	// PLAY COMP GAME ---------------------------------------------------------------------------------------------------
+	// ------------------------------------------------------------------------------------------------------------------
 	playCompGame() {
 		let choice = Math.floor(Math.random() * sceneText.comp.game.healthy.length);
 		if (this.playerData.stats.happiness < 1) {
@@ -421,7 +449,7 @@ export class HomeScene extends Phaser.Scene {
 			this.playerData.stats.happiness--;
 			tb.start(sceneText.comp.game.tilted);
 			playerFnc.changeTime(this.playerData, 30);
-		 } else if (choice == 1) {
+		 } else if (choice > 1) {
 			this.playerData.stats.happiness++;
 			tb.start(sceneText.comp.game.healthy[choice]);
 			playerFnc.changeTime(this.playerData, 30);
@@ -433,7 +461,9 @@ export class HomeScene extends Phaser.Scene {
 		
 	} // end of game
 
+	// ------------------------------------------------------------------------------------------------------------------
 	// STORAGE CHOICES --------------------------------------------------------------------------------------------------
+	// ------------------------------------------------------------------------------------------------------------------
 	listStorageChoices() {
 		playerFnc.clearSubmenu(submenu);
 
@@ -451,6 +481,9 @@ export class HomeScene extends Phaser.Scene {
 		
 	} // end of storage choices
 
+	// ------------------------------------------------------------------------------------------------------------------
+	// UPDATE WORLD EVENTS-----------------------------------------------------------------------------------------------
+	// ------------------------------------------------------------------------------------------------------------------
 	updateWorldEvents() {
 		// DAY 2
 		if (this.playerData.stats.day == 2) {
@@ -463,26 +496,36 @@ export class HomeScene extends Phaser.Scene {
 
 			// Create new events with messages
 			this.playerData.events.runWithBrian = true;
-			this.playerData.messages.push(
+			this.playerData.messages.unshift(
 				{sender: "Brian", message: "Hey, wanna go for a run at the park? We could meet up at 1PM."}
 			)
 
 			if (!this.playerData.inventory.mask) {
-				this.playerData.messages.push(
-					{sender: "Crowntown Health Organization", message: "Make sure you are wearing a mask when you go out, before they run out!"}
+				this.playerData.messages.unshift(
+					{sender: "Crowntown Health Organization", message: "Please wear a mask when going around. Make sure you get one before they run out!"}
 				)
 			}
 		} 
 
 		// DAY 3
 		if (this.playerData.stats.day == 3) {
-			if (this.playerData.events.runWithBrian) {
+			// Remove the Brian event
+
+			if (this.playerData.park.brian_refused) {
+				this.playerData.messages.unshift({sender: "Brian", message: "Hey, I understand why you refused. Maybe we can chill at the pub after this is all over."});
 				this.playerData.events.runWithBrian = false;
-				this.playerData.messages.push({sender: "Brian", message: "Had a good time running"});
+			} else if (!this.playerData.events.runWithBrian){
+				this.playerData.messages.unshift({sender: "Brian", message: "Ugh, I don't feel very good today. Maybe I ran too much?"});
 			} else {
-				this.playerData.messages.push({sender: "Brian", message: "Thanks for hanging out with me! We should do that when this quarantine is all done."});
-			}	
-		} 
+				this.playerData.messages.unshift({sender: "Brian", message: "Hey, where were you? If you're going to ignore me, maybe we shouldn't be friends."});
+				this.playerData.events.runWithBrian = false;
+			}
+			
+			this.playerData.events.parkProtest = true;
+			this.playerData.messages.unshift(
+				{sender: "Anonymous", message: "Protest at the park! Come join us and be free from the shackles of the government!"}
+			)
+		} // end of day 3
 
 	} // end of world events
 }

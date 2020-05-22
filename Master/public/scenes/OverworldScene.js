@@ -69,7 +69,8 @@ export class OverworldScene extends Phaser.Scene {
 		this.homeButton = this.add.rectangle(115, 190, 200, 175, '#000000', 0)
 		.setOrigin(0,0)
 		.setInteractive()
-		.on('pointerup', () => this.scene.start(CONSTANTS.SCENES.HOME), {playerData: this.playerData});
+		.on('pointerup', () => this.scene.start(CONSTANTS.SCENES.HOME, {playerData: this.playerData})
+		);
 
 		this.add.text(175, 210, 'Home', { fontSize: CONSTANTS.TEXT.FONT_SIZE })
 		.setStroke('#000000', 10);
@@ -139,7 +140,13 @@ export class OverworldScene extends Phaser.Scene {
 		this.lobbyButton = this.add.rectangle(0, 790, 275, 175, '#0000ff', 0)
 		.setOrigin(0,0)
 		.setInteractive()
-		.on('pointerup', () => this.scene.start(CONSTANTS.SCENES.LOBBY, {playerData: this.playerData}));
+		.on('pointerup', () => {
+			if (this.playerData.stats.health >= 5 && this.playerData.stats.day < 3) {
+				this.scene.start(CONSTANTS.SCENES.LOBBY, {playerData: this.playerData});
+			} else {
+				tb.start(overworldText.closed, CONSTANTS.TEXT.TEXT_SPEED);
+			}
+		});
 		
 		this.lobbyText = this.add.text(10, 825, 'Movie Theatre', { fill: '#fff', fontSize: CONSTANTS.TEXT.FONT_SIZE })
 		.setStroke('#000000', 10);
@@ -175,7 +182,7 @@ export class OverworldScene extends Phaser.Scene {
 		} 
 
 		// Park
-		if (this.playerData.stats.health < 4) {
+		if (this.playerData.stats.health < 4 && this.playerData.stats.day < 3) {
 			this.parkText.setFill('#f00');
 		} 
 	}

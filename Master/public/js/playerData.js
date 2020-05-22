@@ -19,7 +19,6 @@ export let playerData = {
 		bread: 0
 	},
 	storage: {
-		masks: 0,
 		toilet_paper: 0,
 		soap: 3
 	},
@@ -48,8 +47,14 @@ export let playerData = {
 	toystore: {
 		healthy_customer: true
 	},
+	park: {
+		sally_annoyed: false,
+		brian_refused: false
+	},
 	events: {
-		watchMovieWithJon: true
+		watchMovieWithJon: true, 
+		runWithBrian: false,
+		protest: false
 	}
 };
 
@@ -105,13 +110,14 @@ export function changeHunger(data, num) {
 	data.stats.hunger += num;
 
 	if (num > 0) {
-		data.stats.last_meal -= num;
+		data.stats.last_meal = 0;
 	}
 }	
 
 function checkLastMeal(data) {
-	if (data.stats.last_meal >= 6) {
+	if (data.stats.last_meal >= 4) {
 		data.stats.hunger--;
+		data.stats.last_meal = 0;
 	}
 }
 

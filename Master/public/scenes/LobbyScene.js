@@ -102,12 +102,12 @@ export class LobbyScene extends Phaser.Scene {
 			this.listSofaChoices();
 		})		
 
-		if (this.playerData.events.watchMovieWithJon && this.playerData.stats.hour> 16) {
+		// Jon event
+		if (this.playerData.events.watchMovieWithJon && this.playerData.stats.hour > 16) {
 			this.jon = this.add.sprite(500, 300, 'Jon', 1)
 			.setInteractive()
 			.on('pointerup', () => {
 				playerFnc.clearSubmenu(submenu);
-				
 				tb.start(sceneText.Jon, CONSTANTS.TEXT.TEXT_SPEED);
 				
 			});
@@ -126,7 +126,8 @@ export class LobbyScene extends Phaser.Scene {
 					this.playerData.stats.health--;
 				}
 				this.playerData.stats.bad_decisions++;
-				playerFnc.changeTime(5);
+				playerFnc.changeTime(this.playerData, 10);
+				tb.start(sceneText.seats.badSeat, CONSTANTS.TEXT.TEXT_SPEED);
 			})
 		);
 
@@ -239,10 +240,10 @@ export class LobbyScene extends Phaser.Scene {
 		
 		if (this.playerData.stats.hour < 18) {
 			if (startMinute != 0) {
-				playerFnc.changeTime(minutesofSleep);
+				playerFnc.changeTime(this.playerData, minutesofSleep);
 			}
 			while(this.playerData.stats.hour != 18) {
-				playerFnc.changeTime(60);
+				playerFnc.changeTime(this.playerData, 60);
 			}
 		} else if (this.playerData.stats.hour >= 18 && this.playerData.stats.hour < 20) {
 			tb.start(sceneText.wait.movie_started, CONSTANTS.TEXT.TEXT_SPEED);

@@ -1,11 +1,13 @@
-import {CONSTANTS} from '/js/CONSTANTS.js';
-import {playerData} from '/js/playerData.js';
+import {CONSTANTS} from '../js/CONSTANTS.js';
+import {playerData} from '../js/playerData.js';
 import * as textbox from '/js/functions/textbox.js'
 
 let KEY = CONSTANTS.SCENES.END;
 
 let uiScene;
 let endFlag = false;
+let tb;
+let menuUp = false;
 
 export class EndScene extends Phaser.Scene {
 	constructor() {
@@ -40,16 +42,28 @@ export class EndScene extends Phaser.Scene {
 			this.endgame();
 		}
 
+		if (tb != undefined && !tb.isTyping && tb.isLastPage && !menuUp) {
+			this.add.text(400, 700, "PLAY AGAIN", {fontSize: CONSTANTS.TEXT.FONT_SIZE})
+			.setInteractive()
+			.on('pointerup', () => {
+				this.playerData = JSON.parse(JSON.stringify(playerData));
+				this.scene.start(CONSTANTS.SCENES.HOME, {playerData: this.playerData})
+				.launch(CONSTANTS.SCENES.UI, {playerData: this.playerData});
+				menuUp = true;
+			});
+		}
+
 		// Checks the world health and updates things appropriately
 		this.checkWorldHealth();
 	}
 
 	endgame() {
 		endFlag = true;
+		this.scene.stop(CONSTANTS.SCENES.UI);
 		this.scene.pause(CONSTANTS.SCENES.UI);
 		this.scene.stop(this.playerData.location);
 		this.scene.setVisible(true, CONSTANTS.SCENES.END);
-		textbox.createEndTextBox(this, 250, 300, 
+		tb = textbox.createEndTextBox(this, 250, 300, 
 			{wrapWidth: 650})
 			.start(this.calculateScore(), CONSTANTS.TEXT.TEXT_SPEED);
 		
@@ -63,7 +77,7 @@ export class EndScene extends Phaser.Scene {
 		}
 
 		// Bad health 4-7
-
+		
 
 		// Critical health 1-3
 
@@ -87,11 +101,13 @@ export class EndScene extends Phaser.Scene {
 
 		let str = "";
 		if (this.playerData.stats.day >= 4) {
-			str += "Congratulations! You've completed all five days!"
+			str += "Congratulations! You survived!"
 			str += "\nGame completion: 200";
 			score += 200;
 		} else if (this.playerData.stats.hunger < 1) {
-			str += "Unforunately you starved."
+			str += "Unforunately, you starved."
+		} else if (this.playerData.stats.happiness < 1) {
+			str += "You die of a broken heart. Make sure to keep your mental health up too!"
 		} else if (this.playerData.stats.health < 1) {
 			str += "The world was overtaken by the virus."
 		}
@@ -106,7 +122,6 @@ export class EndScene extends Phaser.Scene {
 		str += "\nBad decisions made: -" + this.playerData.stats.bad_decisions * 10;
 		str += "\nScore: " + score;
 		
-
 		this.postScore(score);
 		return str;
 	}
