@@ -7,6 +7,7 @@ let KEY = CONSTANTS.SCENES.END;
 let endFlag = false;
 let tb;
 let menuUp = false;
+let uiScene;
 
 /***********************************************
  * Used to trigger listening to end events and *
